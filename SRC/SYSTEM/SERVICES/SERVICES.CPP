@@ -1,32 +1,38 @@
-/* ----------------------------------------------------------------------------
- * SYSTEM.DLL - System library for DIV Games Studio.
- * (C) VisualStudioEX3, José Miguel Sánchez Fernández - 2022
- * DIV Games Studio 2 (C) Hammer Technologies - 1998, 1999
- * ---------------------------------------------------------------------------- */
+//! SYSTEM.DLL - System library for DIV Games Studio 2.
+//! @copyright TLSA98 Engine (C) VisualStudioEX3, José Miguel Sánchez Fernández - 2022
+//! @copyright DIV Games Studio 2 (C) Hammer Technologies, Daniel Navarro Medrano - 1998, 1999
+/*!
+    Service provider that allow to shared different system implementations between DIV DLLs.
+*/
 
 #include "SERVICES.H"
+
+const int MAX_SERVICES = 64;
 
 typedef struct service_t
 {
     service_id_t id;
-    void* service;
+    const void* service;
 } service_t;
 
-const int MAX_SERVICES = 64;
+typedef struct service_container_t
+{
+    service_t* services[MAX_SERVICES];
+    int count;
+} service_container_t;
 
-service_t* services[MAX_SERVICES];
-int count = 0;
+service_container_t* serviceContainer;
 
 static bool isContainerFull()
 {
-    return count == MAX_SERVICES;
+    return serviceContainer->count == MAX_SERVICES;
 }
 
 static service_t* searchService(service_id_t id)
 {
     for (int i = 0; i < MAX_SERVICES; i++)
     {
-        service_t* service = services[i];
+        service_t* service = serviceContainer->services[i];
         
         if (service->id == id)
             return service;
@@ -40,6 +46,15 @@ static bool containsService(service_id_t id)
     return searchService(id) == NULL;
 }
 
+void initializeServiceContainer()
+{
+    // Use DIV Games Studio 2 NET struct as shared pointer to store the service container.
+    // The reason to use NET struct instead other DIV struct if because I don't want to use the DIV network
+    // system for my project. If I used the network system I can use other shared struct like M7 or M8 if also
+    // I don't want to use these systems.
+    serviceContainer = ((service_container_t*)NET);  
+}
+
 int registerService(service_id_t id, const void* service)
 {
     if (isContainerFull())
@@ -48,12 +63,12 @@ int registerService(service_id_t id, const void* service)
     if (containsService(id))
         return RESULT_ERROR_SERVICE_ALREADY_REGISTERED;
 
-    service_t* slot = services[count];
+    service_t* slot = serviceContainer->services[serviceContainer->count];
 
     slot->id = id;
-    slot->service = (void*)service;
+    slot->service = service;
 
-    count++;
+    serviceContainer->count++;
 
     return RESULT_OK;
 }
@@ -65,5 +80,5 @@ const void* getService(service_id_t id)
 
 int getServiceCount()
 {
-    return count;
+    return serviceContainer->count;
 }
