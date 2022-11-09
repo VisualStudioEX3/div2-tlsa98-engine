@@ -5,6 +5,7 @@
     Engine base members and service provider.
 */
 
+#include <string.h>
 #include "SYSTEM.H"
 
 const int MAX_SERVICES = 64;
@@ -52,7 +53,11 @@ void initializeServiceContainer()
     // The reason to use NET struct instead other DIV struct if because I don't want to use the DIV network
     // system for my project. If I used the network system I can use other shared struct like M7 or M8 if also
     // I don't want to use these systems.
-    serviceContainer = ((service_container_t*)NET);  
+    serviceContainer = ((service_container_t*)NET);
+
+    // Initialize service container:
+    memset(serviceContainer->services, NULL, arraylen(serviceContainer->services));
+    serviceContainer->count = 0;
 }
 
 int registerService(service_id_t id, const void* service)
