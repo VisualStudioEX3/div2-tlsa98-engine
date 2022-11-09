@@ -65,9 +65,9 @@ typedef int service_id_t;
 /// @brief Registers a new service.
 /// @param id Unique id used to identify the service.
 /// @param service Pointer to the service.
-/// @return Returns #SYSTEM::RESULT_ERROR_SERVICE_ALREADY_REGISTERED if a service is already 
-/// registered with this id, #SYSTEM::RESULT_ERROR_SERVICE_CONTAINER_IS_FULL if the service 
-/// container is full, #SYSTEM::RESULT_OK otherwise.
+/// @return Returns #RESULT_ERROR_SERVICE_ALREADY_REGISTERED if a service is already 
+/// registered with this id, #RESULT_ERROR_SERVICE_CONTAINER_IS_FULL if the service 
+/// container is full, #RESULT_OK otherwise.
 int registerService(service_id_t id, const void* service);
 
 /// @brief Gets the service instance.
