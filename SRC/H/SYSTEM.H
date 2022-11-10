@@ -5,25 +5,25 @@
     Engine base members and service provider.
 */
 
-#ifndef _SYSTEM_DLL_
-#define _SYSTEM_DLL_
+#ifndef __SYSTEM_DLL_
+#define __SYSTEM_DLL_
 
 #define GLOBALS                 // Required by DIV.H (before incluide it).
-#include "..\DIV.H"             // DIV Games Studio 2 API header.
+#include "DIV.H"                // DIV Games Studio 2 API header.
 
 /// @brief True constant value.
 /// @remarks In DIV Games Studio, all odd values are considered as true value.
-#define true            1
+#define true                                        1
 
 /// @brief False constant value.
 /// @remarks In DIV Games Studio, all even values are considered as false value.
-#define false           0
+#define false                                       0
 
 /// @brief Default function success result.
-#define RESULT_OK       0
+#define RESULT_OK                                   0
 
 /// @brief Default function error result.
-#define RESULT_ERROR    -1
+#define RESULT_ERROR                                -1
 
 /// @brief A service is already registered with the used id.
 #define RESULT_ERROR_SERVICE_ALREADY_REGISTERED     1000
