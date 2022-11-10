@@ -10,6 +10,7 @@
 
 #define GLOBALS                 // Required by DIV.H (before incluide it).
 #include "DIV.H"                // DIV Games Studio 2 API header.
+#include "MATH\MATH.H"          // Math service.
 
 /// @brief True constant value.
 /// @remarks In DIV Games Studio, all odd values are considered as true value.

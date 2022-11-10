@@ -96,6 +96,7 @@ int getServiceProviderCapacity()
 static void initialize()
 {
     initializeServiceContainer();
+    registerMathService();
 }
 
 void __export divlibrary(LIBRARY_PARAMS)
