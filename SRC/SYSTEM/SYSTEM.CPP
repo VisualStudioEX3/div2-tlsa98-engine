@@ -7,6 +7,7 @@
 
 #include <string.h>
 #include "..\H\SYSTEM.H"
+#include "MATH\DIVFNEXP.H"
 
 const int MAX_SERVICES = 64;
 
@@ -102,6 +103,7 @@ static void initialize()
 void __export divlibrary(LIBRARY_PARAMS)
 {
     // Register DIV functions.
+    exportMathService(LIBRARY_PARAMS);
 }
 
 void __export divmain(COMMON_PARAMS)
