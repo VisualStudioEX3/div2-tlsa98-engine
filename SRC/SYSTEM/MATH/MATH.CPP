@@ -5,7 +5,7 @@
     Math service.
 */
 
-#include "MATH.H"
+#include "..\..\H\MATH.H"
 
 math_service_t* mathService;
 
@@ -38,11 +38,11 @@ void registerMathService()
 {
     mathService = (math_service_t*)malloc(sizeof(math_service_t));
 
-    mathService->min = min;
-    mathService->max = max;
-    mathService->clamp = clamp;
-    mathService->isClamped = isClamped;
-    mathService->lerp = lerp;
+    mathService->min        = min;
+    mathService->max        = max;
+    mathService->clamp      = clamp;
+    mathService->isClamped  = isClamped;
+    mathService->lerp       = lerp;
 
     registerService(MATH_SERVICE, mathService);
 }

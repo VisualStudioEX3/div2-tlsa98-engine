@@ -8,7 +8,7 @@
 #ifndef __SYSTEM_MATH_DLL_DIV_FUNCTION_EXPORT_
 #define __SYSTEM_MATH_DLL_DIV_FUNCTION_EXPORT_
 
-#include "MATH.H"
+#include "..\..\H\MATH.H"
 
 /// @brief Exports math service functions to DIV language. 
 void exportMathService(LIBRARY_PARAMS);

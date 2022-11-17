@@ -8,16 +8,16 @@
 #ifndef __SYSTEM_MATH_DLL_
 #define __SYSTEM_MATH_DLL_
 
-#include "..\..\H\SYSTEM.H"
+#include "SYSTEM.H"
 
 /// @brief Math service id.
 #define MATH_SERVICE    1000
 
-typedef int (*math_min_function)(int, int);
-typedef int (*math_max_function)(int, int);
-typedef int (*math_clamp_function)(int, int, int);
-typedef bool (*math_is_clamped_function)(int, int, int);
-typedef int (*math_lerp_function)(int, int, int);
+typedef int     (*math_min_function)        (int, int);
+typedef int     (*math_max_function)        (int, int);
+typedef int     (*math_clamp_function)      (int, int, int);
+typedef bool    (*math_is_clamped_function) (int, int, int);
+typedef int     (*math_lerp_function)       (int, int, int);
 
 /// @brief Math service interface.
 typedef struct math_service_t
@@ -56,6 +56,7 @@ typedef struct math_service_t
     math_lerp_function lerp;
 } math_service_t;
 
+/// @brief Register and initializes math service.
 void registerMathService();
 
 #endif
