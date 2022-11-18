@@ -5,19 +5,19 @@
     Math service.
 */
 
-#ifndef __SYSTEM_MATH_DLL_
-#define __SYSTEM_MATH_DLL_
+#ifndef __SYSTEM_MATH_SERVICE_DLL_
+#define __SYSTEM_MATH_SERVICE_DLL_
 
 #include "SYSTEM.H"
 
 /// @brief Math service id.
 #define MATH_SERVICE    1000
 
-typedef int     (*math_min_function)        (int, int);
-typedef int     (*math_max_function)        (int, int);
-typedef int     (*math_clamp_function)      (int, int, int);
-typedef bool    (*math_is_clamped_function) (int, int, int);
-typedef int     (*math_lerp_function)       (int, int, int);
+typedef int     (*math_min_f)           (int, int);
+typedef int     (*math_max_f)           (int, int);
+typedef int     (*math_clamp_f)         (int, int, int);
+typedef bool    (*math_is_clamped_f)    (int, int, int);
+typedef int     (*math_lerp_f)          (int, int, int);
 
 /// @brief Math service interface.
 typedef struct math_service_t
@@ -26,34 +26,34 @@ typedef struct math_service_t
     /// @param a First value.
     /// @param b Second value.
     /// @return Returns the min value.
-    math_min_function min;
+    math_min_f min;
 
     /// @brief Gets the max value bewteen 2 values.
     /// @param a First value.
     /// @param b Second value.
     /// @return Returns the max value.
-    math_max_function max;
+    math_max_f max;
 
     /// @brief Gets the clamped value in a range.
     /// @param v Value to clamp.
     /// @param a Min value of the range.
     /// @param b Max value of the range.
     /// @return Returns the clamped value.
-    math_clamp_function clamp;
+    math_clamp_f clamp;
 
     /// @brief Gets if a value is clamped into a range.
     /// @param v Value to check.
     /// @param a Min value of the range.
     /// @param b Max value of the range.
     /// @return Returns #SYSTEM::true if the value is clamped, #SYSTEM::false otherwise.
-    math_is_clamped_function isClamped;
+    math_is_clamped_f isClamped;
 
     /// @brief Interpolate linearly a value between two values.
     /// @param a Min value.
     /// @param b Max value.
     /// @param t The interpolation value between two integer values.
     /// @return Returns the interpolated integer result between the two values.
-    math_lerp_function lerp;
+    math_lerp_f lerp;
 } math_service_t;
 
 /// @brief Register and initializes math service.
