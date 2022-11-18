@@ -12,6 +12,7 @@
 static void initialize()
 {
     initializeServiceProvider();
+    registerDIVFunctionExporterService();
     registerMathService();
 }
 

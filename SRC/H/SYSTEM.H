@@ -12,6 +12,7 @@
 
 #include "DIV.H"        // DIV Games Studio 2 API.
 #include "SERVICES.H"   // Service provider.
+#include "DIVFNEXP.H"   // DIV Games Studio function exporter service.
 #include "MATH.H"       // Math service.
 
 /// @brief True constant value.
