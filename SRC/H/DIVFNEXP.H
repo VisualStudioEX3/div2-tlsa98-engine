@@ -24,7 +24,7 @@ typedef struct div_function_exporter_service_t
     /// language reserved names.
     /// @param params Number of parameters that function expects.
     /// @param function Pointer to the native function to export. All exported functions must 
-    /// be return an integer value and be parameterless.
+    /// be parameterless void functions, and use #retval function to return an integer value.
     /// @remarks This funciton only register the exported function. To complete and validate
     /// all registered functions, remember to call #div_function_exporter_service_t::commit 
     /// function.
