@@ -39,6 +39,9 @@ typedef unsigned short word;
 /// @remarks An alias for char pointer type.
 typedef char* string;
 
+/// @brief Unsigned integer alias.
+typedef unsigned int uint;
+
 /// @brief Boolean alias.
 /// @remarks In DIV Games Studio, like in C, a boolean value is an integer value.
 typedef int bool;
