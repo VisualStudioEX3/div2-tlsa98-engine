@@ -41,7 +41,8 @@ typedef struct string_service_t
     /// otherwise.
     string_all_f all;
 
-    /// @brief Determines whether any character of a string are equal to character model.
+    /// @brief Determines whether any character of a string are equal to any character of the
+    /// string model.
     /// @param str String to check.
     /// @param chars String with characters to compare.
     /// @return Returns #SYSTEM::true if any character is present in the string, 
