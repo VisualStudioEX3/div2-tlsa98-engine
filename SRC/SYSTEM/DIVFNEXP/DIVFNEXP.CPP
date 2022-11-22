@@ -38,7 +38,7 @@ static void registerFunction(string name, uint params, void* function)
     {
         divfnexp_function_t* queueItem = &exportQueue[queueIndex];
 
-        queueItem->name     = name; // TODO: Convert name to lower chars.
+        queueItem->name     = stringService->toLower(name);
         queueItem->params   = params;
         queueItem->function = function;
 
