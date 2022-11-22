@@ -17,11 +17,14 @@
 /// @remarks An alias for char pointer type.
 typedef char* string;
 
-typedef int     (*string_len_f)     (const string);
-typedef bool    (*string_all_f)     (const string, const char);
-typedef bool    (*string_any_f)     (const string, const string);
-typedef bool    (*string_empty_f)   (const string);
-typedef bool    (*string_equals_f)  (const string, const string);
+typedef int     (*string_len_f)         (const string);
+typedef bool    (*string_all_f)         (const string, const char);
+typedef bool    (*string_any_f)         (const string, const string);
+typedef bool    (*string_empty_f)       (const string);
+typedef bool    (*string_equals_f)      (const string, const string);
+typedef string  (*string_copy_f)        (const string);
+typedef string  (*string_to_lower_f)    (const string);
+typedef string  (*string_to_upper_f)    (const string);
 
 /// @brief String service interface.
 typedef struct string_service_t
@@ -57,6 +60,21 @@ typedef struct string_service_t
     /// @return Returns #SYSTEM::true if the left string is equal to right string.
     /// @remarks The comparison method is case sensitive.
     string_equals_f equals;
+
+    /// @brief Creates a copy of the string.
+    /// @param str String to copy.
+    /// @return Returns the copied string.
+    string_copy_f copy;
+
+    /// @brief Convert all characters to lower case.
+    /// @param str String to convert.
+    /// @return Returns pointer to the converted string.
+    string_to_lower_f toLower;
+
+    /// @brief Convert all characters to upper case.
+    /// @param str String to convert.
+    /// @return Returns pointer to the converted string.
+    string_to_upper_f toUpper;
 } string_service_t;
 
 /// @brief Register and initializes service service.

@@ -5,6 +5,7 @@
     String service.
 */
 
+#include <ctype.h>
 #include <string.h>
 #include "..\..\H\STRING.H"
 
@@ -39,6 +40,31 @@ static bool equals(const string lhs, const string rhs)
     return strcmp(lhs, rhs) == 0;
 }
 
+static string copy(const string str)
+{
+    return strdup(str);
+}
+
+static string toCase(const string str, int (*case_f)(int))
+{
+    string strCopy = service->copy(str);
+
+    for (char* chr = strCopy; chr != '\0'; chr++)
+        *chr = case_f(*chr);
+
+    return strCopy;
+}
+
+static string toLowerS(const string str)
+{
+    return toCase(str, tolower);
+}
+
+static string toUpperS(const string str)
+{
+    return toCase(str, toupper);
+}
+
 void registerStringService()
 {
     service = (string_service_t*)malloc(sizeof(string_service_t));
@@ -48,6 +74,9 @@ void registerStringService()
     service->any        = any;
     service->isEmpty    = isEmpty;
     service->equals     = equals;
+    service->copy       = copy;
+    service->toLower    = toLowerS;
+    service->toUpper    = toUpperS;
 
     registerService(STRING_SERVICE, service);
 }
