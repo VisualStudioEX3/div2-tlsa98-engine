@@ -13,6 +13,7 @@
 #include "DIV.H"        // DIV Games Studio 2 API.
 #include "SERVICES.H"   // Service provider.
 #include "DIVFNEXP.H"   // DIV Games Studio function exporter service.
+#include "STRING.H"     // String service.
 #include "MATH.H"       // Math service.
 
 /// @brief True constant value.
@@ -34,10 +35,6 @@ typedef unsigned char byte;
 
 /// @brief WORD type in DIV Games Studio 2.
 typedef unsigned short word;
-
-/// @brief STRING type in DIV Games Studio 2.
-/// @remarks An alias for char pointer type.
-typedef char* string;
 
 /// @brief Unsigned integer alias.
 typedef unsigned int uint;
