@@ -13,9 +13,18 @@
 /// @brief DIV Games Studio function exporter service id.
 #define DIV_FUNCTION_EXPORTER_SERVICE       100
 
-typedef void (*div_function_export_f)   (char*, void*, int);
-typedef void (*divfnexp_register_f)     (string, uint, void*);
-typedef void (*divfnexp_commit_f)       (div_function_export_f);
+/// @brief DIV Games Studio COM Export function template.
+/// @remarks Required to be able to receive #DIV::COM_export function as parameter on 
+/// #DIV::div_library callback.
+typedef void (*div_function_com_export_f)   (char*, void*, int);
+
+/// @brief DIV Games Studio language native function template.
+/// @remarks The function must be use #DIV::getparm macro to read the parameters stack and
+/// always call #DIV::retval macro to return an integer as result.
+typedef void (*div_function_template_f)     ();
+
+typedef void (*divfnexp_register_f)         (string, uint, div_function_template_f);
+typedef void (*divfnexp_commit_f)           (div_function_com_export_f);
 
 /// @brief DIV Games Studio function exporter service.
 typedef struct div_function_exporter_service_t
@@ -24,13 +33,12 @@ typedef struct div_function_exporter_service_t
     /// @param name Function name in DIV Games Studio language. Avoid using DIV Games Studio 
     /// language reserved names.
     /// @param params Number of parameters that function expects.
-    /// @param function Pointer to the native function to export. All exported functions must 
-    /// be parameterless void functions, and use #DIV::retval macro to return an integer 
-    /// value.
+    /// @param function Pointer to the native function to export.
     /// @return Returns #SYSTEM::false if the export queue is full, #SYSTEM::true otherwise.
     /// @remarks Use this function to register the DIV Games Studio function in the export 
     /// queue. After register all functions, call #div_function_exporter_service_t::commit
     /// function to export and validate them.
+    /// @see #div_function_model_f
     divfnexp_register_f registerFunction;
 
     /// @brief Commits the all new registered functions to DIV Games Studio runtime.

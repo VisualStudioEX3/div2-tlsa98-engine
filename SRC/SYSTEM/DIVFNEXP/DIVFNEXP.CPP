@@ -16,7 +16,7 @@ typedef struct divfnexp_function_t
 {
     string name;
     uint params;
-    void* function;
+    div_function_template_f function;
 } divfnexp_function_t;
 
 div_function_exporter_service_t* service;
@@ -32,7 +32,7 @@ static void clearExportQueue()
     queueIndex = 0;
 }
 
-static void registerFunction(string name, uint params, void* function)
+static void registerFunction(string name, uint params, div_function_template_f function)
 {
     if (queueIndex < MAX_REGISTERED_FUNCTIONS)
     {
@@ -88,12 +88,12 @@ static bool validateFunction(divfnexp_function_t* f)
     // TODO: Use future error reporter service to log this error.
 }
 
-static void exportFunctionToDIV(divfnexp_function_t* f, div_function_export_f comExport)
+static void exportFunctionToDIV(divfnexp_function_t* f, div_function_com_export_f comExport)
 {
     comExport(f->name, f->function, f->params);
 }
 
-static void commit(div_function_export_f comExport)
+static void commit(div_function_com_export_f comExport)
 {
     for (int i = 0; i < MAX_REGISTERED_FUNCTIONS; i++)
     {
