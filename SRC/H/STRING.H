@@ -30,7 +30,7 @@ typedef string  (*string_to_upper_f)    (const string);
 typedef struct string_service_t
 {
     /// @brief Gets the length of the string.
-    /// @param str String to mesure.
+    /// @param str String to measure.
     /// @return Returns the number of characters until reach the first #DIV::NULL character.
     string_len_f len;
 
