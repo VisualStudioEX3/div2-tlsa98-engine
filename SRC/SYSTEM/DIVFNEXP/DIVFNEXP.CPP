@@ -9,9 +9,7 @@
 #include "..\..\H\DIVFNEXP.H"
 #include "DIV2RESN.H" // DIV Games Studio language reserved names list.
 
-const char VALID_CHARS[] = "abcdefghijklmnopqrstuvwxyz_";
-// TODO: Replace strlen for equivalent on future string service.
-const int VALID_CHARS_LEN = strlen(VALID_CHARS);
+const string VALID_CHARS = "abcdefghijklmnopqrstuvwxyz_";
 const int MAX_REGISTERED_FUNCTIONS = 32;
 
 typedef struct divfnexp_function_t
@@ -22,6 +20,7 @@ typedef struct divfnexp_function_t
 } divfnexp_function_t;
 
 div_function_exporter_service_t* service;
+string_service_t* stringService;
 divfnexp_function_t exportQueue[MAX_REGISTERED_FUNCTIONS];
 int queueIndex;
 
@@ -49,35 +48,16 @@ static void registerFunction(string name, uint params, void* function)
     // TODO: Use future error reporter service to log the full queue error.
 }
 
-static bool allCharsAreEqualsTo(const string name, const char c)
-{
-    // TODO: Replace strlen for equivalent on future string service.
-    int i = strlen(name);
-
-    while (--i >= 0 && name[i] == c);
-
-    return i <= 0; // Consider empty string as null string.
-}
-
-// TODO: Replace this function for equivalent on future string service.
-static bool isEmptyName(const string name)
-{
-    return allCharsAreEqualsTo(name, '\0');
-
-    // TODO: Use future error reporter service to log this error.
-}
-
 static bool isFullUnderscoreName(const string name)
 {
-    return allCharsAreEqualsTo(name, '_');
+    return stringService->all(name, '_');
 
     // TODO: Use future error reporter service to log this error.
 }
 
 static bool containIllegalChars(const string name)
 {
-    // TODO: Replace strpbrk for equivalent on future string service.
-    return strpbrk(name, VALID_CHARS) != NULL;
+    return stringService->any(name, VALID_CHARS) != NULL;
 
     // TODO: Use future error reporter service to log this error.
 }
@@ -85,8 +65,7 @@ static bool containIllegalChars(const string name)
 static bool isReservedName(const string name)
 {
     for (int i = 0; i < arraylen(DIV2_LANGUAGE_RESERVED_NAMES); i++)
-        // TODO: Replace strcmp for equivalent on future string service.
-        if (strcmp(name, DIV2_LANGUAGE_RESERVED_NAMES[i]))
+        if (stringService->equals(name, DIV2_LANGUAGE_RESERVED_NAMES[i]))
             return true;
             // TODO: Use future error reporter service to log this error.
 
@@ -95,7 +74,7 @@ static bool isReservedName(const string name)
 
 static bool validateName(const string name)
 {
-    return !isEmptyName(name) 
+    return !stringService->isEmpty(name) 
         && !containIllegalChars(name) 
         && !isFullUnderscoreName(name) 
         && !isReservedName(name);
@@ -140,6 +119,8 @@ static void createService()
 
 void registerDIVFunctionExporterService()
 {
+    stringService = (string_service_t*)getService(STRING_SERVICE);
+
     createService();
     registerService(DIV_FUNCTION_EXPORTER_SERVICE, service);
 }
