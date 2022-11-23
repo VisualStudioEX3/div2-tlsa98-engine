@@ -57,9 +57,13 @@ static bool isFullUnderscoreName(const string name)
 
 static bool containIllegalChars(const string name)
 {
-    return stringService->any(name, VALID_CHARS) != NULL;
+    for (char* chr = name; chr != '\0'; chr++)
+        if (!stringService->any(chr, VALID_CHARS))
+            return true;
+            // TODO: Use future error reporter service to log this error.
 
-    // TODO: Use future error reporter service to log this error.
+    return false;
+
 }
 
 static bool isReservedName(const string name)
