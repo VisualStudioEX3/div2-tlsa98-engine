@@ -68,7 +68,7 @@ static bool containIllegalChars(const string name)
 
 static bool isReservedName(const string name)
 {
-    for (int i = 0; i < arraylen(DIV2_LANGUAGE_RESERVED_NAMES); i++)
+    for (int i = 0; i < DIV_LANGUAGE_RESERVED_NAMES_COUNT; i++)
         if (stringService->equals(name, DIV2_LANGUAGE_RESERVED_NAMES[i]))
             return true;
             // TODO: Use future error reporter service to log this error.

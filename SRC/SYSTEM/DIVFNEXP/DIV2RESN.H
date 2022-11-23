@@ -452,3 +452,6 @@ const string DIV2_LANGUAGE_RESERVED_NAMES[]
     "y",
     "z"
 };
+
+// TODO: Check if arraylen calculate right the number of elements of this array.
+const int DIV_LANGUAGE_RESERVED_NAMES_COUNT = arraylen(DIV2_LANGUAGE_RESERVED_NAMES);
