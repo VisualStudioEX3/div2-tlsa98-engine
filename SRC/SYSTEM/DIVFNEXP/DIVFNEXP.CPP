@@ -5,7 +5,6 @@
     DIV Games Studio function exporter service.
 */
 
-#include <string.h>
 #include "..\..\H\DIVFNEXP.H"
 #include "DIV2RESN.H" // DIV Games Studio language reserved names list.
 
@@ -20,6 +19,7 @@ typedef struct divfnexp_function_t
 } divfnexp_function_t;
 
 div_function_exporter_service_t* service;
+mem_service_t* memService;
 string_service_t* stringService;
 divfnexp_function_t exportQueue[MAX_REGISTERED_FUNCTIONS];
 int queueIndex;
@@ -28,7 +28,7 @@ static void clearExportQueue()
 {
     const size_t QUEUE_SIZE = sizeof(divfnexp_function_t) * MAX_REGISTERED_FUNCTIONS;
 
-    memset(exportQueue, NULL, QUEUE_SIZE);
+    memService->clear(exportQueue, QUEUE_SIZE);
     queueIndex = 0;
 }
 
@@ -123,7 +123,8 @@ static void createService()
 
 void registerDIVFunctionExporterService()
 {
-    stringService = (string_service_t*)getService(STRING_SERVICE);
+    memService      = (mem_service_t*)getService(MEM_SERVICE);
+    stringService   = (string_service_t*)getService(STRING_SERVICE);
 
     createService();
     registerService(DIV_FUNCTION_EXPORTER_SERVICE, service);
