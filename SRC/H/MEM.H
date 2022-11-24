@@ -1,0 +1,59 @@
+//! SYSTEM.DLL - System library for DIV Games Studio 2.
+//! @copyright TLSA98 Engine (C) VisualStudioEX3, José Miguel Sánchez Fernández - 2022
+//! @copyright DIV Games Studio 2 (C) Hammer Technologies, Daniel Navarro Medrano - 1998, 1999
+/*!
+    Memory service.
+*/
+
+#ifndef __SYSTEM_DIV_MEMORY_SERVICE_DLL_
+#define __SYSTEM_DIV_MEMORY_SERVICE_DLL_
+
+#include "SYSTEM.H"
+
+#define MEM_SERVICE     50
+
+typedef void* (*mem_clear_f)        (void*, size_t);
+typedef void* (*mem_calloc_f)       (size_t);
+typedef void* (*mem_copy_f)         (const void*, size_t);
+typedef void  (*mem_move_f)         (const void*, size_t, void*);
+typedef bool  (*mem_equals_f)       (const void*, const void*, size_t);
+
+typedef struct mem_service_t
+{
+    /// @brief Sets all bytes to null.
+    /// @param ptr Pointer to a memory region.
+    /// @param size Size of the memory region.
+    /// @return Returns the pointer to the cleared memory region.
+    /// @remarks This function not releases allocated memory regions. Use #free instead.
+    mem_clear_f clear;
+
+    /// @brief Allocates a memory region and filled with null values.
+    /// @param size Size of the memory region to allocate.
+    /// @return Returns the pointer to the allocated memory region, #DIV::NULL otherwise.
+    mem_calloc_f calloc;
+
+    /// @brief Creates a copy of the region memory.
+    /// @param ptr Pointer to the memory region to copy.
+    /// @param size Size of the memory region to copy.
+    /// @return Returns a new pointer to the copied memory region, #DIV::NULL otherwise.
+    mem_copy_f copy;
+
+    /// @brief Copies a block of bytes to another memory region.
+    /// @param src Pointer to the memory region to copy.
+    /// @param size Size of the memory region to copy.
+    /// @param dst Pointer to the memory region to copy the bytes.
+    mem_move_f move;
+
+    /// @brief Determine if both memory regions are equals.
+    /// @param ptr1 First pointer.
+    /// @param ptr2 Second pointer.
+    /// @param size Size of the memory region. This value is for both pointers.
+    /// @returns Returns #SYSTEM::true if all bytes of both memory regions are equals, 
+    /// @SYSTEM::false otherwise.
+    mem_equals_f equals;
+} mem_service_t;
+
+/// @brief Register and initializes the service.
+void registerMemService();
+
+#endif
