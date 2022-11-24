@@ -49,7 +49,7 @@ typedef struct mem_service_t
     /// @param ptr2 Second pointer.
     /// @param size Size of the memory region. This value is for both pointers.
     /// @returns Returns #SYSTEM::true if all bytes of both memory regions are equals, 
-    /// @SYSTEM::false otherwise.
+    /// #SYSTEM::false otherwise.
     mem_equals_f equals;
 } mem_service_t;
 
