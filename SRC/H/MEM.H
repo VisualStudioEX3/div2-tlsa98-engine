@@ -41,6 +41,7 @@ typedef struct mem_service_t
     /// @param src Pointer to the memory region to copy.
     /// @param size Size of the memory region to copy.
     /// @param dst Pointer to the memory region to copy the bytes.
+    /// @remarks The source memory region keeps the values after the copy.
     mem_move_f move;
 
     /// @brief Determine if both memory regions are equals.
@@ -49,6 +50,8 @@ typedef struct mem_service_t
     /// @param size Size of the memory region. This value is for both pointers.
     /// @returns Returns #SYSTEM::true if all bytes of both memory regions are equals, 
     /// #SYSTEM::false otherwise.
+    /// @remarks Ensure that both memory regions has the same size, otherwise, the comparison
+    /// may return wrong results.
     mem_equals_f equals;
 } mem_service_t;
 
