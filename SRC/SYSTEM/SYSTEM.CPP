@@ -5,13 +5,13 @@
     Main engine file and access to all core services.
 */
 
-#include <string.h>
 #include "..\H\SYSTEM.H"
 #include "MATH\DIVFNEXP.H"
 
 static void initialize()
 {
     initializeServiceProvider();
+    registerMemService();
     registerStringService();
     registerDIVFunctionExporterService();
     registerMathService();
