@@ -15,7 +15,7 @@
 typedef void  (*mem_clear_f)        (void*, size_t);
 typedef void* (*mem_calloc_f)       (size_t);
 typedef void* (*mem_copy_f)         (const void*, size_t);
-typedef void  (*mem_move_f)         (const void*, size_t, void*);
+typedef void  (*mem_copy_to_f)      (const void*, void*, size_t);
 typedef bool  (*mem_equals_f)       (const void*, const void*, size_t);
 
 typedef struct mem_service_t
@@ -38,11 +38,13 @@ typedef struct mem_service_t
     mem_copy_f copy;
 
     /// @brief Copies a block of bytes to another memory region.
-    /// @param src Pointer to the memory region to copy.
+    /// @param from Pointer to the memory region from copy the bytes.
+    /// @param to Pointer to the memory region to copy the bytes.
     /// @param size Size of the memory region to copy.
-    /// @param dst Pointer to the memory region to copy the bytes.
     /// @remarks The source memory region keeps the values after the copy.
-    mem_move_f move;
+    /// Also ensure that both memory regions has the same size, otherwise, will overwrite 
+    /// data of other memory regions.
+    mem_copy_to_f copyTo;
 
     /// @brief Determine if both memory regions are equals.
     /// @param ptr1 First pointer.

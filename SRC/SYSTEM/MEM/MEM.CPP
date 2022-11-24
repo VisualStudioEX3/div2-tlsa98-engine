@@ -32,9 +32,9 @@ static void* copy(const void* ptr, size_t size)
     return memcpy(copyPtr, ptr, size);
 }
 
-static void move(const void* src, size_t size, void* dst)
+static void copyTo(const void* from, void* to, size_t size)
 {
-    memmove(dst, src, size);
+    memmove(to, from, size);
 }
 
 static bool equals(const void* ptr1, const void* ptr2, size_t size)
@@ -49,7 +49,7 @@ void registerMemService()
     service->clear  = clear;
     service->calloc = div_calloc;
     service->copy   = copy;
-    service->move   = move;
+    service->copyTo = copyTo;
     service->equals = equals;
 
     registerService(MEM_SERVICE, service);
