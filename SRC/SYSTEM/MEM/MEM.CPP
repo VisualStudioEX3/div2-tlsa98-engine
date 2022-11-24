@@ -10,9 +10,9 @@
 
 mem_service_t* service;
 
-static void* clear(void* ptr, size_t size)
+static void clear(void* ptr, size_t size)
 {
-    return memset(ptr, NULL, size);
+    memset(ptr, NULL, size);
 }
 
 // We can't use standard calloc, so we implemented own version.
@@ -20,7 +20,9 @@ static void* div_calloc(size_t size)
 {
     void* ptr = malloc(size);
 
-    return service->clear(ptr, size);
+    service->clear(ptr, size);
+
+    return ptr;
 }
 
 static void* copy(const void* ptr, size_t size)

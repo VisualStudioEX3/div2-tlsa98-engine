@@ -12,7 +12,7 @@
 
 #define MEM_SERVICE     50
 
-typedef void* (*mem_clear_f)        (void*, size_t);
+typedef void  (*mem_clear_f)        (void*, size_t);
 typedef void* (*mem_calloc_f)       (size_t);
 typedef void* (*mem_copy_f)         (const void*, size_t);
 typedef void  (*mem_move_f)         (const void*, size_t, void*);
@@ -23,7 +23,6 @@ typedef struct mem_service_t
     /// @brief Sets all bytes to null.
     /// @param ptr Pointer to a memory region.
     /// @param size Size of the memory region.
-    /// @return Returns the pointer to the cleared memory region.
     /// @remarks This function not releases allocated memory regions. Use #free instead.
     mem_clear_f clear;
 
