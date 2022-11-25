@@ -36,6 +36,7 @@
 typedef int bool;
 
 /// @brief getparm() version to get a DIV Games Studio 2 STRING parameter.
+/// @return Returns the next parameter from DIV function stack as #string value.
 #define getstrparm()    (string)&mem[text_offset + getparm()]
 
 /// @brief malloc() alias to DIV implementation.
