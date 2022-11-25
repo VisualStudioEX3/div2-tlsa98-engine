@@ -11,7 +11,10 @@
 #include "SYSTEM.H"
 
 /// @brief Memory service id.
-#define MEM_SERVICE     50
+#define MEM_SERVICE     1020
+
+/// @brief BYTE type in DIV Games Studio 2.
+typedef unsigned char byte;
 
 typedef void  (*mem_clear_f)        (void*, size_t);
 typedef void* (*mem_calloc_f)       (size_t);

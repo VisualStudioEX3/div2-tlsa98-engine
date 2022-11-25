@@ -31,15 +31,6 @@
 /// @brief Default function error result.
 #define RESULT_ERROR    -1
 
-/// @brief BYTE type in DIV Games Studio 2.
-typedef unsigned char byte;
-
-/// @brief WORD type in DIV Games Studio 2.
-typedef unsigned short word;
-
-/// @brief Unsigned integer alias.
-typedef unsigned int uint;
-
 /// @brief Boolean alias.
 /// @remarks In DIV Games Studio, like in C, a boolean value is an integer value.
 typedef int bool;
@@ -48,9 +39,12 @@ typedef int bool;
 #define getstrparm()    (string)&mem[text_offset + getparm()]
 
 /// @brief malloc() alias to DIV implementation.
+/// @param Size Size of the memory region to allocate.
+/// @return Returns the pointer to the new allocated memory region.
 #define malloc(size)    div_malloc(size)
 
 /// @brief free() alias to DIV implementation.
+/// @param ptr Pointer of the memory region to release.
 #define free(ptr)       div_free(ptr)
 
 /// @brief Gets the size of an array.

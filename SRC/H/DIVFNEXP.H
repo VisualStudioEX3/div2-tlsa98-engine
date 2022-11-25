@@ -11,7 +11,7 @@
 #include "SYSTEM.H"
 
 /// @brief DIV Games Studio function exporter service id.
-#define DIV_FUNCTION_EXPORTER_SERVICE       100
+#define DIV_FUNCTION_EXPORTER_SERVICE       1100
 
 /// @brief DIV Games Studio COM Export function template.
 /// @remarks Required to be able to receive #DIV::COM_export function as parameter on 

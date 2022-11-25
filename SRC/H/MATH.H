@@ -11,7 +11,13 @@
 #include "SYSTEM.H"
 
 /// @brief Math service id.
-#define MATH_SERVICE    300
+#define MATH_SERVICE    1000
+
+/// @brief WORD type in DIV Games Studio 2.
+typedef unsigned short word;
+
+/// @brief Unsigned integer alias.
+typedef unsigned int uint;
 
 typedef int     (*math_min_f)           (int, int);
 typedef int     (*math_max_f)           (int, int);

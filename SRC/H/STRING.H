@@ -11,7 +11,7 @@
 #include "SYSTEM.H"
 
 /// @brief String service id.
-#define STRING_SERVICE    200
+#define STRING_SERVICE    1010
 
 /// @brief STRING type in DIV Games Studio 2.
 /// @remarks An alias for char pointer type.
