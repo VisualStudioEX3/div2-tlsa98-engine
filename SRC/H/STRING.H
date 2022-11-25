@@ -17,6 +17,7 @@
 /// @remarks An alias for char pointer type.
 typedef char* string;
 
+typedef string  (*string_stralloc_f)    (int);
 typedef int     (*string_len_f)         (const string);
 typedef bool    (*string_all_f)         (const string, const char);
 typedef bool    (*string_any_f)         (const string, const string);
@@ -29,6 +30,12 @@ typedef string  (*string_to_upper_f)    (const string);
 /// @brief String service interface.
 typedef struct string_service_t
 {
+    /// @brief Allocates memory for a new string.
+    /// @param chars Number of chars. Not counting the null terminated char.
+    /// @return Returns a pointer to the new string created, filled with null chars, 
+    /// #DIV::NULL otherwise.
+    string_stralloc_f strAlloc;
+
     /// @brief Gets the length of the string.
     /// @param str String to measure.
     /// @return Returns the number of characters until reach the first #DIV::NULL character.

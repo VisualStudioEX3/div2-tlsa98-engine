@@ -10,6 +10,12 @@
 #include "..\..\H\STRING.H"
 
 string_service_t* service;
+mem_service_t* memService;
+
+static string strAlloc(int chars)
+{
+    return (string)memService->calloc(++chars); // Sum extra char for null terminated char.
+}
 
 static int len(const string str)
 {
@@ -42,7 +48,12 @@ static bool equals(const string lhs, const string rhs)
 
 static string copy(const string str)
 {
-    return strdup(str);
+    int nChars = service->len(str);
+    string strCopy = service->strAlloc(nChars);
+
+    memService->copyTo(str, strCopy, nChars);
+
+    return strCopy;
 }
 
 static string toCase(const string str, int (*case_f)(int))
@@ -65,10 +76,11 @@ static string toUpperS(const string str)
     return toCase(str, toupper);
 }
 
-void registerStringService()
+static void createService()
 {
     service = (string_service_t*)malloc(sizeof(string_service_t));
 
+    service->strAlloc   = strAlloc;
     service->len        = len;
     service->all        = all;
     service->any        = any;
@@ -79,4 +91,11 @@ void registerStringService()
     service->toUpper    = toUpperS;
 
     registerService(STRING_SERVICE, service);
+}
+
+void registerStringService()
+{
+    memService = (mem_service_t*)getService(MEM_SERVICE);
+
+    createService();
 }
