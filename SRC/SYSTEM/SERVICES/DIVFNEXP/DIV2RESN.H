@@ -5,6 +5,9 @@
     DIV Games Studio language reserved names.
 */
 
+#ifndef __SYSTEM_DIVFNEXP_DIV2_LANGUAGE_RESERVED_NAMES
+#define __SYSTEM_DIVFNEXP_DIV2_LANGUAGE_RESERVED_NAMES
+
 #include "..\..\..\H\DIVFNEXP.H"
 
 const string DIV2_LANGUAGE_RESERVED_NAMES[]
@@ -454,3 +457,5 @@ const string DIV2_LANGUAGE_RESERVED_NAMES[]
 };
 
 const int DIV_LANGUAGE_RESERVED_NAMES_COUNT = arraylen(DIV2_LANGUAGE_RESERVED_NAMES);
+
+#endif

@@ -5,8 +5,8 @@
     Math service.
 */
 
-#ifndef __SYSTEM_MATH_SERVICE_DLL_
-#define __SYSTEM_MATH_SERVICE_DLL_
+#ifndef __SYSTEM_MATH_SERVICE
+#define __SYSTEM_MATH_SERVICE
 
 #include "SYSTEM.H"
 

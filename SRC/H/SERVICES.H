@@ -5,8 +5,8 @@
     Service provider.
 */
 
-#ifndef __SYSTEM_SERVICES_DLL_
-#define __SYSTEM_SERVICES_DLL_
+#ifndef __SYSTEM_SERVICES
+#define __SYSTEM_SERVICES
 
 #include "SYSTEM.H"
 

@@ -5,11 +5,12 @@
     Memory service.
 */
 
-#ifndef __SYSTEM_DIV_MEMORY_SERVICE_DLL_
-#define __SYSTEM_DIV_MEMORY_SERVICE_DLL_
+#ifndef __SYSTEM_MEMORY_SERVICE
+#define __SYSTEM_MEMORY_SERVICE
 
 #include "SYSTEM.H"
 
+/// @brief Memory service id.
 #define MEM_SERVICE     50
 
 typedef void  (*mem_clear_f)        (void*, size_t);
