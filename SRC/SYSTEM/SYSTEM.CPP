@@ -6,21 +6,15 @@
 */
 
 #include "..\H\SYSTEM.H"
-#include "MATH\DIVFNEXP.H"
 
 static void initialize()
 {
     initializeServiceProvider();
+
     registerMemService();
     registerStringService();
     registerDIVFunctionExporterService();
     registerMathService();
-}
-
-void __export divlibrary(LIBRARY_PARAMS)
-{
-    // Register DIV functions.
-    exportMathService(LIBRARY_PARAMS);
 }
 
 void __export divmain(COMMON_PARAMS)
@@ -28,6 +22,16 @@ void __export divmain(COMMON_PARAMS)
     GLOBAL_IMPORT();
     initialize();
     // Register DIV callbacks.
+}
+
+void __export divlibrary(LIBRARY_PARAMS)
+{
+    div_function_exporter_service_t* service = 
+        (div_function_exporter_service_t*)getService(DIV_FUNCTION_EXPORTER_SERVICE);
+
+    exportMathService(service);
+
+    service->commit(COM_export);
 }
 
 void __export divend(COMMON_PARAMS)
