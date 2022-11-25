@@ -46,6 +46,7 @@ static bool equals(const string lhs, const string rhs)
     return strcmp(lhs, rhs) == 0;
 }
 
+// We can't use standard strdup, so we implemented own version.
 static string copy(const string str)
 {
     int nChars = service->len(str);
