@@ -5,7 +5,7 @@
     DIV Games Studio language reserved names.
 */
 
-#include "..\..\H\DIVFNEXP.H"
+#include "..\..\..\H\DIVFNEXP.H"
 
 const string DIV2_LANGUAGE_RESERVED_NAMES[]
 {

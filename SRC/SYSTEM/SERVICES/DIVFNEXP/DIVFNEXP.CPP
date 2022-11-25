@@ -5,7 +5,7 @@
     DIV Games Studio function exporter service.
 */
 
-#include "..\..\H\DIVFNEXP.H"
+#include "..\..\..\H\DIVFNEXP.H"
 #include "DIV2RESN.H" // DIV Games Studio language reserved names list.
 
 const string VALID_CHARS = "abcdefghijklmnopqrstuvwxyz_";
