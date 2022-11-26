@@ -14,7 +14,7 @@ mem_service_t* memService;
 
 static string strAlloc(int chars)
 {
-    return (string)memService->calloc(++chars); // Sum extra char for null terminated char.
+    return (string)memService->calloc(++chars); // Add extra char for null terminated char.
 }
 
 static int len(const string str)
