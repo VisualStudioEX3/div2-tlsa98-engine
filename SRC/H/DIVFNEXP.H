@@ -34,7 +34,6 @@ typedef struct div_function_exporter_service_t
     /// language reserved names.
     /// @param params Number of parameters that function expects.
     /// @param function Pointer to the native function to export.
-    /// @return Returns #SYSTEM::false if the export queue is full, #SYSTEM::true otherwise.
     /// @remarks Use this function to register the DIV Games Studio function in the export 
     /// queue. After register all functions, call #div_function_exporter_service_t::commit
     /// function to export and validate them.
