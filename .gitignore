@@ -1,3 +1,4 @@
 # Build results
 *.obj
 *.dll
+*.err
