@@ -19,11 +19,11 @@ typedef unsigned short word;
 /// @brief Unsigned integer alias.
 typedef unsigned int uint;
 
-typedef int     (*math_min_f)           (int, int);
-typedef int     (*math_max_f)           (int, int);
-typedef int     (*math_clamp_f)         (int, int, int);
-typedef bool    (*math_is_clamped_f)    (int, int, int);
-typedef int     (*math_lerp_f)          (int, int, int);
+typedef int     (*math_min_f)           (int a, int b);
+typedef int     (*math_max_f)           (int a, int b);
+typedef int     (*math_clamp_f)         (int v, int a, int b);
+typedef bool    (*math_is_clamped_f)    (int v, int a, int b);
+typedef int     (*math_lerp_f)          (int a, int b, int t);
 
 /// @brief Math service interface.
 typedef struct math_service_t

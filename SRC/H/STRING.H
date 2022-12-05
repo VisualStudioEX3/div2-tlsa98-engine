@@ -17,15 +17,15 @@
 /// @remarks An alias for char pointer type.
 typedef char* string;
 
-typedef string  (*string_stralloc_f)    (int);
-typedef int     (*string_len_f)         (const string);
-typedef bool    (*string_all_f)         (const string, const char);
-typedef bool    (*string_any_f)         (const string, const string);
-typedef bool    (*string_empty_f)       (const string);
-typedef bool    (*string_equals_f)      (const string, const string);
-typedef string  (*string_copy_f)        (const string);
-typedef string  (*string_to_lower_f)    (const string);
-typedef string  (*string_to_upper_f)    (const string);
+typedef string  (*string_stralloc_f)    (int chars);
+typedef int     (*string_len_f)         (const string str);
+typedef bool    (*string_all_f)         (const string str, const char chr);
+typedef bool    (*string_any_f)         (const string str, const string chars);
+typedef bool    (*string_empty_f)       (const string str);
+typedef bool    (*string_equals_f)      (const string lhs, const string rhs);
+typedef string  (*string_copy_f)        (const string str);
+typedef string  (*string_to_lower_f)    (const string str);
+typedef string  (*string_to_upper_f)    (const string str);
 
 /// @brief String service interface.
 typedef struct string_service_t

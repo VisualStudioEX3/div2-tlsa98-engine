@@ -16,11 +16,11 @@
 /// @brief BYTE type in DIV Games Studio 2.
 typedef unsigned char byte;
 
-typedef void  (*mem_clear_f)        (void*, size_t);
-typedef void* (*mem_calloc_f)       (size_t);
-typedef void* (*mem_copy_f)         (const void*, size_t);
-typedef void  (*mem_copy_to_f)      (const void*, void*, size_t);
-typedef bool  (*mem_equals_f)       (const void*, const void*, size_t);
+typedef void  (*mem_clear_f)        (void* ptr, size_t size);
+typedef void* (*mem_calloc_f)       (size_t size);
+typedef void* (*mem_copy_f)         (const void* ptr, size_t size);
+typedef void  (*mem_copy_to_f)      (const void* from, void* to, size_t size);
+typedef bool  (*mem_equals_f)       (const void* ptr1, const void* ptr2, size_t size);
 
 /// @brief Memory service interface.
 typedef struct mem_service_t

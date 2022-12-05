@@ -16,15 +16,15 @@
 /// @brief DIV Games Studio COM Export function template.
 /// @remarks Required to be able to receive #DIV::COM_export function as parameter on 
 /// #DIV::div_library callback.
-typedef void (*div_function_com_export_f)   (char*, void*, int);
+typedef void (*div_function_com_export_f)   (char* name, void* obj, int nparms);
 
 /// @brief DIV Games Studio language native function template.
 /// @remarks The function must be use #DIV::getparm macro to read the parameters stack and
 /// always call #DIV::retval macro to return an integer as result.
 typedef void (*div_function_template_f)     ();
 
-typedef void (*divfnexp_register_f)         (string, uint, div_function_template_f);
-typedef void (*divfnexp_commit_f)           (div_function_com_export_f);
+typedef void (*divfnexp_register_f)         (string name, uint params, div_function_template_f function);
+typedef void (*divfnexp_commit_f)           (div_function_com_export_f comExport);
 
 /// @brief DIV Games Studio function exporter service.
 typedef struct div_function_exporter_service_t
