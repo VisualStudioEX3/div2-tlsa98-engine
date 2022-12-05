@@ -29,7 +29,9 @@ static void* copy(const void* ptr, size_t size)
 {
     void* copyPtr = malloc(size);
 
-    return memcpy(copyPtr, ptr, size);
+    service->copyTo(ptr, copyPtr, size);
+
+    return copyPtr;
 }
 
 static void copyTo(const void* from, void* to, size_t size)
