@@ -6,7 +6,10 @@
 */
 
 #include <string.h>
-#include "..\..\H\MEM.H"
+#include "..\H\SYSTEM\DIV2.H"
+#include "..\H\SYSTEM\GLOBAL.H"
+#include "..\H\SYSTEM\MEM.H"
+#include "..\H\SYSTEM\SERVICES.H"
 
 mem_service_t* service;
 

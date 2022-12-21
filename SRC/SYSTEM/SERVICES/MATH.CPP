@@ -5,9 +5,13 @@
     Math service.
 */
 
-#include "..\..\H\MATH.H"
+#include "..\H\SYSTEM\DIV2.H"
+#include "..\H\SYSTEM\BOOL.H"
+#include "..\H\SYSTEM\DIV2.H"
+#include "..\H\SYSTEM\SERVICES.H"
+#include "..\H\SYSTEM\MATH.H"
 
-math_service_t* mathService;
+math_service_t* service;
 
 static int min(int a, int b)
 {
@@ -79,22 +83,22 @@ static void div_lerp()
 
 void registerMathService()
 {
-    mathService = (math_service_t*)malloc(sizeof(math_service_t));
+    service = (math_service_t*)malloc(sizeof(math_service_t));
 
-    mathService->min        = min;
-    mathService->max        = max;
-    mathService->clamp      = clamp;
-    mathService->isClamped  = isClamped;
-    mathService->lerp       = lerp;
+    service->min        = min;
+    service->max        = max;
+    service->clamp      = clamp;
+    service->isClamped  = isClamped;
+    service->lerp       = lerp;
 
-    registerService(MATH_SERVICE, mathService);
+    registerService(MATH_SERVICE, service);
 }
 
-void exportMathService(div_function_exporter_service_t* service)
+void exportMathService(div_function_exporter_service_t* regService)
 {
-    service->registerFunction("min",        2, div_min);
-    service->registerFunction("max",        2, div_max);
-    service->registerFunction("clamp",      3, div_clamp);
-    service->registerFunction("is_clamped", 3, div_isClamped);
-    service->registerFunction("lerp",       3, div_lerp);
+    regService->registerFunction("min",         2,  div_min);
+    regService->registerFunction("max",         2,  div_max);
+    regService->registerFunction("clamp",       3,  div_clamp);
+    regService->registerFunction("is_clamped",  3,  div_isClamped);
+    regService->registerFunction("lerp",        3,  div_lerp);
 }

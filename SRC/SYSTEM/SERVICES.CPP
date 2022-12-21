@@ -6,7 +6,9 @@
 */
 
 #include <string.h>
-#include "..\H\SERVICES.H"
+#include "..\H\SYSTEM\DIV2.H"
+#include "..\H\SYSTEM\GLOBAL.H"
+#include "..\H\SYSTEM\SERVICES.H"
 
 const int MAX_SERVICES = 64;
 

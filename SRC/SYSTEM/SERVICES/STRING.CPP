@@ -7,7 +7,10 @@
 
 #include <ctype.h>
 #include <string.h>
-#include "..\..\H\STRING.H"
+#include "..\H\SYSTEM\DIV2.H"
+#include "..\H\SYSTEM\SERVICES.H"
+#include "..\H\SYSTEM\MEM.H"
+#include "..\H\SYSTEM\STRING.H"
 
 string_service_t* service;
 mem_service_t* memService;

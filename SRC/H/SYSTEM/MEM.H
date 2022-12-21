@@ -8,7 +8,7 @@
 #ifndef __SYSTEM_MEMORY_SERVICE
 #define __SYSTEM_MEMORY_SERVICE
 
-#include "SYSTEM.H"
+#include "BOOL.H"
 
 /// @brief Memory service id.
 #define MEM_SERVICE     1020

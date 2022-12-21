@@ -8,8 +8,6 @@
 #ifndef __SYSTEM_SERVICES
 #define __SYSTEM_SERVICES
 
-#include "SYSTEM.H"
-
 /// @brief A service is already registered with the used id.
 #define RESULT_ERROR_SERVICE_ALREADY_REGISTERED     1000
 

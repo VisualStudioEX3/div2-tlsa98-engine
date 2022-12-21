@@ -5,16 +5,20 @@
     DIV Games Studio function exporter service.
 */
 
-#include "..\..\..\H\DIVFNEXP.H"
-#include "DIV2RESN.H" // DIV Games Studio language reserved names list.
+#include "..\H\SYSTEM\DIV2.H"
+#include "..\H\SYSTEM\BOOL.H"
+#include "..\H\SYSTEM\MEM.H"
+#include "..\H\SYSTEM\SERVICES.H"
+#include "..\H\SYSTEM\DIVFNEXP.H"
+#include "DIV2RESN.H" // DIV Games Studio 2 language reserved names list.
 
-const string VALID_CHARS = "abcdefghijklmnopqrstuvwxyz_";
+const char* VALID_CHARS = "abcdefghijklmnopqrstuvwxyz_";
 const int MAX_REGISTERED_FUNCTIONS = 32;
 
 typedef struct divfnexp_function_t
 {
-    string name;
-    uint params;
+    char* name;
+    unsigned int params;
     div_function_template_f function;
 } divfnexp_function_t;
 
@@ -32,7 +36,7 @@ static void clearExportQueue()
     queueIndex = 0;
 }
 
-static void registerFunction(string name, uint params, div_function_template_f function)
+static void registerFunction(char* name, unsigned int params, div_function_template_f function)
 {
     if (queueIndex < MAX_REGISTERED_FUNCTIONS)
     {
@@ -48,17 +52,17 @@ static void registerFunction(string name, uint params, div_function_template_f f
     // TODO: Use future error reporter service to log the full queue error.
 }
 
-static bool isFullUnderscoreName(const string name)
+static bool isFullUnderscoreName(const char* name)
 {
-    return stringService->all(name, '_');
+    return stringService->all((char*)name, '_');
 
     // TODO: Use future error reporter service to log this error.
 }
 
-static bool containIllegalChars(const string name)
+static bool containIllegalChars(const char* name)
 {
-    for (char* chr = name; chr != '\0'; chr++)
-        if (!stringService->any(chr, VALID_CHARS))
+    for (char* chr = (char*)name; chr != '\0'; chr++)
+        if (!stringService->any(chr, (char*)VALID_CHARS))
             return true;
             // TODO: Use future error reporter service to log this error.
 
@@ -66,19 +70,19 @@ static bool containIllegalChars(const string name)
 
 }
 
-static bool isReservedName(const string name)
+static bool isReservedName(const char* name)
 {
     for (int i = 0; i < DIV_LANGUAGE_RESERVED_NAMES_COUNT; i++)
-        if (stringService->equals(name, DIV2_LANGUAGE_RESERVED_NAMES[i]))
+        if (stringService->equals((char*)name, DIV2_LANGUAGE_RESERVED_NAMES[i]))
             return true;
             // TODO: Use future error reporter service to log this error.
 
     return false;
 }
 
-static bool validateName(const string name)
+static bool validateName(const char* name)
 {
-    return !stringService->isEmpty(name) 
+    return !stringService->isEmpty((char*)name) 
         && !containIllegalChars(name) 
         && !isFullUnderscoreName(name) 
         && !isReservedName(name);

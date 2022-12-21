@@ -8,7 +8,7 @@
 #ifndef __SYSTEM_MATH_SERVICE
 #define __SYSTEM_MATH_SERVICE
 
-#include "SYSTEM.H"
+#include "DIVFNEXP.H"
 
 /// @brief Math service id.
 #define MATH_SERVICE    1000
@@ -67,6 +67,6 @@ void registerMathService();
 
 /// @brief Exports service functions to DIV language.
 /// @param service Pointer to the DIV Games Studio function exporter service.
-void exportMathService(div_function_exporter_service_t* service);
+void exportMathService(div_function_exporter_service_t* regService);
 
 #endif
