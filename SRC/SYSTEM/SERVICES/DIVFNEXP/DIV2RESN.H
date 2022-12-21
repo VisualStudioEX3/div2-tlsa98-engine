@@ -10,7 +10,7 @@
 
 #include "..\H\GLOBAL.H"
 
-const string DIV2_LANGUAGE_RESERVED_NAMES[]
+const string DIV2_LANGUAGE_RESERVED_NAMES[] = 
 {
     "_esc",
     "_f1",
