@@ -8,14 +8,10 @@
 #ifndef __SYSTEM_STRING_SERVICE
 #define __SYSTEM_STRING_SERVICE
 
-#include "BOOL.H"
+#include "..\GLOBAL.H"
 
 /// @brief String service id.
 #define STRING_SERVICE    1010
-
-/// @brief STRING type in DIV Games Studio 2.
-/// @remarks An alias for char pointer type.
-typedef char* string;
 
 typedef string  (*string_stralloc_f)    (int chars);
 typedef int     (*string_len_f)         (const string str);

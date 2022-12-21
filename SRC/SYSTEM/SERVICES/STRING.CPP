@@ -7,7 +7,7 @@
 
 #include <ctype.h>
 #include <string.h>
-#include "..\H\SYSTEM\DIV2.H"
+#include "..\H\GLOBAL.H"
 #include "..\H\SYSTEM\SERVICES.H"
 #include "..\H\SYSTEM\MEM.H"
 #include "..\H\SYSTEM\STRING.H"

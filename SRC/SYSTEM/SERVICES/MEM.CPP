@@ -6,8 +6,7 @@
 */
 
 #include <string.h>
-#include "..\H\SYSTEM\DIV2.H"
-#include "..\H\SYSTEM\GLOBAL.H"
+#include "..\H\GLOBAL.H"
 #include "..\H\SYSTEM\MEM.H"
 #include "..\H\SYSTEM\SERVICES.H"
 

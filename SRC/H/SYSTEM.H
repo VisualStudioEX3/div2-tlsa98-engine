@@ -8,9 +8,7 @@
 #ifndef __SYSTEM_DLL_
 #define __SYSTEM_DLL_
 
-#include "SYSTEM\DIV2.H"        // DIV Games Studio 2 header setup and extensions.
-#include "SYSTEM\GLOBAL.H"      // Global members.
-#include "SYSTEM\BOOL.H"        // Boolean type and constants.
+#include "GLOBAL.H"             // Global members.
 #include "SYSTEM\SERVICES.H"    // Service provider.
 #include "SYSTEM\MEM.H"         // Memory service.
 #include "SYSTEM\STRING.H"      // String service.

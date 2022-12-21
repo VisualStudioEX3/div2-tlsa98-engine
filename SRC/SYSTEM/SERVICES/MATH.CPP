@@ -5,9 +5,7 @@
     Math service.
 */
 
-#include "..\H\SYSTEM\DIV2.H"
-#include "..\H\SYSTEM\BOOL.H"
-#include "..\H\SYSTEM\DIV2.H"
+#include "..\H\GLOBAL.H"
 #include "..\H\SYSTEM\SERVICES.H"
 #include "..\H\SYSTEM\MATH.H"
 

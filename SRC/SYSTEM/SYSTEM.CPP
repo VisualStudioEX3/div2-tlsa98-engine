@@ -5,7 +5,7 @@
     Main engine file and access to all core services.
 */
 
-#include "..\H\SYSTEM\DIV2.H"
+#include "..\H\GLOBAL.H"
 #include "..\H\SYSTEM\SERVICES.H"
 #include "..\H\SYSTEM\MEM.H"
 #include "..\H\SYSTEM\STRING.H"

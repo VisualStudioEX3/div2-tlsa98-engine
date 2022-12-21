@@ -8,13 +8,10 @@
 #ifndef __SYSTEM_MEMORY_SERVICE
 #define __SYSTEM_MEMORY_SERVICE
 
-#include "BOOL.H"
+#include "..\GLOBAL.H"
 
 /// @brief Memory service id.
 #define MEM_SERVICE     1020
-
-/// @brief BYTE type in DIV Games Studio 2.
-typedef unsigned char byte;
 
 typedef void  (*mem_clear_f)        (void* ptr, size_t size);
 typedef void* (*mem_calloc_f)       (size_t size);

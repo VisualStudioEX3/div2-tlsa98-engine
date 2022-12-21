@@ -8,20 +8,22 @@
 #ifndef __SYSTEM_DIV_FUNCTION_EXPORTER_SERVICE
 #define __SYSTEM_DIV_FUNCTION_EXPORTER_SERVICE
 
+#include "..\GLOBAL.H"
+
 /// @brief DIV Games Studio function exporter service id.
 #define DIV_FUNCTION_EXPORTER_SERVICE       1100
 
 /// @brief DIV Games Studio COM Export function template.
 /// @remarks Required to be able to receive #DIV::COM_export function as parameter on 
 /// #DIV::div_library callback.
-typedef void (*div_function_com_export_f)   (char* name, void* obj, int nparms);
+typedef void (*div_function_com_export_f)   (string name, void* obj, int nparms);
 
 /// @brief DIV Games Studio language native function template.
 /// @remarks The function must be use #DIV::getparm macro to read the parameters stack and
 /// always call #DIV::retval macro to return an integer as result.
 typedef void (*div_function_template_f)     ();
 
-typedef void (*divfnexp_register_f)         (char* name, unsigned int params, div_function_template_f function);
+typedef void (*divfnexp_register_f)         (string name, uint params, div_function_template_f function);
 typedef void (*divfnexp_commit_f)           (div_function_com_export_f comExport);
 
 /// @brief DIV Games Studio function exporter service.

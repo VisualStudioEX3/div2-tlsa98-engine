@@ -8,16 +8,11 @@
 #ifndef __SYSTEM_MATH_SERVICE
 #define __SYSTEM_MATH_SERVICE
 
+#include "..\GLOBAL.H"
 #include "DIVFNEXP.H"
 
 /// @brief Math service id.
 #define MATH_SERVICE    1000
-
-/// @brief WORD type in DIV Games Studio 2.
-typedef unsigned short word;
-
-/// @brief Unsigned integer alias.
-typedef unsigned int uint;
 
 typedef int     (*math_min_f)           (int a, int b);
 typedef int     (*math_max_f)           (int a, int b);
