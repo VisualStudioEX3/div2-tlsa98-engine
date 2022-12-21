@@ -81,7 +81,7 @@ typedef struct string_service_t
     string_to_upper_f toUpper;
 } string_service_t;
 
-/// @brief Register and initializes service service.
+/// @brief Register and initializes the service.
 void registerStringService();
 
 #endif
