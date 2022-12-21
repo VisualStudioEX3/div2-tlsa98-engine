@@ -5,8 +5,8 @@
     Global members.
 */
 
-#ifndef __GLOBAL_
-#define __GLOBAL_
+#ifndef __GLOBAL_H_
+#define __GLOBAL_H_
 
 #define GLOBALS         // Required by DIV.H (before incluide it).
 

@@ -5,8 +5,8 @@
     Memory service.
 */
 
-#ifndef __SYSTEM_MEMORY_SERVICE
-#define __SYSTEM_MEMORY_SERVICE
+#ifndef __SYSTEM_MEMORY_SERVICE_H_
+#define __SYSTEM_MEMORY_SERVICE_H_
 
 #include "..\GLOBAL.H"
 

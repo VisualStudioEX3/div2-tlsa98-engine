@@ -5,8 +5,8 @@
     Math service.
 */
 
-#ifndef __SYSTEM_MATH_SERVICE
-#define __SYSTEM_MATH_SERVICE
+#ifndef __SYSTEM_MATH_SERVICE_H_
+#define __SYSTEM_MATH_SERVICE_H_
 
 #include "..\GLOBAL.H"
 #include "DIVFNEXP.H"

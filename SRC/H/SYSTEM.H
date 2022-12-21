@@ -5,8 +5,8 @@
     Main engine file and access to all core services.
 */
 
-#ifndef __SYSTEM_DLL_
-#define __SYSTEM_DLL_
+#ifndef __SYSTEM_DLL_H_
+#define __SYSTEM_DLL_H_
 
 #include "GLOBAL.H"             // Global members.
 #include "SYSTEM\SERVICES.H"    // Service provider.

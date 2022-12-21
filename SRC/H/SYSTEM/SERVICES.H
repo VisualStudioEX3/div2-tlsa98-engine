@@ -5,8 +5,8 @@
     Service provider.
 */
 
-#ifndef __SYSTEM_SERVICES
-#define __SYSTEM_SERVICES
+#ifndef __SYSTEM_SERVICES_H_
+#define __SYSTEM_SERVICES_H_
 
 /// @brief A service is already registered with the used id.
 #define RESULT_ERROR_SERVICE_ALREADY_REGISTERED     1000
