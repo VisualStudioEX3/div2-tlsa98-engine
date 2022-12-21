@@ -5,12 +5,7 @@
     Main engine file and access to all core services.
 */
 
-#include "..\H\GLOBAL.H"
-#include "..\H\SYSTEM\SERVICES.H"
-#include "..\H\SYSTEM\MEM.H"
-#include "..\H\SYSTEM\STRING.H"
-#include "..\H\SYSTEM\DIVFNEXP.H"
-#include "..\H\SYSTEM\MATH.H"
+#include "..\H\SYSTEM.H"
 
 static void initialize()
 {
