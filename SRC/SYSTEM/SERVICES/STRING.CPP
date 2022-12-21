@@ -64,7 +64,7 @@ static string toCase(const string str, int (*case_f)(int))
 {
     string strCopy = service->copy(str);
 
-    for (char* chr = strCopy; chr != '\0'; chr++)
+    for (string chr = strCopy; chr != '\0'; chr++)
         *chr = case_f(*chr);
 
     return strCopy;
