@@ -2,7 +2,7 @@
 //! @copyright TLSA98 Engine (C) VisualStudioEX3, José Miguel Sánchez Fernández - 2022
 //! @copyright DIV Games Studio 2 (C) Hammer Technologies, Daniel Navarro Medrano - 1998, 1999
 /*!
-    Global members.
+    Global engine data, definitions and macros.
 */
 
 #ifndef __GLOBAL_H_
@@ -31,6 +31,8 @@
 typedef int bool;
 
 /// @brief BYTE type in DIV Games Studio 2.
+/// @remarks You can use this alias instead of normal char (-127 to 127) to manage memory
+/// stream data, ensuring that all values are valid byte values (0 to 255).
 typedef unsigned char byte;
 
 /// @brief WORD type in DIV Games Studio 2.
@@ -40,20 +42,29 @@ typedef unsigned short word;
 typedef unsigned int uint;
 
 /// @brief STRING type in DIV Games Studio 2.
-/// @remarks An alias for char pointer type.
+/// @remarks An alias for char pointer type. All DIV parameters, even the string values, are
+/// received as integer values as a position in DIV managed memory of the parameter is stored.
 typedef char* string;
 
-/// @brief getparm() version to get a DIV Games Studio 2 STRING parameter.
+/// @brief getparm() version to get a DIV Games Studio 2 STRING parameters.
 /// @return Returns the next parameter from DIV function stack as string value.
 #define getstrparm()    (string)&mem[text_offset + getparm()]
 
 /// @brief malloc() alias to DIV implementation.
-/// @param Size Size of the memory region to allocate.
+/// @param size Size of the memory region to allocate.
 /// @return Returns the pointer to the new allocated memory region.
+/// @remarks DIV Games Studio runtime has his onw malloc() implementation to manage his 
+/// memory allocations. If you try to use the standard malloc() the program starts to generate
+/// memory corruption and even crashes. This macro allows you to use safe malloc() calls but 
+/// using the DIV implementation.
 #define malloc(size)    div_malloc(size)
 
 /// @brief free() alias to DIV implementation.
 /// @param ptr Pointer of the memory region to release.
+/// @remarks DIV Games Studio runtime has his onw free() implementation to manage his 
+/// memory allocations. If you try to use the standard free() the program starts to generate
+/// memory corruption and even crashes. This macro allows you to use safe free() calls but 
+/// using the DIV implementation.
 #define free(ptr)       div_free(ptr)
 
 /// @brief Gets the size of an array.
