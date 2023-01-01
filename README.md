@@ -2,10 +2,11 @@
 <img src="https://github.com/VisualStudioEX3/Home/blob/master/pictures/div_games_studio/div2_logo/div2_logo.png" alt="DIV Games Studio 2 logo" width="512" />
 <br>
 TLSA98 Engine</h1>
-<h6 align="center">© Visual Studio EX3, José Miguel Sánchez Fernández - 2022</h6>
+<h6 align="center">© Visual Studio EX3, José Miguel Sánchez Fernández - 2022 - 2023</h6>
 <h2 align="center">A native game engine for DIV Games Studio 2 (vanilla)</h2>
 
-<h3 align="center">Check the 'develop' and 'feature' branches to follow progress of this project.</h3>
+> **Note**
+> Check the [**develop**](https://github.com/VisualStudioEX3/div2-tlsa98-engine/tree/develop) and [**feature**](https://github.com/VisualStudioEX3/div2-tlsa98-engine/branches/all?query=feature) branches to follow progress of this project.
 
 # Introduction
 
