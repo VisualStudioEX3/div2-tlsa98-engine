@@ -45,7 +45,7 @@ static service_t* searchService(service_id_t id)
 
 static bool containsService(service_id_t id)
 {
-    return searchService(id) == NULL;
+    return searchService(id) != NULL;
 }
 
 void initializeServiceProvider()
@@ -76,12 +76,15 @@ int registerService(service_id_t id, const void* service)
 
     serviceContainer->count++;
 
+    // TODO: Assert failed register service (check if pointer is null).
+
     return RESULT_OK;
 }
 
 const void* getService(service_id_t id)
 {
     return searchService(id);
+    // TODO: Assert service id not found.
 }
 
 int getServiceProviderCount()
