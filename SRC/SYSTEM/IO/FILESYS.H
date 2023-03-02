@@ -8,7 +8,7 @@
 #ifndef __SYSTEM_FILE_SYSTEM_
 #define __SYSTEM_FILE_SYSTEM_
 
-#include "../../H/GLOBAL.H"
+#include "..\..\H\GLOBAL.H"
 
 /// @brief Creates a new directory.
 /// @param path Path for the new directory to creates.
