@@ -41,10 +41,30 @@ typedef unsigned short word;
 /// @brief Unsigned integer alias.
 typedef unsigned int uint;
 
+/// @brief Unsigned long alias.
+typedef unsigned long ulong;
+
 /// @brief STRING type in DIV Games Studio 2.
 /// @remarks An alias for char pointer type. All DIV parameters, even the string values, are
 /// received as integer values as a position in DIV managed memory of the parameter is stored.
 typedef char* string;
+
+/// @brief Date and time value.
+struct datetime_t
+{
+    /// @brief Seconds after the minute (from 0).
+    int seconds;
+    /// @brief Minutes after the hour (from 0).
+    int minutes;
+    /// @brief Hour of the day (from 0).
+    int hour;
+    /// @brief Day of the month (from 1).
+    int day;
+    /// @brief Month of the year (from 0).
+    int month;
+    /// @brief Years since 1900 (from 0).
+    int year;
+};
 
 /// @brief getparm() version to get a DIV Games Studio 2 STRING parameters.
 /// @return Returns the next parameter from DIV function stack as string value.
