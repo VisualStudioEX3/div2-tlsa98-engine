@@ -2,7 +2,7 @@
 //! @copyright TLSA98 Engine (C) VisualStudioEX3, José Miguel Sánchez Fernández - 2022
 //! @copyright DIV Games Studio 2 (C) Hammer Technologies, Daniel Navarro Medrano - 1998, 1999
 /*!
-    Global engine data, definitions and macros.
+    Global engine shared data, definitions and macros.
 */
 
 #ifndef __GLOBAL_H_
@@ -66,7 +66,7 @@ typedef struct datetime_t
     int year;
 };
 
-/// @brief getparm() version to get a DIV Games Studio 2 STRING parameters.
+/// @brief #DIV::getparm() version to get a DIV Games Studio 2 STRING parameters.
 /// @return Returns the next parameter from DIV function stack as string value.
 #define getstrparm()    (string)&mem[text_offset + getparm()]
 
