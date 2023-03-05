@@ -60,7 +60,7 @@ typedef struct datetime_t
     int hour;
     /// @brief Day of the month (from 1).
     int day;
-    /// @brief Month of the year (from 0).
+    /// @brief Month of the year (from 1).
     int month;
     /// @brief Year (from 1900).
     int year;
