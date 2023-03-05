@@ -10,7 +10,7 @@
 
 const int CLOCKS_PER_MILLISECONDS = CLOCKS_PER_SEC / 1000;
 
-tm* dt;
+struct tm* dt;
 time_t now;
 
 ulong getTickCount()
