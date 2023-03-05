@@ -24,14 +24,14 @@ bool changeDirectory(string path);
 /// @param filename Filename and path of the file to open or created.
 /// @param mode Mode to open or create the file.
 /// @returns Returns the file handle or #DIV::NULL otherwise.
-/// @remarks This functions always must use the built-in DIV.H div_fopen() function in 
+/// @remarks This functions always must use the built-in DIV.H #DIV::div_fopen() function in 
 /// order to work properly with DIV Games Studio 2 runtime.
 /// See the standard stdio.h fopen() C function documentation for more details.
 FILE* openFile(string filename, string mode);
 
 /// @brief Close an opened file.
 /// @param file File handle to close.
-/// @remarks This functions always must use the built-in DIV.H div_fclose() function in 
+/// @remarks This functions always must use the built-in DIV.H #DIV::div_fclose() function in 
 /// order to work properly with DIV Games Studio 2 runtime.
 /// See the standard stdio.h fclose() C function documentation for more details.
 void closeFile(FILE* file);
