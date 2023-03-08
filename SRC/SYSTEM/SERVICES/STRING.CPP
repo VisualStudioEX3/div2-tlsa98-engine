@@ -24,6 +24,7 @@ void registerStringService()
     service->copy       = stringCopy;
     service->toLower    = stringToLowerCase;
     service->toUpper    = stringToUpperCase;
+    service->format     = stringFormat;
 
     registerService(STRING_SERVICE, service);
 }

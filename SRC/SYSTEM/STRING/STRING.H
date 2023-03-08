@@ -64,4 +64,11 @@ string stringToLowerCase(const string str);
 /// @return Returns pointer to the converted string.
 string stringToUpperCase(const string str);
 
+/// @brief Formats a string using a list of values.
+/// @param str Pointer to string where store the output formatted result.
+/// @param format Format string model. To see how to format the output see: https://cplusplus.com/reference/cstdio/printf/.
+/// @param ... List of arguments to use in formatted string.
+/// @returns Returns #SYSTEM::true if string is sucessful formatted, #SYSTEM::false otherwise.
+bool stringFormat(string str, const string format, ...);
+
 #endif

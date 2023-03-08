@@ -22,6 +22,7 @@ typedef bool    (*string_equals_f)      (const string lhs, const string rhs);
 typedef string  (*string_copy_f)        (const string str);
 typedef string  (*string_to_lower_f)    (const string str);
 typedef string  (*string_to_upper_f)    (const string str);
+typedef bool    (*string_format_f)      (string, const string, ...);
 
 /// @brief String service interface.
 typedef struct string_service_t
@@ -79,6 +80,13 @@ typedef struct string_service_t
     /// @param str String to convert.
     /// @return Returns pointer to the converted string.
     string_to_upper_f toUpper;
+
+    /// @brief Formats a string using a list of values.
+    /// @param str Pointer to string where store the output formatted restult.
+    /// @param format Format string model. To see how to format the output see: https://cplusplus.com/reference/cstdio/printf/.
+    /// @param ... List of arguments to use in formatted string.
+    /// @returns Returns #SYSTEM::true if string is sucessful formatted, #SYSTEM::false otherwise.
+    string_format_f format;
 } string_service_t;
 
 /// @brief Register and initializes the service.
