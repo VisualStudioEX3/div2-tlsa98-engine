@@ -5,7 +5,6 @@
     Memory service.
 */
 
-#include <string.h>
 #include "..\H\GLOBAL.H"
 #include "..\H\SYSTEM\MEM.H"
 #include "..\H\SYSTEM\SERVICES.H"
