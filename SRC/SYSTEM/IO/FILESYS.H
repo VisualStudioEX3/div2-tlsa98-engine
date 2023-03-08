@@ -5,8 +5,8 @@
     System file system functions.
 */
 
-#ifndef __SYSTEM_FILE_SYSTEM_
-#define __SYSTEM_FILE_SYSTEM_
+#ifndef __SYSTEM_FILE_SYSTEM_H_
+#define __SYSTEM_FILE_SYSTEM_H_
 
 #include "..\..\H\GLOBAL.H"
 

@@ -5,8 +5,8 @@
     Memory functions.
 */
 
-#ifndef __SYSTEM_MEM_
-#define __SYSTEM_MEM_
+#ifndef __SYSTEM_MEM_H_
+#define __SYSTEM_MEM_H_
 
 #include "..\..\H\GLOBAL.H"
 

@@ -5,8 +5,8 @@
     String functions.
 */
 
-#ifndef __SYSTEM_STRING_
-#define __SYSTEM_STRING_
+#ifndef __SYSTEM_STRING_H_
+#define __SYSTEM_STRING_H_
 
 #include "..\..\H\GLOBAL.H"
 

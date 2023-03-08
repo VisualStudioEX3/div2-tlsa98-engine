@@ -5,8 +5,8 @@
     Date and time functions.
 */
 
-#ifndef __SYSTEM_DATETIME_
-#define __SYSTEM_DATETIME_
+#ifndef __SYSTEM_DATETIME_H_
+#define __SYSTEM_DATETIME_H_
 
 #include "..\..\H\GLOBAL.H"
 
