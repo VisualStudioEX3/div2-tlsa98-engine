@@ -23,6 +23,16 @@ void* memoryCalloc(size_t size)
     return ptr;
 }
 
+void* memoryRealloc(void* ptr, size_t size, bool useCalloc)
+{
+    void* newPtr = useCalloc ? memoryCalloc(size) : malloc(size);
+
+    memoryCopyTo(ptr, newPtr, size);
+    free(ptr);
+
+    return newPtr;
+}
+
 void* memoryCopy(const void* ptr, size_t size)
 {
     void* copyPtr = malloc(size);

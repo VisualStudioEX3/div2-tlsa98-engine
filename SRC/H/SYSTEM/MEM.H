@@ -15,6 +15,7 @@
 
 typedef void  (*mem_clear_f)        (void* ptr, size_t size);
 typedef void* (*mem_calloc_f)       (size_t size);
+typedef void* (*mem_realloc_f)      (void* ptr, size_t size, bool useCalloc);
 typedef void* (*mem_copy_f)         (const void* ptr, size_t size);
 typedef void  (*mem_copy_to_f)      (const void* from, void* to, size_t size);
 typedef bool  (*mem_equals_f)       (const void* ptr1, const void* ptr2, size_t size);
@@ -32,6 +33,13 @@ typedef struct mem_service_t
     /// @param size Size of the memory region to allocate.
     /// @return Returns the pointer to the allocated memory region, #DIV::NULL otherwise.
     mem_calloc_f calloc;
+
+    /// @brief Reallocates a memory region.
+    /// @param ptr Pointer to a memory region.
+    /// @param size New size of the memory region.
+    /// @param useCalloc Use #MEM::memoryCalloc function instead of #GLOBAL::malloc.
+    /// @return Returns the pointer to the reallocated memory region, #DIV::NULL otherwise.
+    mem_realloc_f realloc;
 
     /// @brief Creates a copy of the region memory.
     /// @param ptr Pointer to the memory region to copy.

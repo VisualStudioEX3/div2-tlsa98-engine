@@ -15,11 +15,12 @@ void registerMemService()
 {
     service = (mem_service_t*)malloc(sizeof(mem_service_t));
 
-    service->clear  = memoryClear;
-    service->calloc = memoryCalloc;
-    service->copy   = memoryCopy;
-    service->copyTo = memoryCopyTo;
-    service->equals = memoryEquals;
+    service->clear      = memoryClear;
+    service->calloc     = memoryCalloc;
+    service->realloc    = memoryRealloc;
+    service->copy       = memoryCopy;
+    service->copyTo     = memoryCopyTo;
+    service->equals     = memoryEquals;
 
     registerService(MEM_SERVICE, service);
 }
