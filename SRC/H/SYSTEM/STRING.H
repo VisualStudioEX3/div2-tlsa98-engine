@@ -13,7 +13,7 @@
 /// @brief String service id.
 #define STRING_SERVICE    1010
 
-typedef string  (*string_stralloc_f)    (int chars);
+typedef string  (*string_create_f)      (int chars);
 typedef string  (*string_resize_f)      (string str, int chars);
 typedef int     (*string_len_f)         (const string str);
 typedef bool    (*string_all_f)         (const string str, const char chr);
@@ -28,11 +28,11 @@ typedef bool    (*string_format_f)      (string, const string, ...);
 /// @brief String service interface.
 typedef struct string_service_t
 {
-    /// @brief Allocates memory for a new string.
+    /// @brief Creates a new string.
     /// @param chars Number of chars. Not counting the null terminated char.
     /// @return Returns a pointer to the new string created, filled with null chars, 
     /// #DIV::NULL otherwise.
-    string_stralloc_f strAlloc;
+    string_create_f create;
 
     /// @brief Resizes a string.
     /// @param str Pointer to a string to resize.

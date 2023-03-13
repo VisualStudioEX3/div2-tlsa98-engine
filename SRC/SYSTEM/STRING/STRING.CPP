@@ -12,7 +12,7 @@
 #include "STRING.H"
 #include "..\MEM\MEM.H"
 
-string stringAlloc(int chars)
+string stringCreate(int chars)
 {
     return (string)memoryCalloc(++chars); // Add extra char for null terminated char.
 }
@@ -55,7 +55,7 @@ bool stringEquals(const string lhs, const string rhs)
 string stringCopy(const string str)
 {
     int nChars = stringLength(str);
-    string strCopy = stringAlloc(nChars);
+    string strCopy = stringCreate(nChars);
 
     memoryCopyTo(str, strCopy, nChars);
 

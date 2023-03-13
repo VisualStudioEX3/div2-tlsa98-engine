@@ -10,11 +10,11 @@
 
 #include "..\..\H\GLOBAL.H"
 
-/// @brief Allocates memory for a new string.
+/// @brief Creates a new string.
 /// @param chars Number of chars. Not counting the null terminated char.
 /// @return Returns a pointer to the created string, filled with null chars, 
 /// #DIV::NULL otherwise.
-string stringAlloc(int chars);
+string stringCreate(int chars);
 
 /// @brief Resizes a string.
 /// @param str Pointer to a string to resize.
