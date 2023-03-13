@@ -74,9 +74,20 @@ string stringToUpperCase(const string str);
 
 /// @brief Formats a string using a list of values.
 /// @param str Pointer to string where store the output formatted result.
-/// @param format Format string model. To see how to format the output see: https://cplusplus.com/reference/cstdio/printf/.
+/// @param format Format string model. To see how to format the output see: 
+/// https://cplusplus.com/reference/cstdio/printf/.
 /// @param ... List of arguments to use in formatted string.
-/// @returns Returns #SYSTEM::true if string is sucessful formatted, #SYSTEM::false otherwise.
+/// @returns Returns #SYSTEM::true if string is sucessful formatted, #SYSTEM::false 
+/// otherwise.
 bool stringFormat(string str, const string format, ...);
+
+/// @brief Concatenates the elements of the argument list using the specified separator.
+/// @param separator The string to use as a separator. Separator is included in the 
+/// returned string only if values has more than one element.
+/// @param count Number of elements of the argument list.
+/// @param ... Argument list that contains the strings to concatenate.
+/// @return Returns a new string that consists of the elements of the argument list 
+/// delimited by the separator string.
+string stringJoin(const string separator, int count, ...);
 
 #endif

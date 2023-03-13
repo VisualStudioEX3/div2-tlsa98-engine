@@ -94,3 +94,37 @@ bool stringFormat(string str, const string format, ...)
 
     return ret;
 }
+
+string stringJoin(const string separator, int count, ...)
+{
+    const int SEPARATOR_LENGTH = stringLength(separator);
+
+    va_list args;
+    string str;
+    int strChars;
+    string arg;
+    int argChars;
+
+    va_start(args, count);
+
+    for (int i = 0; i < count; i++)
+    {
+        va_arg(arg, string);
+        argChars = stringLength(arg);
+
+        if (i == 0)
+            str = stringCreate(argChars);
+        else
+        {
+            strChars = stringLength(str) + SEPARATOR_LENGTH + argChars;
+            str = stringResize(str, strChars);
+            strcat(str, separator);
+        }
+
+        strcat(str, arg);
+    }
+
+    va_end(args);
+
+    return str;
+}
