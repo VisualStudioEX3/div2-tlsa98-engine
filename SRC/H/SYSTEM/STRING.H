@@ -14,6 +14,7 @@
 #define STRING_SERVICE    1010
 
 typedef string  (*string_stralloc_f)    (int chars);
+typedef string  (*string_resize_f)      (string str, int chars);
 typedef int     (*string_len_f)         (const string str);
 typedef bool    (*string_all_f)         (const string str, const char chr);
 typedef bool    (*string_any_f)         (const string str, const string chars);
@@ -32,6 +33,14 @@ typedef struct string_service_t
     /// @return Returns a pointer to the new string created, filled with null chars, 
     /// #DIV::NULL otherwise.
     string_stralloc_f strAlloc;
+
+    /// @brief Resizes a string.
+    /// @param str Pointer to a string to resize.
+    /// @param chars Number of chars. Not counting the null terminated char.
+    /// @return Returns a pointer to the resized string, #DIV::NULL otherwise. 
+    /// If the size is major than original string size, the new chars are filled with null 
+    /// chars.
+    string_resize_f resize;
 
     /// @brief Gets the length of the string.
     /// @param str String to measure.

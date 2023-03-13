@@ -17,6 +17,11 @@ string stringAlloc(int chars)
     return (string)memoryCalloc(++chars); // Add extra char for null terminated char.
 }
 
+string stringResize(string str, int chars)
+{
+    return (string)memoryRealloc(str, ++chars, true); // Add extra char for null terminated char.
+}
+
 int stringLength(const string str)
 {
     return strlen(str);

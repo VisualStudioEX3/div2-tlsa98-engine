@@ -12,9 +12,17 @@
 
 /// @brief Allocates memory for a new string.
 /// @param chars Number of chars. Not counting the null terminated char.
-/// @return Returns a pointer to the new string created, filled with null chars, 
+/// @return Returns a pointer to the created string, filled with null chars, 
 /// #DIV::NULL otherwise.
 string stringAlloc(int chars);
+
+/// @brief Resizes a string.
+/// @param str Pointer to a string to resize.
+/// @param chars Number of chars. Not counting the null terminated char.
+/// @return Returns a pointer to the resized string, #DIV::NULL otherwise. 
+/// If the size is major than original string size, the new chars are filled with null 
+/// chars.
+string stringResize(string str, int chars);
 
 /// @brief Gets the length of the string.
 /// @param str String to measure.

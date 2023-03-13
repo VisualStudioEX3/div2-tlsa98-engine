@@ -16,6 +16,7 @@ void registerStringService()
     service = (string_service_t*)malloc(sizeof(string_service_t));
 
     service->strAlloc   = stringAlloc;
+    service->resize     = stringResize;
     service->len        = stringLength;
     service->all        = stringAll;
     service->any        = stringAny;
