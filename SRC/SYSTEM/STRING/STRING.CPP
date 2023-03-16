@@ -88,7 +88,7 @@ bool stringFormat(string str, const string format, ...)
 
     va_start(args, format);
 
-    bool ret = sprintf(str, format, args) > 0;
+    bool ret = vsprintf(str, format, args) > 0;
 
     va_end(args);
 
