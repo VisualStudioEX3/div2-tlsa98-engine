@@ -12,6 +12,30 @@
 #include "STRING.H"
 #include "..\MEM\MEM.H"
 
+static string stringToCase(const string str, int (*case_f)(int))
+{
+    string strCopy = stringCopy(str);
+
+    for (string chr = strCopy; chr != '\0'; chr++)
+        *chr = case_f(*chr);
+
+    return strCopy;
+}
+
+static int stringGetTotalCharsFromArgumentList(int count, va_list args)
+{
+    int chars = 0;
+    string arg;
+
+    for (int i = 0; i < count; i++)
+    {
+        arg = va_arg(args, string);
+        chars += stringLength(arg);
+    }
+
+    return chars;
+}
+
 string stringCreate(int chars)
 {
     return (string)memoryCalloc(++chars); // Add extra char for null terminated char.
@@ -62,16 +86,6 @@ string stringCopy(const string str)
     return strCopy;
 }
 
-static string stringToCase(const string str, int (*case_f)(int))
-{
-    string strCopy = stringCopy(str);
-
-    for (string chr = strCopy; chr != '\0'; chr++)
-        *chr = case_f(*chr);
-
-    return strCopy;
-}
-
 string stringToLowerCase(const string str)
 {
     return stringToCase(str, tolower);
@@ -97,29 +111,22 @@ bool stringFormat(string str, const string format, ...)
 
 string stringJoin(const string separator, int count, ...)
 {
-    const int SEPARATOR_LENGTH = stringLength(separator);
-
     va_list args;
-    string str;
-    int strChars;
-    string arg;
-    int argChars;
 
+    va_start(args, count);
+
+    int strChars = stringGetTotalCharsFromArgumentList(count, args);
+    string str = stringCreate(strChars);
+
+    va_end(args);
     va_start(args, count);
 
     for (int i = 0; i < count; i++)
     {
-        va_arg(arg, string);
-        argChars = stringLength(arg);
+        string arg = va_arg(args, string);
 
-        if (i == 0)
-            str = stringCreate(argChars);
-        else
-        {
-            strChars = stringLength(str) + SEPARATOR_LENGTH + argChars;
-            str = stringResize(str, strChars);
+        if (i > 0)
             strcat(str, separator);
-        }
 
         strcat(str, arg);
     }
