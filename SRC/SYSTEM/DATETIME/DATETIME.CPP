@@ -7,11 +7,35 @@
 
 #include <time.h>
 #include "DATETIME.H"
+#include "..\MEM\MEM.H"
 
 const int CLOCKS_PER_MILLISECONDS = CLOCKS_PER_SEC / 1000;
 
-struct tm* dt;
-time_t now;
+static void tm_to_datetime_t(const tm* src, datetime_t* dest)
+{
+    dest->seconds   = src->tm_sec;
+    dest->minutes   = src->tm_min;
+    dest->hour      = src->tm_hour;
+    dest->day       = src->tm_mday;
+    dest->month     = src->tm_mon + 1;      // Fix month value.
+    dest->year      = src->tm_year + 1900;  // Fix year value.
+}
+
+static time_t datetime_t_to_tm(const datetime_t* src, tm* dest)
+{
+    memoryClear(dest, sizeof(tm));
+
+    dest->tm_sec    = src->seconds;
+    dest->tm_min    = src->minutes;
+    dest->tm_hour   = src->hour;
+    dest->tm_mday   = src->day;
+    dest->tm_mon    = src->month - 1;
+    dest->tm_year   = src->year - 1900;
+
+    dest->tm_isdst  = -1;   // Unknown daylight savings time.
+
+    return mktime(dest);    // Resolve tm_wday and tm_yday values on dest argument, and returns the time_t value.
+}
 
 ulong getTickCount()
 {
@@ -20,24 +44,27 @@ ulong getTickCount()
 
 void getDateTime(datetime_t* dateTime)
 {
+    time_t now;
+    struct tm* dt;
+
     time(&now);
     dt = localtime(&now);
-    dt->tm_mon++;           // Fix month value.
-    dt->tm_year += 1900;    // Fix year value.
-
-    dateTime->seconds   = dt->tm_sec;
-    dateTime->minutes   = dt->tm_min;
-    dateTime->hour      = dt->tm_hour;
-    dateTime->day       = dt->tm_mday;
-    dateTime->month     = dt->tm_mon;
-    dateTime->year      = dt->tm_year;
+    tm_to_datetime_t(dt, dateTime);
 }
 
 datetime_t* getDateTimeAlloc()
 {
-    datetime_t* dateTime = (datetime_t*)malloc(sizeof(datetime_t));
+    datetime_t* dateTime = (datetime_t*)malloc(sizeof(datetime_t));;
 
     getDateTime(dateTime);
 
     return dateTime;
+}
+
+string dateTimeToString(datetime_t* dateTime)
+{
+    struct tm* dt = (tm*)malloc(sizeof(tm));
+    time_t t = datetime_t_to_tm(dateTime, dt);
+
+    return ctime(&t);
 }

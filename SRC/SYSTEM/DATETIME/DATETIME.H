@@ -23,4 +23,9 @@ void getDateTime(datetime_t* dateTime);
 /// @remarks This function creates a new #GLOBAL::datetime_t pointer to return the value.
 datetime_t* getDateTimeAlloc();
 
+/// @brief Converts date time value to string representation.
+/// @param dateTime Pointer to date time value to converts.
+/// @return Returns the string rerpresentation of the date time value.
+string dateTimeToString(datetime_t* dateTime);
+
 #endif
