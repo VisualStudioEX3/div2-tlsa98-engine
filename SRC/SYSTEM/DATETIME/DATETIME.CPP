@@ -61,7 +61,7 @@ datetime_t* getDateTimeAlloc()
     return dateTime;
 }
 
-string dateTimeToString(datetime_t* dateTime)
+string dateTimeToString(const datetime_t* dateTime)
 {
     struct tm* dt = (tm*)malloc(sizeof(tm));
     time_t t = datetime_t_to_tm(dateTime, dt);

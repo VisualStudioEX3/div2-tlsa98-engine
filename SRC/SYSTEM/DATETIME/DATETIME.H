@@ -26,6 +26,6 @@ datetime_t* getDateTimeAlloc();
 /// @brief Converts date time value to string representation.
 /// @param dateTime Pointer to date time value to converts.
 /// @return Returns the string rerpresentation of the date time value.
-string dateTimeToString(datetime_t* dateTime);
+string dateTimeToString(const datetime_t* dateTime);
 
 #endif
