@@ -30,11 +30,29 @@ bool changeDirectory(string path);
 /// See the standard stdio.h fopen() C function documentation for more details.
 FILE* openFile(string filename, string mode);
 
-/// @brief Close an opened file.
+/// @brief Closes an opened file.
 /// @param file File handle to close.
 /// @remarks This functions always must use the built-in DIV.H #DIV::div_fclose() function in 
 /// order to work properly with DIV Games Studio 2 runtime.
 /// See the standard stdio.h fclose() C function documentation for more details.
 void closeFile(FILE* file);
+
+/// @brief Writes a string value to file.
+/// @param file Pointer to a opened file.
+/// @param str String value to write.
+/// @param ... Optional list of arguments to format in the string. To see how to format the 
+/// output see: https://cplusplus.com/reference/cstdio/printf/.
+/// @returns Returns #SYSTEM::true if the string is sucessfully writen in the file, 
+/// #SYSTEM::false otherwise.
+bool writeStringToFile(FILE* file, string str, ...);
+
+/// @brief Writes a string value to file (Variadic version).
+/// @param file Pointer to a opened file.
+/// @param str String value to write.
+/// @param args List of arguments to format in the string. To see how to format the output 
+/// see: https://cplusplus.com/reference/cstdio/printf/.
+/// @returns Returns #SYSTEM::true if the string is sucessfully writen in the file, 
+/// #SYSTEM::false otherwise.
+bool writeStringToFileArgs(FILE* file, string str, va_list args);
 
 #endif

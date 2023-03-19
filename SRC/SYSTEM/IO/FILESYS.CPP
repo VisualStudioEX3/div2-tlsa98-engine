@@ -28,3 +28,21 @@ void closeFile(FILE* file)
     // TODO: Asserts NULL file handle.
     div_fclose(file);
 }
+
+bool writeStringToFile(FILE* file, string str, ...)
+{
+    va_list args;
+
+    va_start(args, str);
+
+    bool ret = writeStringToFileArgs(file, str, args);
+    
+    va_end(args);
+
+    return ret;
+}
+
+bool writeStringToFileArgs(FILE* file, string str, va_list args)
+{
+    return vfprintf(file, str, args) >= 0;
+}
