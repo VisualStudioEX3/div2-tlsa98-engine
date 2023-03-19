@@ -10,6 +10,7 @@
 
 #define GLOBALS         // Required by DIV.H (before incluide it).
 
+#include <stdarg.h>
 #include "DIV.H"        // DIV Games Studio 2 API.
 
 /// @brief True constant value.
