@@ -11,6 +11,10 @@
 #include <stdarg.h>
 #include "..\..\H\GLOBAL.H"
 
+/// @brief Gets current directory.
+/// @return Returns a pointer to a new string that contains the current working path.
+string getCurrentDirectory();
+
 /// @brief Creates a new directory.
 /// @param path Path for the new directory to creates.
 /// @returns Returns #SYSTEM::true if the directory is created, #SYSTEM::false otherwise.
@@ -20,6 +24,11 @@ bool createDirectory(string path);
 /// @param path Path for the directory.
 /// @returns Returns #SYSTEM::true if the path is valid, #SYSTEM::false otherwise.
 bool changeDirectory(string path);
+
+/// @brief Determines whether the given path refers to an existing directory on disk.
+/// @param path Path to test.
+/// @return Returns #SYSTEM::true if the directory exists, #SYSTEM::false otherwise.
+bool directoryExists(const string path);
 
 /// @brief Opens or created a file.
 /// @param filename Filename and path of the file to open or created.

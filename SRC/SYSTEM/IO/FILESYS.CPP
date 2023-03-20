@@ -6,7 +6,16 @@
 */
 
 #include <direct.h> // DOS filesystem functions.
+#include <sys/stat.h>
 #include "FILESYS.H"
+
+const int DOS_MAX_FILENAME = 12;    // Max length for a filename in MS-DOS (8:3 format).
+const int DOS_MAX_PATH = 80;        // Max length for a path in MS-DOS.
+
+string getCurrentDirectory()
+{
+    return getcwd(NULL, DOS_MAX_PATH); // NULL buffer autoallocates a new string with the enough length for the path.
+}
 
 bool createDirectory(string path)
 {
@@ -16,6 +25,15 @@ bool createDirectory(string path)
 bool changeDirectory(string path)
 {
     return chdir(path) == 0;
+}
+
+bool directoryExists(const string path)
+{
+    struct stat stats;
+
+    stat(path, &stats);
+
+    return S_ISDIR(stats.st_mode);
 }
 
 FILE* openFile(string filename, string mode)
