@@ -42,7 +42,16 @@ ulong getTickCount()
     return clock() * CLOCKS_PER_MILLISECONDS;
 }
 
-void getDateTime(datetime_t* dateTime)
+datetime_t* getDateTime()
+{
+    datetime_t* dateTime = (datetime_t*)malloc(sizeof(datetime_t));
+
+    getDateTimeNotAlloc(dateTime);
+
+    return dateTime;
+}
+
+void getDateTimeNotAlloc(datetime_t* dateTime)
 {
     time_t now;
     struct tm* dt;
@@ -50,15 +59,6 @@ void getDateTime(datetime_t* dateTime)
     time(&now);
     dt = localtime(&now);
     tm_to_datetime_t(dt, dateTime);
-}
-
-datetime_t* getDateTimeAlloc()
-{
-    datetime_t* dateTime = (datetime_t*)malloc(sizeof(datetime_t));;
-
-    getDateTime(dateTime);
-
-    return dateTime;
 }
 
 string dateTimeToString(const datetime_t* dateTime)

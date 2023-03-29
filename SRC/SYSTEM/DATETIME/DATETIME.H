@@ -15,13 +15,12 @@
 ulong getTickCount();
 
 /// @brief Get current date and time.
-/// @param dateTime Pointer to variable to store the date and time values.
-void getDateTime(datetime_t* dateTime);
+/// @return Returns the current system date and time.
+datetime_t* getDateTime();
 
 /// @brief Get current date and time.
-/// @return Returns the current system date and time.
-/// @remarks This function creates a new #GLOBAL::datetime_t pointer to return the value.
-datetime_t* getDateTimeAlloc();
+/// @param dateTime Pointer to variable to store the date and time values.
+void getDateTimeNotAlloc(datetime_t* dateTime);
 
 /// @brief Converts date time value to string representation.
 /// @param dateTime Pointer to date time value to converts.
