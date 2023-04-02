@@ -101,11 +101,16 @@ bool stringFormat(string str, const string format, ...)
 
     va_start(args, format);
 
-    bool ret = vsprintf(str, format, args) > 0;
+    bool ret = stringFormatArgs(str, format, args);
 
     va_end(args);
 
     return ret;
+}
+
+bool stringFormatArgs(string str, const string format, va_list args)
+{
+    return vsprintf(str, format, args) > 0;
 }
 
 string stringJoin(const string separator, int count, ...)
@@ -114,11 +119,21 @@ string stringJoin(const string separator, int count, ...)
 
     va_start(args, count);
 
-    int strChars = stringGetTotalCharsFromArgumentList(count, args);
-    string str = stringCreate(strChars);
+    string str = stringJoinArgs(separator, count, args);
 
     va_end(args);
-    va_start(args, count);
+
+    return str;
+}
+
+string stringJoinArgs(const string separator, int count, va_list args)
+{
+    va_list copyArgs;
+
+    va_copy(args, copyArgs);
+
+    int strChars = stringGetTotalCharsFromArgumentList(count, copyArgs);
+    string str = stringCreate(strChars);
 
     for (int i = 0; i < count; i++)
     {
@@ -129,8 +144,6 @@ string stringJoin(const string separator, int count, ...)
 
         strcat(str, arg);
     }
-
-    va_end(args);
 
     return str;
 }
