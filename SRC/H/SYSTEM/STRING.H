@@ -24,7 +24,9 @@ typedef string  (*string_copy_f)        (const string str);
 typedef string  (*string_to_lower_f)    (const string str);
 typedef string  (*string_to_upper_f)    (const string str);
 typedef bool    (*string_format_f)      (string, const string, ...);
+typedef bool    (*string_format_args_f) (string, const string, va_list);
 typedef string  (*string_join_f)        (const string separator, int count, ...);
+typedef string  (*string_join_args_f)   (const string separator, int count, va_list);
 
 /// @brief String service interface.
 typedef struct string_service_t
@@ -98,6 +100,13 @@ typedef struct string_service_t
     /// @returns Returns #SYSTEM::true if string is sucessful formatted, #SYSTEM::false otherwise.
     string_format_f format;
 
+    /// @brief Formats a string using a list of values.
+    /// @param str Pointer to string where store the output formatted restult.
+    /// @param format Format string model. To see how to format the output see: https://cplusplus.com/reference/cstdio/printf/.
+    /// @param args List of arguments to use in formatted string.
+    /// @returns Returns #SYSTEM::true if string is sucessful formatted, #SYSTEM::false otherwise.
+    string_format_args_f vformat;
+
     /// @brief Concatenates the elements of the argument list using the specified separator.
     /// @param separator The string to use as a separator. Separator is included in the 
     /// returned string only if values has more than one element.
@@ -106,6 +115,15 @@ typedef struct string_service_t
     /// @return Returns a new string that consists of the elements of the argument list 
     /// delimited by the separator string.
     string_join_f join;
+
+    /// @brief Concatenates the elements of the argument list using the specified separator.
+    /// @param separator The string to use as a separator. Separator is included in the 
+    /// returned string only if values has more than one element.
+    /// @param count Number of elements of the argument list.
+    /// @param args Argument list that contains the strings to concatenate.
+    /// @return Returns a new string that consists of the elements of the argument list 
+    /// delimited by the separator string.
+    string_join_args_f vjoin;
 } string_service_t;
 
 /// @brief Register and initializes the service.
