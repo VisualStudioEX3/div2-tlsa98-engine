@@ -30,6 +30,18 @@ bool changeDirectory(string path);
 /// @return Returns #SYSTEM::true if the directory exists, #SYSTEM::false otherwise.
 bool directoryExists(const string path);
 
+/// @brief Combines strings into a path.
+/// @param count Number of elements of the argument list.
+/// @param ... Argument list that contains the strings to concatenate.
+/// @return Returns a new string with the combined paths, #DIV::NULL otherwise.
+string combinePath(int count, ...);
+
+/// @brief Combines strings into a path (Variadic version).
+/// @param count Number of elements of the argument list.
+/// @param args Argument list that contains the strings to concatenate.
+/// @return Returns a new string with the combined paths, #DIV::NULL otherwise.
+string combinePathArgs(int count, va_list args);
+
 /// @brief Opens or created a file.
 /// @param filename Filename and path of the file to open or created.
 /// @param mode Mode to open or create the file.

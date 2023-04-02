@@ -7,10 +7,12 @@
 
 #include <direct.h> // DOS filesystem functions.
 #include <sys/stat.h>
+#include "..\STRING\STRING.H"
 #include "FILESYS.H"
 
-const int DOS_MAX_FILENAME = 12;    // Max length for a filename in MS-DOS (8:3 format).
-const int DOS_MAX_PATH = 80;        // Max length for a path in MS-DOS.
+const int DOS_MAX_FILENAME = 12;        // Max length for a filename in MS-DOS (8:3 format).
+const int DOS_MAX_PATH = 80;            // Max length for a path in MS-DOS.
+const char PATH_SEPARATOR_CHAR = '\\';  // DOS-WINDOWS path separator char.
 
 string getCurrentDirectory()
 {
@@ -34,6 +36,24 @@ bool directoryExists(const string path)
     stat(path, &stats);
 
     return S_ISDIR(stats.st_mode);
+}
+
+string combinePath(int count, ...)
+{
+    va_list args;
+
+    va_start(args, count);
+
+    string path = combinePathArgs(count, args);
+
+    va_end(args);
+
+    return path;
+}
+
+string combinePathArgs(int count, va_list args)
+{
+    return stringJoinArgs((string)PATH_SEPARATOR_CHAR, count, args);
 }
 
 FILE* openFile(string filename, string mode)
