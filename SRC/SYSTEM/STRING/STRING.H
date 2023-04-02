@@ -24,6 +24,10 @@ string stringCreate(int chars);
 /// chars.
 string stringResize(string str, int chars);
 
+/// @brief Puts all characters of the string to null char.
+/// @param str String to clear.
+void stringClear(string str);
+
 /// @brief Gets the length of the string.
 /// @param str String to measure.
 /// @return Returns the number of characters until reach the first #DIV::NULL character.

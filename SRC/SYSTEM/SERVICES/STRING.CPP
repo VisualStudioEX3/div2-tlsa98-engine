@@ -17,6 +17,7 @@ void registerStringService()
 
     service->create     = stringCreate;
     service->resize     = stringResize;
+    service->clear      = stringClear;
     service->len        = stringLength;
     service->all        = stringAll;
     service->any        = stringAny;

@@ -45,6 +45,11 @@ string stringResize(string str, int chars)
     return (string)memoryRealloc(str, ++chars, true); // Add extra char for null terminated char.
 }
 
+void stringClear(string str)
+{
+    memoryClear(str, stringLength(str));
+}
+
 int stringLength(const string str)
 {
     return strlen(str);

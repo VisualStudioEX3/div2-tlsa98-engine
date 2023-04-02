@@ -15,6 +15,7 @@
 
 typedef string  (*string_create_f)      (int chars);
 typedef string  (*string_resize_f)      (string str, int chars);
+typedef void    (*string_clear_f)       (string str);
 typedef int     (*string_len_f)         (const string str);
 typedef bool    (*string_all_f)         (const string str, const char chr);
 typedef bool    (*string_any_f)         (const string str, const string chars);
@@ -44,6 +45,10 @@ typedef struct string_service_t
     /// If the size is major than original string size, the new chars are filled with null 
     /// chars.
     string_resize_f resize;
+
+    /// @brief Puts all characters of the string to null char.
+    /// @param str String to clear.
+    string_clear_f clear;
 
     /// @brief Gets the length of the string.
     /// @param str String to measure.
