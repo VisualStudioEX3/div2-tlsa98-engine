@@ -81,7 +81,7 @@ string stringToUpperCase(const string str);
 /// otherwise.
 bool stringFormat(string str, const string format, ...);
 
-/// @brief Formats a string using a list of values.
+/// @brief Formats a string using a list of values (Variadic version).
 /// @param str Pointer to string where store the output formatted result.
 /// @param format Format string model. To see how to format the output see: 
 /// https://cplusplus.com/reference/cstdio/printf/.
@@ -99,7 +99,8 @@ bool stringFormatArgs(string str, const string format, va_list args);
 /// delimited by the separator string.
 string stringJoin(const string separator, int count, ...);
 
-/// @brief Concatenates the elements of the argument list using the specified separator.
+/// @brief Concatenates the elements of the argument list using the specified separator
+/// (Variadic version).
 /// @param separator The string to use as a separator. Separator is included in the 
 /// returned string only if values has more than one element.
 /// @param count Number of elements of the argument list.

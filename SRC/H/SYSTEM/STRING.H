@@ -95,14 +95,16 @@ typedef struct string_service_t
 
     /// @brief Formats a string using a list of values.
     /// @param str Pointer to string where store the output formatted restult.
-    /// @param format Format string model. To see how to format the output see: https://cplusplus.com/reference/cstdio/printf/.
+    /// @param format Format string model. To see how to format the output see: 
+    /// https://cplusplus.com/reference/cstdio/printf/.
     /// @param ... List of arguments to use in formatted string.
     /// @returns Returns #SYSTEM::true if string is sucessful formatted, #SYSTEM::false otherwise.
     string_format_f format;
 
-    /// @brief Formats a string using a list of values.
+    /// @brief Formats a string using a list of values (Variadic version).
     /// @param str Pointer to string where store the output formatted restult.
-    /// @param format Format string model. To see how to format the output see: https://cplusplus.com/reference/cstdio/printf/.
+    /// @param format Format string model. To see how to format the output see: 
+    /// https://cplusplus.com/reference/cstdio/printf/.
     /// @param args List of arguments to use in formatted string.
     /// @returns Returns #SYSTEM::true if string is sucessful formatted, #SYSTEM::false otherwise.
     string_format_args_f vformat;
@@ -116,7 +118,8 @@ typedef struct string_service_t
     /// delimited by the separator string.
     string_join_f join;
 
-    /// @brief Concatenates the elements of the argument list using the specified separator.
+    /// @brief Concatenates the elements of the argument list using the specified separator
+    /// (Variadic version).
     /// @param separator The string to use as a separator. Separator is included in the 
     /// returned string only if values has more than one element.
     /// @param count Number of elements of the argument list.
