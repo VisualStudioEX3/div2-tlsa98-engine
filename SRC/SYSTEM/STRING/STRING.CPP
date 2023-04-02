@@ -130,7 +130,7 @@ string stringJoinArgs(const string separator, int count, va_list args)
 {
     va_list copyArgs;
 
-    va_copy(args, copyArgs);
+    va_copy(copyArgs, args);
 
     int strChars = stringGetTotalCharsFromArgumentList(count, copyArgs);
     string str = stringCreate(strChars);

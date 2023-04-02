@@ -95,6 +95,6 @@ typedef struct datetime_t
 #define arraylen(a)         sizeof(a) / sizeof(a[0])
 
 /// @brief Custom implemnetation of ANSI C99 va_copy macro.
-#define va_copy(src, dst)   memcpy((void*)dst, (void*)src, sizeof(va_list));
+#define va_copy(dst, src)   memcpy((void*)dst, (void*)src, sizeof(va_list));
 
 #endif
