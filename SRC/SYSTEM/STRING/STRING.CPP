@@ -15,7 +15,7 @@ static string stringToCase(const string str, int (*case_f)(int))
 {
     string strCopy = stringCopy(str);
 
-    for (string chr = strCopy; chr != '\0'; chr++)
+    for (char* chr = &strCopy[0]; *chr != '\0'; chr++)
         *chr = case_f(*chr);
 
     return strCopy;
