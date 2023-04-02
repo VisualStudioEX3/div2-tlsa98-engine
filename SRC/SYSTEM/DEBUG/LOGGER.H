@@ -12,8 +12,8 @@
 
 /// @brief Creates the log file.
 /// @remarks This function also create, if not exists, the logs root folder, the today folder,
-/// if not exists, with date as name (yyyyMMdd), and the log file with creation time as name
-/// (HHmmss.log).
+/// if not exists, with date as name ($yyyy$MM$dd), and the log file with creation time as name
+/// ($HH$mm$ss.log).
 void createLogFile();
 
 /// @brief Closes the log file.
