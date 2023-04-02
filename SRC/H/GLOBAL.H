@@ -11,6 +11,7 @@
 #define GLOBALS         // Required by DIV.H (before incluide it).
 
 #include <stdarg.h>
+#include <string.h>     // Required for va_copy macro.
 #include "DIV.H"        // DIV Games Studio 2 API.
 
 /// @brief True constant value.
@@ -69,7 +70,7 @@ typedef struct datetime_t
 
 /// @brief #DIV::getparm() version to get a DIV Games Studio 2 STRING parameters.
 /// @return Returns the next parameter from DIV function stack as string value.
-#define getstrparm()    (string)&mem[text_offset + getparm()]
+#define getstrparm()        (string)&mem[text_offset + getparm()]
 
 /// @brief malloc() alias to DIV implementation.
 /// @param size Size of the memory region to allocate.
@@ -78,7 +79,7 @@ typedef struct datetime_t
 /// memory allocations. If you try to use the standard malloc() the program starts to generate
 /// memory corruption and even crashes. This macro allows you to use safe malloc() calls but 
 /// using the DIV implementation.
-#define malloc(size)    div_malloc(size)
+#define malloc(size)        div_malloc(size)
 
 /// @brief free() alias to DIV implementation.
 /// @param ptr Pointer of the memory region to release.
@@ -86,11 +87,14 @@ typedef struct datetime_t
 /// memory allocations. If you try to use the standard free() the program starts to generate
 /// memory corruption and even crashes. This macro allows you to use safe free() calls but 
 /// using the DIV implementation.
-#define free(ptr)       div_free(ptr)
+#define free(ptr)           div_free(ptr)
 
 /// @brief Gets the size of an array.
 /// @param a Array to measure.
 /// @return Returns the array size.
-#define arraylen(a)     sizeof(a) / sizeof(a[0])
+#define arraylen(a)         sizeof(a) / sizeof(a[0])
+
+/// @brief Custom implemnetation of ANSI C99 va_copy macro.
+#define va_copy(src, dst)   memcpy((void*)dst, (void*)src, sizeof(va_list));
 
 #endif
