@@ -6,8 +6,6 @@
 */
 
 #include <ctype.h>
-#include <stdio.h>
-#include <string.h>
 #include "STRING.H"
 #include "..\MEM\MEM.H"
 

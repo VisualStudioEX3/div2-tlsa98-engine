@@ -8,7 +8,6 @@
 #ifndef __SYSTEM_FILE_SYSTEM_H_
 #define __SYSTEM_FILE_SYSTEM_H_
 
-#include <stdarg.h>
 #include "..\..\H\GLOBAL.H"
 
 /// @brief Gets current directory.

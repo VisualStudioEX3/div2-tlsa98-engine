@@ -5,7 +5,6 @@
     Memory functions.
 */
 
-#include <string.h>
 #include "MEM.H"
 
 void memoryClear(void* ptr, size_t size)

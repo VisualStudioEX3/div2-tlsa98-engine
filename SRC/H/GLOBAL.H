@@ -11,8 +11,8 @@
 #define GLOBALS         // Required by DIV.H (before incluide it).
 
 #include <stdarg.h>
-#include <string.h>     // Required for va_copy macro.
-#include "DIV.H"        // DIV Games Studio 2 API.
+#include <string.h>
+#include "DIV.H"        // DIV Games Studio 2 API. This header also include stdio.h.
 
 /// @brief True constant value.
 /// @remarks In DIV Games Studio, all odd values are considered as true value.
