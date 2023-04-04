@@ -9,6 +9,7 @@
 #define __GLOBAL_H_
 
 #define GLOBALS         // Required by DIV.H (before incluide it).
+#define DOSBOX_SUPPORT  // Uncomment this for support and fixes for DOSBox emulator.
 
 #include <stdarg.h>
 #include <string.h>
