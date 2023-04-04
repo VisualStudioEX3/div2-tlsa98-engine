@@ -5,10 +5,12 @@
     Main engine file and access to all core services.
 */
 
+#include "DEBUG\DEBUG.H"
 #include "..\H\SYSTEM.H"
 
 static void initialize()
 {
+    initializeDebugSystem();
     initializeServiceProvider();
 
     registerMemService();
@@ -37,4 +39,5 @@ void __export divlibrary(LIBRARY_PARAMS)
 void __export divend(COMMON_PARAMS)
 {
     // Terminate services.
+    terminateDebugSystem();
 }
