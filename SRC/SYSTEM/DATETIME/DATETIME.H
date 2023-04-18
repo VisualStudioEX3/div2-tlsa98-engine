@@ -8,7 +8,7 @@
 #ifndef __SYSTEM_DATETIME_H_
 #define __SYSTEM_DATETIME_H_
 
-#include "..\..\H\GLOBAL.H"
+#include "..\..\H\SYSTEM.H"
 
 /// @brief Retrieves the number of milliseconds that have elapsed since the system was started.
 /// @return Returns the number of milliseconds that have elapsed since the system was started.

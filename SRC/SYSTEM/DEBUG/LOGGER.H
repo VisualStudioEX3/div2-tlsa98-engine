@@ -8,7 +8,7 @@
 #ifndef __SYSTEM_DEBUG_LOGGER_H_
 #define __SYSTEM_DEBUG_LOGGER_H_
 
-#include "..\..\H\GLOBAL.H"
+#include "..\..\H\SYSTEM.H"
 
 /// @brief Creates the log file.
 /// @remarks This function also create, if not exists, the logs root folder, the today folder,

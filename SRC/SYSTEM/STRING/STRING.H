@@ -8,7 +8,7 @@
 #ifndef __SYSTEM_STRING_H_
 #define __SYSTEM_STRING_H_
 
-#include "..\..\H\GLOBAL.H"
+#include "..\..\H\SYSTEM.H"
 
 /// @brief Creates a new string.
 /// @param chars Number of chars. Not counting the null terminated char.

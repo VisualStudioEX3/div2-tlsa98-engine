@@ -8,7 +8,7 @@
 #ifndef __SYSTEM_DEBUG_H_
 #define __SYSTEM_DEBUG_H_
 
-#include "..\..\H\GLOBAL.H"
+#include "..\..\H\SYSTEM.H"
 
 /// @brief Initializes all debug subsystems.
 void initializeDebugSystem();

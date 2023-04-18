@@ -6,7 +6,7 @@
 */
 
 #include <string.h>
-#include "..\H\GLOBAL.H"
+#include "..\H\SYSTEM.H"
 #include "..\H\SYSTEM\SERVICES.H"
 
 const int MAX_SERVICES = 64;
@@ -35,7 +35,7 @@ static service_t* searchService(service_id_t id)
     for (int i = 0; i < MAX_SERVICES; i++)
     {
         service_t* service = serviceContainer->services[i];
-        
+
         if (service->id == id)
             return service;
     }

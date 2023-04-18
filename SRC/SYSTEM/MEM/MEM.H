@@ -8,7 +8,7 @@
 #ifndef __SYSTEM_MEM_H_
 #define __SYSTEM_MEM_H_
 
-#include "..\..\H\GLOBAL.H"
+#include "..\..\H\SYSTEM.H"
 
 /// @brief Sets all bytes to null.
 /// @param ptr Pointer to a memory region.

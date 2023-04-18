@@ -8,7 +8,7 @@
 #ifndef __SYSTEM_FILE_SYSTEM_H_
 #define __SYSTEM_FILE_SYSTEM_H_
 
-#include "..\..\H\GLOBAL.H"
+#include "..\..\H\SYSTEM.H"
 
 /// @brief Gets current directory.
 /// @return Returns a pointer to a new string that contains the current working path.

@@ -5,7 +5,7 @@
     DIV Games Studio function exporter service.
 */
 
-#include "..\H\GLOBAL.H"
+#include "..\H\SYSTEM.H"
 #include "..\H\SYSTEM\SERVICES.H"
 #include "..\H\SYSTEM\MEM.H"
 #include "..\H\SYSTEM\STRING.H"

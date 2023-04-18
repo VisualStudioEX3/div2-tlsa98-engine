@@ -8,7 +8,7 @@
 #ifndef __SYSTEM_MATH_SERVICE_H_
 #define __SYSTEM_MATH_SERVICE_H_
 
-#include "..\GLOBAL.H"
+#include "..\SYSTEM.H"
 #include "DIVFNEXP.H"
 
 /// @brief Math service id.

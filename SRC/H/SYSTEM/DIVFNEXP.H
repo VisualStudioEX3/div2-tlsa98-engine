@@ -8,7 +8,7 @@
 #ifndef __SYSTEM_DIV_FUNCTION_EXPORTER_SERVICE_H_
 #define __SYSTEM_DIV_FUNCTION_EXPORTER_SERVICE_H_
 
-#include "..\GLOBAL.H"
+#include "..\SYSTEM.H"
 
 /// @brief DIV Games Studio function exporter service id.
 #define DIV_FUNCTION_EXPORTER_SERVICE       1100
