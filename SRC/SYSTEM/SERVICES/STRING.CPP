@@ -5,8 +5,8 @@
     String service.
 */
 
-#include "..\H\SYSTEM\SERVICES.H"
-#include "..\H\SYSTEM\STRING.H"
+#include "..\..\H\SYSTEM\SERVICES.H"
+#include "..\..\H\SYSTEM\STRING.H"
 #include "..\STRING\STRING.H"
 
 string_service_t* service;

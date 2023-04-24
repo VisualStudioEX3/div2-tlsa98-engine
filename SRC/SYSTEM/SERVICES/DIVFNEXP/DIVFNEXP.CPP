@@ -5,11 +5,11 @@
     DIV Games Studio function exporter service.
 */
 
-#include "..\H\SYSTEM.H"
-#include "..\H\SYSTEM\SERVICES.H"
-#include "..\H\SYSTEM\MEM.H"
-#include "..\H\SYSTEM\STRING.H"
-#include "..\H\SYSTEM\DIVFNEXP.H"
+#include "..\..\..\H\SYSTEM.H"
+#include "..\..\..\H\SYSTEM\SERVICES.H"
+#include "..\..\..\H\SYSTEM\MEM.H"
+#include "..\..\..\H\SYSTEM\STRING.H"
+#include "..\..\..\H\SYSTEM\DIVFNEXP.H"
 #include "DIV2RESN.H" // DIV Games Studio 2 language reserved names list.
 
 const string VALID_CHARS = "abcdefghijklmnopqrstuvwxyz_";

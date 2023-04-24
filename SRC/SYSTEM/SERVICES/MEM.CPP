@@ -5,8 +5,8 @@
     Memory service.
 */
 
-#include "..\H\SYSTEM\MEM.H"
-#include "..\H\SYSTEM\SERVICES.H"
+#include "..\..\H\SYSTEM\MEM.H"
+#include "..\..\H\SYSTEM\SERVICES.H"
 #include "..\MEM\MEM.H"
 
 mem_service_t* service;

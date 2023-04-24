@@ -5,9 +5,9 @@
     Math service.
 */
 
-#include "..\H\GLOBAL.H"
-#include "..\H\SYSTEM\SERVICES.H"
-#include "..\H\SYSTEM\MATH.H"
+#include "..\..\H\SYSTEM.H"
+#include "..\..\H\SYSTEM\SERVICES.H"
+#include "..\..\H\SYSTEM\MATH.H"
 
 math_service_t* service;
 
