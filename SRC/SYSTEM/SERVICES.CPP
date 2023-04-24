@@ -30,14 +30,14 @@ static bool isContainerFull()
     return serviceContainer->count == MAX_SERVICES;
 }
 
-static service_t* searchService(service_id_t id)
+static const void* searchService(service_id_t id)
 {
     for (int i = 0; i < MAX_SERVICES; i++)
     {
         service_t* service = serviceContainer->services[i];
 
         if (service->id == id)
-            return service;
+            return service->service;
     }
 
     return NULL;
