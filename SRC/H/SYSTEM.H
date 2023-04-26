@@ -72,7 +72,7 @@ typedef struct datetime_t
     int month;
     /// @brief Year (from 1900).
     int year;
-};
+} datetime_t;
 
 /// @brief #DIV::getparm() version to get a DIV Games Studio 2 STRING parameters.
 /// @return Returns the next parameter from DIV function stack as string value.
