@@ -6,17 +6,27 @@
 */
 
 #include <direct.h> // DOS filesystem functions.
-#include <sys/stat.h>
+#include <stdlib.h>
+#include <sys\stat.h>
 #include "..\STRING\STRING.H"
 #include "FILESYS.H"
 
-const int DOS_MAX_FILENAME = 12;        // Max length for a filename in MS-DOS (8:3 format).
-const int DOS_MAX_PATH = 80;            // Max length for a path in MS-DOS.
-const char PATH_SEPARATOR_CHAR = '\\';  // DOS-WINDOWS path separator char.
+const int MAX_FILENAME = _MAX_NAME;     // Max length for a filename in MS-DOS (8:3 format).
+const int MAX_PATH = _MAX_PATH;         // Max length for a path in MS-DOS.
+const string PATH_SEPARATOR = "\\";     // DOS-WINDOWS path separator char.
 
 string getCurrentDirectory()
 {
-    return getcwd(NULL, DOS_MAX_PATH); // NULL buffer autoallocates a new string with the enough length for the path.
+    string path = getcwd(NULL, MAX_PATH);
+    int len = stringLength(path);
+
+    path[len] = PATH_SEPARATOR[0]; // Add path terminator.
+
+    string ret = stringCopy(path);
+
+    free(path);
+
+    return ret;
 }
 
 bool createDirectory(string path)
@@ -53,7 +63,7 @@ string combinePath(int count, ...)
 
 string combinePathArgs(int count, va_list args)
 {
-    return stringJoinArgs((string)PATH_SEPARATOR_CHAR, count, args);
+    return stringJoinArgs(PATH_SEPARATOR, count, args);
 }
 
 FILE* openFile(string filename, string mode)
@@ -74,7 +84,7 @@ bool writeStringToFile(FILE* file, string str, ...)
     va_start(args, str);
 
     bool ret = writeStringToFileArgs(file, str, args);
-    
+
     va_end(args);
 
     return ret;
