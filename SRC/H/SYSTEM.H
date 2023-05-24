@@ -58,7 +58,7 @@ typedef unsigned long ulong;
 typedef char* string;
 
 /// @brief Date and time value.
-typedef struct datetime_t
+typedef struct
 {
     /// @brief Seconds after the minute (from 0).
     int seconds;

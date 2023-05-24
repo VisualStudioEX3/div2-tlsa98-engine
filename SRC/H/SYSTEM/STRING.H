@@ -30,7 +30,7 @@ typedef string  (*string_join_f)        (const string separator, int count, ...)
 typedef string  (*string_join_args_f)   (const string separator, int count, va_list);
 
 /// @brief String service interface.
-typedef struct string_service_t
+typedef struct
 {
     /// @brief Creates a new string.
     /// @param chars Number of chars. Not counting the null terminated char.

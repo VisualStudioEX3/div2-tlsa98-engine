@@ -21,7 +21,7 @@ typedef bool    (*math_is_clamped_f)    (int v, int a, int b);
 typedef int     (*math_lerp_f)          (int a, int b, int t);
 
 /// @brief Math service interface.
-typedef struct math_service_t
+typedef struct
 {
     /// @brief Gets the min value bewteen 2 values.
     /// @param a First value.

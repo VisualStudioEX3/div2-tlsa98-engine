@@ -21,7 +21,7 @@ typedef void  (*mem_copy_to_f)      (const void* from, void* to, size_t size);
 typedef bool  (*mem_equals_f)       (const void* ptr1, const void* ptr2, size_t size);
 
 /// @brief Memory service interface.
-typedef struct mem_service_t
+typedef struct
 {
     /// @brief Sets all bytes to null.
     /// @param ptr Pointer to a memory region.

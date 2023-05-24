@@ -27,7 +27,7 @@ typedef void (*divfnexp_register_f)         (string name, uint params, div_funct
 typedef void (*divfnexp_commit_f)           (div_function_com_export_f comExport);
 
 /// @brief DIV Games Studio function exporter service.
-typedef struct div_function_exporter_service_t
+typedef struct
 {
     /// @brief Registers a new function to export for DIV Games Studio language.
     /// @param name Function name in DIV Games Studio language. Avoid using DIV Games Studio 
