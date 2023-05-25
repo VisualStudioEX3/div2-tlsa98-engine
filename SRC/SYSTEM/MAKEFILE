@@ -1,0 +1,18 @@
+objects		= system.obj
+coptions	= /s /ox
+dest		= SYSTEM.DLL
+
+.cpp.obj
+	wpp386	$(coptions) $<
+
+$(dest):	$(objects)
+	%write	system.lnk NAME	$@
+	%write	system.lnk SYSTEM DIV_DLL
+	%write	system.lnk FILE	{$(objects)}
+	wlink	@system.lnk
+
+clean:		.SYMBOLIC
+	@echo cleaning directory
+	@if exist *.obj @del *.obj
+	@if exist *.lnk @del *.lnk
+	@if exist *.err @del *.err
