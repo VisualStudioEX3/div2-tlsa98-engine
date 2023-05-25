@@ -1,5 +1,5 @@
 //! SYSTEM.DLL - System library for DIV Games Studio 2.
-//! @copyright TLSA98 Engine (C) VisualStudioEX3, José Miguel Sánchez Fernández - 2022
+//! @copyright TLSA98 Engine (C) VisualStudioEX3, José Miguel Sánchez Fernández - 2022, 2023
 //! @copyright DIV Games Studio 2 (C) Hammer Technologies, Daniel Navarro Medrano - 1998, 1999
 /*!
     Debug functions.
@@ -8,7 +8,7 @@
 #ifndef __SYSTEM_DEBUG_H_
 #define __SYSTEM_DEBUG_H_
 
-#include "..\..\H\SYSTEM.H"
+#include "..\..\H\SYSTEM\GLOBALS.H"
 
 /// @brief Initializes all debug subsystems.
 void initializeDebugSystem();

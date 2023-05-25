@@ -1,5 +1,5 @@
 //! SYSTEM.DLL - System library for DIV Games Studio 2.
-//! @copyright TLSA98 Engine (C) VisualStudioEX3, José Miguel Sánchez Fernández - 2022
+//! @copyright TLSA98 Engine (C) VisualStudioEX3, José Miguel Sánchez Fernández - 2022, 2023
 //! @copyright DIV Games Studio 2 (C) Hammer Technologies, Daniel Navarro Medrano - 1998, 1999
 /*!
     String functions.
@@ -8,7 +8,7 @@
 #ifndef __SYSTEM_STRING_H_
 #define __SYSTEM_STRING_H_
 
-#include "..\..\H\SYSTEM.H"
+#include "..\..\H\SYSTEM\GLOBALS.H"
 
 /// @brief Creates a new string.
 /// @param chars Number of chars. Not counting the null terminated char.

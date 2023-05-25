@@ -1,5 +1,5 @@
 //! SYSTEM.DLL - System library for DIV Games Studio 2.
-//! @copyright TLSA98 Engine (C) VisualStudioEX3, José Miguel Sánchez Fernández - 2022
+//! @copyright TLSA98 Engine (C) VisualStudioEX3, José Miguel Sánchez Fernández - 2022, 2023
 //! @copyright DIV Games Studio 2 (C) Hammer Technologies, Daniel Navarro Medrano - 1998, 1999
 /*!
     Service provider.
@@ -7,6 +7,8 @@
 
 #ifndef __SYSTEM_SERVICES_H_
 #define __SYSTEM_SERVICES_H_
+
+#include "GLOBALS.H"
 
 /// @brief A service is already registered with the used id.
 #define RESULT_ERROR_SERVICE_ALREADY_REGISTERED     1000
