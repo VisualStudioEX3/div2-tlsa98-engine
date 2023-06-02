@@ -9,7 +9,7 @@ $(dest):	$(objects)
 	%write	system.lnk NAME	$@
 	%write	system.lnk SYSTEM DIV_DLL
 	%write	system.lnk FILE	{$(objects)}
-	wlink	@system.lnk
+	wlink	@system.lnk disable 1027
 
 clean:		.SYMBOLIC
 	@echo cleaning directory
