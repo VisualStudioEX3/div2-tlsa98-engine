@@ -246,4 +246,28 @@ void *findListItem(const list_t *list, find_list_item_callback predicate, ...);
  * another required condition to satify to find the desired item.
  */
 void *findListItemArgs(const list_t *list, find_list_item_callback predicate, va_list args);
+
+/**
+ * @brief Checks if an item exists.
+ * @param list Pointer to the list.
+ * @param predicate Function callback to execute in each item. This functions define a
+ * predicate that an item must be match.
+ * @param ... Optional list of arguments to use as extra parameters in the callback.
+ * @returns Returns #true if the item exists in the list, or #false if not exists, if the list 
+ * is empty or if the list is #NULL.
+ * @remarks The predicate function must be return #true to tell the list what item match.
+ */
+bool isListItemExists(const list_t *list, find_list_item_callback predicate, ...);
+
+/**
+ * @brief Checks if an item exists.
+ * @param list Pointer to the list.
+ * @param predicate Function callback to execute in each item. This functions define a
+ * predicate that an item must be match.
+ * @param args List of arguments to use as extra parameters in the callback.
+ * @returns Returns #true if the item exists in the list, or #false if not exists, if the list 
+ * is empty or if the list is #NULL.
+ * @remarks The predicate function must be return #true to tell the list what item match.
+ */
+bool isListItemExistsArgs(const list_t *list, find_list_item_callback predicate, va_list args);
 #endif

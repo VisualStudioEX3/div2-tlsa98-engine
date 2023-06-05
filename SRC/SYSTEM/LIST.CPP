@@ -196,3 +196,21 @@ void *findListItemArgs(const list_t *list, find_list_item_callback predicate, va
 
     return item;
 }
+
+bool isListItemExists(const list_t *list, find_list_item_callback predicate, ...)
+{
+    va_list args;
+
+    va_start(args, predicate);
+
+    bool ret = isListItemExistsArgs(list, predicate, args);
+
+    va_end(args);
+
+    return ret;
+}
+
+bool isListItemExistsArgs(const list_t *list, find_list_item_callback predicate, va_list args)
+{
+    return findListItemArgs(list, predicate, args) != NULL;
+}
