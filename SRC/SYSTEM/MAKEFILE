@@ -1,4 +1,4 @@
-objects		= system.obj list.obj
+objects		= system.obj list.obj services.obj
 coptions	= /s /ox
 dest		= SYSTEM.DLL
 
