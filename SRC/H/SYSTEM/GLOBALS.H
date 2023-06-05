@@ -29,6 +29,12 @@
 /// @brief Default function error result.
 #define RESULT_ERROR -1
 
+/// @brief A service is already registered with the used id.
+#define RESULT_ERROR_SERVICE_ALREADY_REGISTERED 1000
+
+/// @brief Service container is full.
+#define RESULT_ERROR_SERVICE_CONTAINER_IS_FULL 1001
+
 /// @brief Boolean alias.
 /// @remarks In DIV Games Studio, like in C, a boolean value is an integer value.
 typedef int bool;
@@ -116,5 +122,44 @@ typedef struct
 /// generate memory corruption and even crashes. This macro allows you to use safe fclose()
 /// calls but using the DIV implementation.
 #define fclose(file) div_fclose(file)
+
+/// @brief Service id.
+typedef int service_id_t;
+
+typedef int (*register_service_f)(service_id_t, void *);
+typedef const void *(*get_service_f)(service_id_t);
+typedef int (*get_registered_services_count)();
+typedef int (*get_service_provider_capacity_f)();
+
+/// @brief Service provider.
+typedef struct
+{
+    /// @brief Registers a new service.
+    /// @param id Unique id used to identify the service.
+    /// @param service Pointer to the service.
+    /// @return Returns #RESULT_ERROR_SERVICE_ALREADY_REGISTERED if a service is already
+    /// registered with this id, #RESULT_ERROR_SERVICE_CONTAINER_IS_FULL if the service
+    /// container is full, #RESULT_OK otherwise.
+    register_service_f registerService;
+
+    /// @brief Gets the service instance.
+    /// @param id The service id.
+    /// @return Returns the pointer to the service, #DIV::NULL if the id is not found.
+    get_service_f getService;
+
+    /// @brief Gets the number of registered services.
+    /// @return Returns the number of registered services in the container.
+    get_registered_services_count getCount;
+
+    /// @brief Gets the max number of services that service provider can register.
+    /// @return Returns the capacity of the service provider.
+    get_service_provider_capacity_f getCapacity;
+} service_provider_t;
+
+/// @brief Access to the shared service provider instance.
+/// @returns Returns a pointer to the shared service provider instance.
+/// @remarks See @see SERVICES.CPP file to known the reason to use DIV Games Studio NET struct
+/// location in memory.
+#define SERVICES ((service_provider_t *)NET)
 
 #endif
