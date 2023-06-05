@@ -6,10 +6,13 @@
 */
 
 #include "..\H\SYSTEM.H"
+#include "..\H\SYSTEM\SERVICES.H"
 
 static void initialize()
 {
-    // TODO: Initialize here the all intenral systems and services.
+    initializeServiceProvider();
+
+    // TODO: Initialize here the all internal systems and services.
 }
 
 void __export divmain(COMMON_PARAMS)
