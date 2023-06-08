@@ -166,15 +166,15 @@ typedef struct
 /// visibles by DIV Games Studio runtime.
 ///
 /// As a solution to share the services between different DLLs, not only with
-/// DIV Games Studio runtime, we used a little trick to store the service provider directly
-/// in the DIV Games Studio runtime memory session, using one of the not used structures like 
-/// _net (because this project not require the network system).
+/// DIV Games Studio runtime, we used a little trick to store the service provider and another 
+/// data directly in the DIV Games Studio runtime memory session, using one of the unused 
+/// structures like _net (because this project not require the network system).
 ///
 /// In this case, the _net struct memory is reserved in the DIV Games Studio runtime memory
 /// but not initialized until the game code tries to initialize the network system. This
 /// allow us to use this memory to store the pointer to the main eneigne interface, and be
 /// accessible for all DLLs that uses the SYSTEM.H header file.
-#define ENGINE (const tlsa98_engine_t *)NET
+#define ENGINE ((const tlsa98_engine_t *)NET)
 
 /// @brief Gets the signature of the TLSA98 Engine runtime instance.
 /// @remarks Use with TLSA98_ENGINE_SIGNATURE definition to check if the ENGINE access is
@@ -182,12 +182,22 @@ typedef struct
 #define SIGNATURE ENGINE->signature
 
 /// @brief Gets the version of the TLSA98 Engine runtime instance.
-/// @remarks Use TLSA98_VERSION_MAJOR, TLSA98_VERSION_MINOR, TLSA98_VERSION_BUILD and
-/// TLSA98_VERSION_REVISION to check API compatibility.
-#define VERSION (const version_t *)ENGINE->version
+/// @remarks Use TLSA98_ENGINE_VERSION_MAJOR and TLSA98_ENGINE_VERSION_MINOR to check API 
+/// compatibility. TLSA98_ENGINE_VERSION_BUILD and TLSA98_ENGINE_VERSION_REVISION should not 
+/// be taking in count when you check the API compatibility.
+#define VERSION ((const version_t *)ENGINE->version)
 
 /// @brief Access to TLSA98 Engine services.
-#define SERVICES (const service_provider_t *)ENGINE->services
+#define SERVICES ((const service_provider_t *)ENGINE->services)
+
+/// @brief Returns true if engine instance signature matchs with header definition signature.
+#define TLSA98_ENGINE_SIGNATURE_EQUALS SIGNATURE == TLSA98_ENGINE_SIGNATURE
+
+/// @brief Returns true if engine instance major and minor version are major or equal than 
+/// header definition version.
+#define TLSA98_ENGINE_VERSION_MAJOR_OR_EQUALS \
+    VERSION->major >= TLSA98_ENGINE_VERSION_MAJOR && \
+    VERSION->minor >= TLSA98_ENGINE_VERSION_MINOR
 
 /// @brief Gets the size of an array.
 /// @param a Array to measure.

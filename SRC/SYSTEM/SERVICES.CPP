@@ -57,15 +57,11 @@ void initializeServiceProvider()
 
     tlsa98_engine_t *engine = (tlsa98_engine_t *)NET;
 
-    // TODO: Design macros to ease perform these checks.
     // TODO: Implement own assert to allow custom assertion messages, outputs like the future built-in
     // game console or error reporter, and termination action (end program or terminate current level and 
     // return to game console).
-    assert(engine->signature == TLSA98_ENGINE_SIGNATURE);
-    assert(engine->version->major == TLSA98_ENGINE_VERSION_MAJOR);
-    assert(engine->version->minor == TLSA98_ENGINE_VERSION_MINOR);
-    assert(engine->version->build == TLSA98_ENGINE_VERSION_BUILD);
-    assert(engine->version->revision == TLSA98_ENGINE_VERSION_REVISION);
+    assert(TLSA98_ENGINE_SIGNATURE_EQUALS);
+    assert(TLSA98_ENGINE_VERSION_MAJOR_OR_EQUALS);
 
     // Create and initialize the service provider:
     engine->services = (service_provider_t *)malloc(sizeof(service_provider_t));
