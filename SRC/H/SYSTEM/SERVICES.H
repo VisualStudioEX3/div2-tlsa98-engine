@@ -10,6 +10,14 @@
 
 #include "GLOBALS.H"
 
+const int MAX_SERVICES = 64;
+
+typedef struct
+{
+    service_id_t id;
+    void *service;
+} service_t;
+
 /// @brief Initializes the service provider.
 void initializeServiceProvider();
 
