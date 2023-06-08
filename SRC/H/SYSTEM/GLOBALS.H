@@ -29,6 +29,22 @@
 /// @brief Default function error result.
 #define RESULT_ERROR -1
 
+/// @brief The engine signature to identify the runtime instance.
+/// @remarks Integer value that contains "TLSA" characters in hexadecimal format.
+#define TLSA98_ENGINE_SIGNATURE 0x544c5341
+
+/// @brief Major engine version.
+#define TLSA98_ENGINE_VERSION_MAJOR 0
+
+/// @brief Minor engine version.
+#define TLSA98_ENGINE_VERSION_MINOR 1
+
+/// @brief Build engine version.
+#define TLSA98_ENGINE_VERSION_BUILD 0
+
+/// @brief Revision engine version.
+#define TLSA98_ENGINE_VERSION_REVISION 0
+
 /// @brief A service is already registered with the used id.
 #define RESULT_ERROR_SERVICE_ALREADY_REGISTERED 1000
 
@@ -74,6 +90,104 @@ typedef struct
     /// @brief Year (from 1900).
     int year;
 } datetime_t;
+
+/// @brief Semantic version.
+typedef struct
+{
+    /// @brief Major version.
+    byte major;
+    /// @brief Minor version.
+    byte minor;
+    /// @brief Build number.
+    byte build;
+    /// @brief Revision number.
+    byte revision;
+} version_t;
+
+/// @brief Service id.
+typedef int service_id_t;
+
+typedef int (*register_service_f)(service_id_t, void *);
+typedef const void *(*get_service_f)(service_id_t);
+typedef int (*get_registered_services_count)();
+typedef int (*get_service_provider_capacity_f)();
+
+/// @brief Service provider.
+typedef struct
+{
+    /// @brief Registers a new service.
+    /// @param id Unique id used to identify the service.
+    /// @param service Pointer to the service.
+    /// @return Returns #RESULT_ERROR_SERVICE_ALREADY_REGISTERED if a service is already
+    /// registered with this id, #RESULT_ERROR_SERVICE_CONTAINER_IS_FULL if the service
+    /// container is full, #RESULT_OK otherwise.
+    register_service_f registerService;
+
+    /// @brief Gets the service instance.
+    /// @param id The service id.
+    /// @return Returns the pointer to the service, #DIV::NULL if the id is not found.
+    get_service_f getService;
+
+    /// @brief Gets the number of registered services.
+    /// @return Returns the number of registered services in the container.
+    get_registered_services_count getCount;
+
+    /// @brief Gets the max number of services that service provider can register.
+    /// @return Returns the capacity of the service provider.
+    get_service_provider_capacity_f getCapacity;
+} service_provider_t;
+
+/// @brief TLSA98 Engine main interface.
+/// @remarks This interface exposes the main access to engine services and other relevant
+/// data or implementations across the different engine libraries. The struct setup is 
+/// designed to remplace the DIV Games Studio _net struct, occuping the same space.
+typedef struct
+{
+    /// @brief Interface signature.
+    /// @remarks Use it to check if the pointer address this interface and avoid errors
+    /// if the engine is not properly initialized.
+    int signature;
+    /// @brief Engine version.
+    /// @remarks Identifies the engine version. Use it to ensure if your code is 
+    /// compatible with the engine version.
+    version_t *version;
+    /// @brief Engine services provider.
+    service_provider_t *services;
+    /// @brief Reserved for future implementations.
+    void *reserved1;
+    /// @brief Reserved for future implementations.
+    void *reserved2;
+} tlsa98_engine_t;
+
+/// @brief Gets the TLSA98 Engine runtime instance.
+/// @remarks MS-DOS does not supports dynamic link libraries (DLLs) like Windows systems.
+/// DIV Games Studio implements a custom system to map Windows COM DLLs functions, but not
+/// supports to comunicate between them. These DLLs works as isolated libraries only 
+/// visibles by DIV Games Studio runtime.
+///
+/// As a solution to share the services between different DLLs, not only with
+/// DIV Games Studio runtime, we used a little trick to store the service provider directly
+/// in the DIV Games Studio runtime memory session, using one of the not used structures like 
+/// _net (because this project not require the network system).
+///
+/// In this case, the _net struct memory is reserved in the DIV Games Studio runtime memory
+/// but not initialized until the game code tries to initialize the network system. This
+/// allow us to use this memory to store the pointer to the main eneigne interface, and be
+/// accessible for all DLLs that uses the SYSTEM.H header file.
+#define ENGINE (const tlsa98_engine_t *)NET
+
+/// @brief Gets the signature of the TLSA98 Engine runtime instance.
+/// @remarks Use with TLSA98_ENGINE_SIGNATURE definition to check if the ENGINE access is
+/// properly initialized.
+#define SIGNATURE ENGINE->signature
+
+/// @brief Gets the version of the TLSA98 Engine runtime instance.
+/// @remarks Use TLSA98_VERSION_MAJOR, TLSA98_VERSION_MINOR, TLSA98_VERSION_BUILD and
+/// TLSA98_VERSION_REVISION to check API compatibility.
+#define VERSION (const version_t *)ENGINE->version
+
+/// @brief Access to TLSA98 Engine services.
+#define SERVICES (const service_provider_t *)ENGINE->services
 
 /// @brief Gets the size of an array.
 /// @param a Array to measure.
@@ -122,44 +236,5 @@ typedef struct
 /// generate memory corruption and even crashes. This macro allows you to use safe fclose()
 /// calls but using the DIV implementation.
 #define fclose(file) div_fclose(file)
-
-/// @brief Service id.
-typedef int service_id_t;
-
-typedef int (*register_service_f)(service_id_t, void *);
-typedef const void *(*get_service_f)(service_id_t);
-typedef int (*get_registered_services_count)();
-typedef int (*get_service_provider_capacity_f)();
-
-/// @brief Service provider.
-typedef struct
-{
-    /// @brief Registers a new service.
-    /// @param id Unique id used to identify the service.
-    /// @param service Pointer to the service.
-    /// @return Returns #RESULT_ERROR_SERVICE_ALREADY_REGISTERED if a service is already
-    /// registered with this id, #RESULT_ERROR_SERVICE_CONTAINER_IS_FULL if the service
-    /// container is full, #RESULT_OK otherwise.
-    register_service_f registerService;
-
-    /// @brief Gets the service instance.
-    /// @param id The service id.
-    /// @return Returns the pointer to the service, #DIV::NULL if the id is not found.
-    get_service_f getService;
-
-    /// @brief Gets the number of registered services.
-    /// @return Returns the number of registered services in the container.
-    get_registered_services_count getCount;
-
-    /// @brief Gets the max number of services that service provider can register.
-    /// @return Returns the capacity of the service provider.
-    get_service_provider_capacity_f getCapacity;
-} service_provider_t;
-
-/// @brief Access to the shared service provider instance.
-/// @returns Returns a pointer to the shared service provider instance.
-/// @remarks See @see SERVICES.CPP file to known the reason to use DIV Games Studio NET struct
-/// location in memory.
-#define SERVICES ((service_provider_t *)NET)
 
 #endif

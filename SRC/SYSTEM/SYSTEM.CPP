@@ -8,9 +8,29 @@
 #include "..\H\SYSTEM.H"
 #include "..\H\SYSTEM\SERVICES.H"
 
+static void initializeEngineInterface()
+{
+    tlsa98_engine_t *engine = (tlsa98_engine_t *)NET;
+
+    memset(engine, NULL, sizeof(tlsa98_engine_t));
+
+    engine->signature = TLSA98_ENGINE_SIGNATURE;
+    engine->version = (version_t *)malloc(sizeof(version_t));
+    {
+        version_t *version = engine->version;
+
+        version->major = TLSA98_ENGINE_VERSION_MAJOR;
+        version->minor = TLSA98_ENGINE_VERSION_MINOR;
+        version->build = TLSA98_ENGINE_VERSION_BUILD;
+        version->revision = TLSA98_ENGINE_VERSION_REVISION;
+    }
+    
+    initializeServiceProvider();
+}
+
 static void initialize()
 {
-    initializeServiceProvider();
+    initializeEngineInterface();
 
     // TODO: Initialize here the all internal systems and services.
 }
