@@ -5,19 +5,11 @@
     Service provider.
 */
 
+#include <assert.h>
 #include "..\H\SYSTEM\SERVICES.H"
 #include "..\H\SYSTEM\LIST.H"
 
-const int MAX_SERVICES = 64;
-
-typedef struct
-{
-    service_id_t id;
-    void *service;
-} service_t;
-
 list_t *serviceContainer;
-service_provider_t *serviceProvider;
 
 static bool serviceIdComparer(void *item, va_list args)
 {
@@ -63,31 +55,26 @@ void initializeServiceProvider()
     // Create and initialize the service container:
     serviceContainer = createList(MAX_SERVICES, sizeof(service_t));
 
+    tlsa98_engine_t *engine = (tlsa98_engine_t *)NET;
+
+    // TODO: Design macros to ease perform these checks.
+    // TODO: Implement own assert to allow custom assertion messages, outputs like the future built-in
+    // game console or error reporter, and termination action (end program or terminate current level and 
+    // return to game console).
+    assert(engine->signature == TLSA98_ENGINE_SIGNATURE);
+    assert(engine->version->major == TLSA98_ENGINE_VERSION_MAJOR);
+    assert(engine->version->minor == TLSA98_ENGINE_VERSION_MINOR);
+    assert(engine->version->build == TLSA98_ENGINE_VERSION_BUILD);
+    assert(engine->version->revision == TLSA98_ENGINE_VERSION_REVISION);
+
     // Create and initialize the service provider:
-    serviceProvider = (service_provider_t *)malloc(sizeof(service_provider_t));
+    engine->services = (service_provider_t *)malloc(sizeof(service_provider_t));
     {
-        serviceProvider->getCapacity = getServiceProviderCapacity;
-        serviceProvider->getCount = getServiceProviderCount;
-        serviceProvider->getService = getService;
-        serviceProvider->registerService = registerService;
+        service_provider_t *services = engine->services;
+
+        services->getCapacity = getServiceProviderCapacity;
+        services->getCount = getServiceProviderCount;
+        services->getService = getService;
+        services->registerService = registerService;
     }
-
-    /*
-     * MS-DOS does not supports dynamic link libraries (DLLs) like Windows systems.
-     * DIV Games Studio implements a custom system to map Windows COM DLLs functions, but not
-     * supports to comunicate between them. These DLLs works as isolated libraries only 
-     * visibles by DIV Games Studio runtime.
-     *
-     * As a solution to share the services between different DLLs, not only with
-     * DIV Games Studio runtime, we used a little trick to store the service provider directly
-     * in the DIV Games Studio runtime session, using one of the not used structures like NET
-     * (because this project not require the network system).
-     *
-     * In this case, the NET struct memory is reserved in the DIV Games Studio runtime memory
-     * but not initialized until the game code tries to initialize the network system. This
-     * allow us to use this memory to store the pointer to the service provider, and be
-     * accessible for all DLLs that uses the SYSTEM.H header file.
-     */
-
-    memcpy(NET, &serviceProvider, sizeof(service_provider_t *));
 }
