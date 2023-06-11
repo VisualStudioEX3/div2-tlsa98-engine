@@ -179,7 +179,7 @@ typedef struct
 /// @brief Gets the signature of the TLSA98 Engine runtime instance.
 /// @remarks Use with TLSA98_ENGINE_SIGNATURE definition to check if the ENGINE access is
 /// properly initialized.
-#define SIGNATURE ENGINE->signature
+#define SIGNATURE (ENGINE->signature)
 
 /// @brief Gets the version of the TLSA98 Engine runtime instance.
 /// @remarks Use TLSA98_ENGINE_VERSION_MAJOR and TLSA98_ENGINE_VERSION_MINOR to check API 
@@ -190,14 +190,18 @@ typedef struct
 /// @brief Access to TLSA98 Engine services.
 #define SERVICES ((const service_provider_t *)ENGINE->services)
 
-/// @brief Returns true if engine instance signature matchs with header definition signature.
-#define TLSA98_ENGINE_SIGNATURE_EQUALS SIGNATURE == TLSA98_ENGINE_SIGNATURE
+/// @brief Returns true if engine instance signature matches with header definition signature.
+#define TLSA98_ENGINE_SIGNATURE_EQUALS (SIGNATURE == TLSA98_ENGINE_SIGNATURE)
 
-/// @brief Returns true if engine instance major and minor version are major or equal than 
-/// header definition version.
-#define TLSA98_ENGINE_VERSION_MAJOR_OR_EQUALS \
-    VERSION->major >= TLSA98_ENGINE_VERSION_MAJOR && \
-    VERSION->minor >= TLSA98_ENGINE_VERSION_MINOR
+/// @brief Checks if engine instance major and minor version are major or equal than 
+/// major and minor parameters.
+/// @param _major Required major version.
+/// @param _minor Required minor version.
+/// @return Returns true if engine instance major and minor version are major or equal than 
+/// requiured _major and _minor parameters, false otherwise.
+#define TLSA98_ENGINE_VERSION_MAJOR_OR_EQUALS(_major, _minor) \
+    VERSION->major >= _major && \
+    VERSION->minor >= _minor
 
 /// @brief Gets the size of an array.
 /// @param a Array to measure.

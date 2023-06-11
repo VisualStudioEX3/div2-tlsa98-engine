@@ -52,16 +52,16 @@ static int registerService(service_id_t id, void *service)
 
 void initializeServiceProvider()
 {
-    // Create and initialize the service container:
-    serviceContainer = createList(MAX_SERVICES, sizeof(service_t));
-
-    tlsa98_engine_t *engine = (tlsa98_engine_t *)NET;
-
     // TODO: Implement own assert to allow custom assertion messages, outputs like the future built-in
     // game console or error reporter, and termination action (end program or terminate current level and 
     // return to game console).
     assert(TLSA98_ENGINE_SIGNATURE_EQUALS);
-    assert(TLSA98_ENGINE_VERSION_MAJOR_OR_EQUALS);
+    assert(TLSA98_ENGINE_VERSION_MAJOR_OR_EQUALS(0, 1));
+
+    // Create and initialize the service container:
+    serviceContainer = createList(MAX_SERVICES, sizeof(service_t));
+
+    tlsa98_engine_t *engine = (tlsa98_engine_t *)NET;
 
     // Create and initialize the service provider:
     engine->services = (service_provider_t *)malloc(sizeof(service_provider_t));
