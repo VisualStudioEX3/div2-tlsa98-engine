@@ -251,4 +251,10 @@ typedef struct
 /// calls but using the DIV implementation.
 #define fclose(file) div_fclose(file)
 
+/// @brief Finds and gets the service instance from the engine service provider.
+/// @param id The service id.
+/// @return Returns the pointer to the service, #DIV::NULL if the id is not found.
+/// @remarks Shortcut to ENGINE->services->getService function.
+#define getService(id) SERVICES->getService(id)
+
 #endif

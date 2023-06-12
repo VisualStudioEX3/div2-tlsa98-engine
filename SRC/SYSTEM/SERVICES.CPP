@@ -26,7 +26,7 @@ static int getServiceProviderCount()
     return serviceContainer->count;
 }
 
-static const void *getService(service_id_t id)
+static const void *findService(service_id_t id)
 {
     return findListItem(serviceContainer, serviceIdComparer, id);
     // TODO: Assert service id not found.
@@ -70,7 +70,7 @@ void initializeServiceProvider()
 
         services->getCapacity = getServiceProviderCapacity;
         services->getCount = getServiceProviderCount;
-        services->getService = getService;
+        services->getService = findService;
         services->registerService = registerService;
     }
 }
