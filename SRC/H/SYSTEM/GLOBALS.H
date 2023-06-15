@@ -139,7 +139,7 @@ typedef struct
 
 /// @brief TLSA98 Engine main interface.
 /// @remarks This interface exposes the main access to engine services and other relevant
-/// data or implementations across the different engine libraries. The struct setup is 
+/// data or implementations across the different engine libraries. The struct setup is
 /// designed to remplace the DIV Games Studio _net struct, occuping the same space.
 typedef struct
 {
@@ -148,7 +148,7 @@ typedef struct
     /// if the engine is not properly initialized.
     int signature;
     /// @brief Engine version.
-    /// @remarks Identifies the engine version. Use it to ensure if your code is 
+    /// @remarks Identifies the engine version. Use it to ensure if your code is
     /// compatible with the engine version.
     version_t *version;
     /// @brief Engine services provider.
@@ -162,12 +162,12 @@ typedef struct
 /// @brief Gets the TLSA98 Engine runtime instance.
 /// @remarks MS-DOS does not supports dynamic link libraries (DLLs) like Windows systems.
 /// DIV Games Studio implements a custom system to map Windows COM DLLs functions, but not
-/// supports to comunicate between them. These DLLs works as isolated libraries only 
+/// supports to comunicate between them. These DLLs works as isolated libraries only
 /// visibles by DIV Games Studio runtime.
 ///
 /// As a solution to share the services between different DLLs, not only with
-/// DIV Games Studio runtime, we used a little trick to store the service provider and another 
-/// data directly in the DIV Games Studio runtime memory session, using one of the unused 
+/// DIV Games Studio runtime, we used a little trick to store the service provider and another
+/// data directly in the DIV Games Studio runtime memory session, using one of the unused
 /// structures like _net (because this project not require the network system).
 ///
 /// In this case, the _net struct memory is reserved in the DIV Games Studio runtime memory
@@ -182,8 +182,8 @@ typedef struct
 #define SIGNATURE (ENGINE->signature)
 
 /// @brief Gets the version of the TLSA98 Engine runtime instance.
-/// @remarks Use TLSA98_ENGINE_VERSION_MAJOR and TLSA98_ENGINE_VERSION_MINOR to check API 
-/// compatibility. TLSA98_ENGINE_VERSION_BUILD and TLSA98_ENGINE_VERSION_REVISION should not 
+/// @remarks Use TLSA98_ENGINE_VERSION_MAJOR and TLSA98_ENGINE_VERSION_MINOR to check API
+/// compatibility. TLSA98_ENGINE_VERSION_BUILD and TLSA98_ENGINE_VERSION_REVISION should not
 /// be taking in count when you check the API compatibility.
 #define VERSION ((const version_t *)ENGINE->version)
 
@@ -193,15 +193,14 @@ typedef struct
 /// @brief Returns true if engine instance signature matches with header definition signature.
 #define TLSA98_ENGINE_SIGNATURE_EQUALS (SIGNATURE == TLSA98_ENGINE_SIGNATURE)
 
-/// @brief Checks if engine instance major and minor version are major or equal than 
+/// @brief Checks if engine instance major and minor version are major or equal than
 /// major and minor parameters.
 /// @param _major Required major version.
 /// @param _minor Required minor version.
-/// @return Returns true if engine instance major and minor version are major or equal than 
+/// @return Returns true if engine instance major and minor version are major or equal than
 /// requiured _major and _minor parameters, false otherwise.
 #define TLSA98_ENGINE_VERSION_MAJOR_OR_EQUALS(_major, _minor) \
-    VERSION->major >= _major && \
-    VERSION->minor >= _minor
+    VERSION->major >= _major && VERSION->minor >= _minor
 
 /// @brief Gets the size of an array.
 /// @param a Array to measure.
@@ -213,7 +212,7 @@ typedef struct
 
 /// @brief #DIV::getparm() version to get a DIV Games Studio 2 STRING parameters.
 /// @return Returns the next parameter from DIV function stack as string value.
-#define getstrparm() (string) & mem[text_offset + getparm()]
+#define getstrparm() (string)(&mem[text_offset + getparm()])
 
 /// @brief malloc() alias to DIV implementation.
 /// @param size Size of the memory region to allocate.
