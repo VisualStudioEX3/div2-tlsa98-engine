@@ -7,6 +7,7 @@
 
 #include "..\H\SYSTEM.H"
 #include "..\H\SYSTEM\SERVICES.H"
+#include "..\H\SYSTEM\FOO.H"
 
 static void initializeEngineInterface()
 {
@@ -33,6 +34,7 @@ static void initialize()
     initializeEngineInterface();
 
     // TODO: Initialize here the all internal systems and services.
+    registerFooService();
 }
 
 void __export divmain(COMMON_PARAMS)
@@ -45,6 +47,7 @@ void __export divmain(COMMON_PARAMS)
 void __export divlibrary(LIBRARY_PARAMS)
 {
     // TODO: Export here all services to DIV runtime.
+    registerFooService(COM_export);
 }
 
 void __export divend(COMMON_PARAMS)
