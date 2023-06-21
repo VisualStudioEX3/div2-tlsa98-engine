@@ -1,8 +1,8 @@
 project	= SYSTEM
 output	= $(project).DLL
 link	= $(project).LNK
-sources	= system.cpp list.cpp services.cpp services\foo.cpp
-objects	= system.obj list.obj services.obj foo.obj
+sources	= system.cpp list.cpp services.cpp
+objects	= system.obj list.obj services.obj
 options	= /c /fe=$(output) /s /ox /l=div_dll
 
 $(output):

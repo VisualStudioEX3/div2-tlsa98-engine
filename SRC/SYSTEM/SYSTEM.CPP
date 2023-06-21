@@ -7,7 +7,6 @@
 
 #include "..\H\SYSTEM.H"
 #include "..\H\SYSTEM\SERVICES.H"
-#include "..\H\SYSTEM\FOO.H"
 
 static void initializeEngineInterface()
 {
@@ -25,32 +24,35 @@ static void initializeEngineInterface()
         version->build = TLSA98_ENGINE_VERSION_BUILD;
         version->revision = TLSA98_ENGINE_VERSION_REVISION;
     }
-    
+
     initializeServiceProvider();
 }
 
-static void initialize()
+static void initializeServices()
 {
-    initializeEngineInterface();
+}
 
-    // TODO: Initialize here the all internal systems and services.
-    registerFooService();
+static void initializeDIVCallbacks()
+{
 }
 
 void __export divmain(COMMON_PARAMS)
 {
     GLOBAL_IMPORT();
-    initialize();
-    // Register DIV callbacks.
+
+    initializeEngineInterface();
+    initializeServices();
+    initializeDIVCallbacks();
 }
 
 void __export divlibrary(LIBRARY_PARAMS)
 {
-    // TODO: Export here all services to DIV runtime.
-    exportFooService(COM_export);
+    // Export here all services to DIV language:
+    // ...
 }
 
 void __export divend(COMMON_PARAMS)
 {
-    // TODO: Terminate here services.
+    // Terminate here services:
+    // ...
 }
