@@ -13,7 +13,7 @@
 
 #include <stdarg.h> // Required for va_copy macro.
 #include <string.h> // Required for va_copy macro.
-#include "DIV.H"    // DIV Games Studio 2 API.
+#include "..\DIV.H" // DIV Games Studio 2 API.
 
 /// @brief True constant value.
 /// @remarks In DIV Games Studio, all odd values are considered as true value.
