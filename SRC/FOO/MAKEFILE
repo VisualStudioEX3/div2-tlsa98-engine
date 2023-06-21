@@ -1,0 +1,24 @@
+# FOO.DLL - Test library.
+# @copyright TLSA98 Engine (C) VisualStudioEX3, José Miguel Sánchez Fernández - 2022, 2023
+# @copyright DIV Games Studio 2 (C) Hammer Technologies, Daniel Navarro Medrano - 1998, 1999
+#
+#  	Makefile.
+#
+
+# Macros and variables:
+project	= FOO
+output	= $(project).DLL
+link	= $(project).LNK
+sources	= foo.cpp
+options	= /fe=$(output) /s /ox /l=div_dll
+
+# Main target:
+$(output):	$(sources)
+	wcl386 $(options) $(sources)
+
+# Optional commands:
+clean:		.SYMBOLIC
+	@echo cleaning directory
+	@if exist *.obj @del /f /q *.obj
+	@if exist *.lnk @del /f /q *.lnk
+	@if exist *.err @del /f /q *.err
