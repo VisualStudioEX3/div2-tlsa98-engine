@@ -1,3 +1,11 @@
+# SYSTEM.DLL - System library for DIV Games Studio 2.
+# @copyright TLSA98 Engine (C) VisualStudioEX3, José Miguel Sánchez Fernández - 2022, 2023
+# @copyright DIV Games Studio 2 (C) Hammer Technologies, Daniel Navarro Medrano - 1998, 1999
+#
+# 	Makefile.
+#
+
+# Macros and variables:
 project	= SYSTEM
 output	= $(project).DLL
 link	= $(project).LNK
@@ -5,7 +13,8 @@ sources	= system.cpp list.cpp services.cpp
 objects	= system.obj list.obj services.obj
 options	= /c /fe=$(output) /s /ox /l=div_dll
 
-$(output):
+# Main target:
+$(output):	$(sources)
 	wcl386 $(options) $(sources)
 	# TODO: Remove /c option when DIV.H warning 1027 is solved to perform all compilation and linking in one step using wcl386 command.
 	# Then, the following wlink code will been not necessary anymore.
@@ -14,8 +23,9 @@ $(output):
 	%write	$(link) FILE {$(objects)}
 	wlink	@$(link) disable 1027
 
+# Optional commands:
 clean:		.SYMBOLIC
 	@echo cleaning directory
-	@if exist *.obj @del *.obj
-	@if exist *.lnk @del *.lnk
-	@if exist *.err @del *.err
+	@if exist *.obj @del /f /q *.obj
+	@if exist *.lnk @del /f /q *.lnk
+	@if exist *.err @del /f /q *.err
