@@ -24,7 +24,7 @@ typedef struct
 /// @brief Register test foo service.
 void registerFooService();
 
-/// @brief Register test foo function in DIV language.
-void registerFooService(void (*COM_export)(char *name,void *obj,int nparms));
+/// @brief Export test foo function in DIV language.
+void exportFooService(void (*COM_export)(char *name,void *obj,int nparms));
 
 #endif

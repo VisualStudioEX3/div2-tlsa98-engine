@@ -47,7 +47,7 @@ void __export divmain(COMMON_PARAMS)
 void __export divlibrary(LIBRARY_PARAMS)
 {
     // TODO: Export here all services to DIV runtime.
-    registerFooService(COM_export);
+    exportFooService(COM_export);
 }
 
 void __export divend(COMMON_PARAMS)

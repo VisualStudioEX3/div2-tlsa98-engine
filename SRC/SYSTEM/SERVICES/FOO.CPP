@@ -35,7 +35,7 @@ void registerFooService()
     assert(result == RESULT_OK);
 }
 
-void registerFooService(void (*COM_export)(char *name,void *obj,int nparms))
+void exportFooService(void (*COM_export)(char *name,void *obj,int nparms))
 {
     COM_export("foo", div_foo, 1);
 }
