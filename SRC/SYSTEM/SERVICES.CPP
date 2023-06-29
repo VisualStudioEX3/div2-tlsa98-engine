@@ -13,7 +13,10 @@ list_t *serviceContainer;
 
 static bool serviceIdComparer(void *item, va_list args)
 {
-    return ((service_t *)item)->id == va_arg(args, service_id_t);
+    service_t *service = (service_t *)item;
+    service_id_t id = va_arg(args, service_id_t);
+
+    return service->id == id;
 }
 
 static int getServiceProviderCapacity()
@@ -28,8 +31,14 @@ static int getServiceProviderCount()
 
 static const void *findService(service_id_t id)
 {
-    return findListItem(serviceContainer, serviceIdComparer, id);
+    void *servicePointer = NULL;
+    service_t *item = (service_t *)findListItem(serviceContainer, serviceIdComparer, id);
+
+    if (item)
+        servicePointer = item->service;
     // TODO: Assert service id not found.
+
+    return servicePointer;
 }
 
 static int registerService(service_id_t id, void *service)
