@@ -8,7 +8,6 @@
 # Macros and variables:
 project	= FOO
 output	= $(project).DLL
-link	= $(project).LNK
 sources	= foo.cpp
 options	= /fe=$(output) /s /ox /l=div_dll
 
