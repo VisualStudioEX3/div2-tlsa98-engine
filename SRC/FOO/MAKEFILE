@@ -5,18 +5,14 @@
 #  	Makefile.
 #
 
-# Macros and variables:
-project	= FOO
-output	= $(project).DLL
 sources	= foo.cpp
-options	= /fe=$(output) /s /ox /l=div_dll
 
-# Main target:
-$(output):	$(sources)
-	wcl386 $(options) $(sources)
+all: compile clean
 
-# Optional commands:
-clean:		.SYMBOLIC
+compile: 	.SYMBOLIC
+	$(COMPILER_CMD) $(sources)
+
+clean: 		.SYMBOLIC
 	@echo cleaning directory
 	@if exist *.obj @del /f /q *.obj
 	@if exist *.lnk @del /f /q *.lnk

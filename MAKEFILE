@@ -1,0 +1,33 @@
+# TLSA98 Engine - A service and component oriented engine for DIV Games Studio 2.
+# @copyright TLSA98 Engine (C) VisualStudioEX3, José Miguel Sánchez Fernández - 2022, 2023
+# @copyright DIV Games Studio 2 (C) Hammer Technologies, Daniel Navarro Medrano - 1998, 1999
+#
+# 	Project makefile.
+#
+#	Use this MAKEFILE to compile all libraries or a single one. 
+#	Don't use directly the child MAKEFILEs.
+#
+#	Usage:
+#	wmake		- Compile all libraries.
+#	wmake FOO 	- Compile only FOO library. Change FOO for the library name to compile.
+#
+
+bin_folder 			= BIN
+src_folder			= SRC
+target_cmd			= $(goto_target_path) & $(make_cmd) & $(goto_root_path)
+make_cmd			= wmake "COMPILER_CMD=$(compiler_cmd)"
+compiler_cmd		= wcl386 $(compiler_args)
+compiler_args		= /ox /l=div_dll /fe=..\..\$(bin_folder)\$@.DLL
+goto_target_path	= cd $(src_folder)\$@
+goto_root_path		= cd ..\..
+
+all: FOO SYSTEM
+
+.BEFORE createBinFolder:
+	@safemd.bat $(bin_folder)
+
+system: .SYMBOLIC
+	@$(target_cmd)
+
+foo: 	.SYMBOLIC
+	@$(target_cmd)
