@@ -1,19 +1,19 @@
 
-// ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
-// DIV Games Studio - Dinamic Link Library - Header File (c) 1998 HAMMER Tech.
-// ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+//! DIV Games Studio 2 - Dinamic Link Library - Header File.
+//! @copyright DIV Games Studio 2 (C) Hammer Technologies, Daniel Navarro Medrano - 1998, 1999
+//! @copyright TLSA98 Engine (C) VisualStudioEX3, Jos‚ Miguel S nchez Fern ndez - 2022, 2023
+/*!
+    Modified DIV Games Studio 2 API header for TLSA98 Engine.
+*/
 
 #ifndef __DIV_H_
 #define __DIV_H_
 
 #include <stdio.h>
 
-#ifdef GLOBALS
-  #define EXTERN
-  void main(){};
-#else
-  #define EXTERN extern
-#endif
+void main()
+{
+}
 
 // ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 // Common definitions for all libraries
@@ -288,46 +288,44 @@ void ss_end(void);                          // Screen Saver ending function
 // DIV exported variables - Internal - You must use above definitions!
 // ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-EXTERN int  *_stack;
-EXTERN int  *_mem;
-EXTERN char *_palette;
-EXTERN char *_active_palette;
-EXTERN char *_key;
-
-EXTERN int  *_sp;
-EXTERN int  *_wide;
-EXTERN int  *_height;
-EXTERN int  *_ss_time;
-EXTERN int  *_ss_status;
-EXTERN int  *_ss_exit;
-EXTERN int  *_process_size;
-EXTERN int  *_id_offset;
-EXTERN int  *_id_init_offset;
-EXTERN int  *_id_start_offset;
-EXTERN int  *_id_end_offset;
-EXTERN int  *_set_palette;
-
-EXTERN unsigned long _buffer;
-EXTERN unsigned long _background;
-EXTERN unsigned long _ghost;
+int  *_stack;
+int  *_mem;
+char *_palette;
+char *_active_palette;
+char *_key;
+int  *_sp;
+int  *_wide;
+int  *_height;
+int  *_ss_time;
+int  *_ss_status;
+int  *_ss_exit;
+int  *_process_size;
+int  *_id_offset;
+int  *_id_init_offset;
+int  *_id_start_offset;
+int  *_id_end_offset;
+int  *_set_palette;
+unsigned long _buffer;
+unsigned long _background;
+unsigned long _ghost;
 
 // ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 // DIV exported functions
 // ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-EXTERN void *(*div_malloc)(size_t __size);             // Don't use malloc()!!!
-EXTERN void  (*div_free  )( void *__ptr );             // Don't use free()!!!
-EXTERN FILE *(*div_fopen )(char *,char *);             // Don't use fopen()!!!
-EXTERN void  (*div_fclose)(FILE *);                    // Don't use fclose()!!!
-
-EXTERN int   (*div_rand)(int rang_low,int rang_hi);    // Random between two numbers
-EXTERN void  (*div_text_out)(char *texto,int x,int y); // Screen print function
+void *(*div_malloc)(size_t __size);             // Don't use malloc()!!!
+void  (*div_free  )( void *__ptr );             // Don't use free()!!!
+FILE *(*div_fopen )(char *,char *);             // Don't use fopen()!!!
+void  (*div_fclose)(FILE *);                    // Don't use fclose()!!!
+int   (*div_rand)(int rang_low,int rang_hi);    // Random between two numbers
+void  (*div_text_out)(char *texto,int x,int y); // Screen print function
 
 // ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 // Macros to get parameters and return values in new functions
 // ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-#define getparm()     stack[sp--]           // Get next parameter
+#define getparm()     stack[sp--]           // Get next parameter as integer
+#define getstrparm()  (char *)(&mem[text_offset + getparm()]) // Get next parameter as string
 #define retval(_x_sp) (stack[++sp]=(_x_sp)) // Set return value (is a must)
 
 // ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
@@ -370,6 +368,12 @@ EXTERN void  (*div_text_out)(char *texto,int x,int y); // Screen print function
 #define DIRINFO     ((_dirinfo     *)&mem[long_header+14+10*10+10*7+8+11+9+10*4])
 #define FILEINFO    ((_fileinfo    *)&mem[long_header+14+10*10+10*7+8+11+9+10*4+1026])
 #define VIDEO_MODES ((_video_modes *)&mem[long_header+14+10*10+10*7+8+11+9+10*4+1026+146])
+
+// ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+// Definition to get the TLSA98 Engine address in DIV's memory
+// ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+
+#define TLSA98_ENGINE_ADDRESS (void *)NET
 
 // ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 // Definition to get the offset of objects

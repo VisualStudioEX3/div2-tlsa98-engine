@@ -64,8 +64,6 @@ void initializeServiceProvider()
     // Create and initialize the service container:
     serviceContainer = createList(MAX_SERVICES, sizeof(service_t));
 
-    tlsa98_engine_t *engine = (tlsa98_engine_t *)NET;
-
     // Create and initialize the service provider:
     engine->services = (service_provider_t *)malloc(sizeof(service_provider_t));
     {

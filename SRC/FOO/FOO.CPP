@@ -7,6 +7,7 @@
 
 #include <assert.h>
 #include "..\H\FOO.H"
+#include "..\H\DIV2.H"
 
 const int TLSA_ENGINE_MAJOR_VERSION = 0;
 const int TLSA_ENGINE_MINOR_VERSION = 1;
@@ -37,7 +38,7 @@ void registerFooService()
 {
     service.getHelloWorldMessage = getHelloWorldMessage;
 
-    int result = SERVICES->registerService(FOO_SERVICE, &service);
+    int result = engine->services->registerService(FOO_SERVICE, &service);
 
     assert(result == RESULT_OK);
 }
@@ -53,6 +54,7 @@ void __export divmain(COMMON_PARAMS)
     // abstracted by a shared service from SYSTEM.DLL (this call should be executed one time 
     // and only by SYSTEM.DLL).
     GLOBAL_IMPORT();
+    engine = (tlsa98_engine_t *)TLSA98_ENGINE_ADDRESS;
 
     // TODO: Implement own assert to allow custom assertion messages, outputs like the future 
     // built-in game console or error reporter, and termination action (end program or 
