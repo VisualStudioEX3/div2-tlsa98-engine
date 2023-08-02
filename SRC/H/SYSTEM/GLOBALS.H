@@ -8,12 +8,11 @@
 #ifndef __SYSTEM_DLL_GLOBALS_H_
 #define __SYSTEM_DLL_GLOBALS_H_
 
-#define GLOBALS        // Requires by DIV.H before include it.
 #define DOSBOX_SUPPORT // Uncomment this for support and fixes for DOSBox emulator.
 
 #include <stdarg.h> // Required for va_copy macro.
 #include <string.h> // Required for va_copy macro.
-#include "..\DIV.H" // DIV Games Studio 2 API.
+#include "..\DIV2.H" // DIV Games Studio 2 API.
 
 /// @brief True constant value.
 /// @remarks In DIV Games Studio, all odd values are considered as true value.
@@ -174,24 +173,10 @@ typedef struct
 /// but not initialized until the game code tries to initialize the network system. This
 /// allow us to use this memory to store the pointer to the main eneigne interface, and be
 /// accessible for all DLLs that uses the SYSTEM.H header file.
-#define ENGINE ((const tlsa98_engine_t *)NET)
-
-/// @brief Gets the signature of the TLSA98 Engine runtime instance.
-/// @remarks Use with TLSA98_ENGINE_SIGNATURE definition to check if the ENGINE access is
-/// properly initialized.
-#define SIGNATURE (ENGINE->signature)
-
-/// @brief Gets the version of the TLSA98 Engine runtime instance.
-/// @remarks Use TLSA98_ENGINE_VERSION_MAJOR and TLSA98_ENGINE_VERSION_MINOR to check API
-/// compatibility. TLSA98_ENGINE_VERSION_BUILD and TLSA98_ENGINE_VERSION_REVISION should not
-/// be taking in count when you check the API compatibility.
-#define VERSION ((const version_t *)ENGINE->version)
-
-/// @brief Access to TLSA98 Engine services.
-#define SERVICES ((const service_provider_t *)ENGINE->services)
+tlsa98_engine_t *engine;
 
 /// @brief Returns true if engine instance signature matches with header definition signature.
-#define TLSA98_ENGINE_SIGNATURE_EQUALS (SIGNATURE == TLSA98_ENGINE_SIGNATURE)
+#define TLSA98_ENGINE_SIGNATURE_EQUALS (engine->signature == TLSA98_ENGINE_SIGNATURE)
 
 /// @brief Checks if engine instance major and minor version are major or equal than
 /// major and minor parameters.
@@ -200,7 +185,7 @@ typedef struct
 /// @return Returns true if engine instance major and minor version are major or equal than
 /// requiured _major and _minor parameters, false otherwise.
 #define TLSA98_ENGINE_VERSION_MAJOR_OR_EQUALS(_major, _minor) \
-    VERSION->major >= _major && VERSION->minor >= _minor
+    engine->version->major >= _major && engine->version->minor >= _minor
 
 /// @brief Gets the size of an array.
 /// @param a Array to measure.
@@ -209,10 +194,6 @@ typedef struct
 
 /// @brief Custom implemnetation of ANSI C99 va_copy macro.
 #define va_copy(dst, src) memcpy((void *)dst, (void *)src, sizeof(va_list));
-
-/// @brief #DIV::getparm() version to get a DIV Games Studio 2 STRING parameters.
-/// @return Returns the next parameter from DIV function stack as string value.
-#define getstrparm() (string)(&mem[text_offset + getparm()])
 
 /// @brief malloc() alias to DIV implementation.
 /// @param size Size of the memory region to allocate.
@@ -254,6 +235,6 @@ typedef struct
 /// @param id The service id.
 /// @return Returns the pointer to the service, #DIV::NULL if the id is not found.
 /// @remarks Shortcut to ENGINE->services->getService function.
-#define getService(id) SERVICES->getService(id)
+#define getService(id) engine->services->getService(id)
 
 #endif
