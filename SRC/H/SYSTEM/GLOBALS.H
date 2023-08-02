@@ -12,7 +12,10 @@
 
 #include <stdarg.h> // Required for va_copy macro.
 #include <string.h> // Required for va_copy macro.
-#include "..\DIV2.H" // DIV Games Studio 2 API.
+#include "..\SYSTEM\DIV2API.H"
+
+/// @brief NULL constant value.
+#define NULL 0
 
 /// @brief True constant value.
 /// @remarks In DIV Games Studio, all odd values are considered as true value.
@@ -146,16 +149,20 @@ typedef struct
     /// @remarks Use it to check if the pointer address this interface and avoid errors
     /// if the engine is not properly initialized.
     int signature;
+    
     /// @brief Engine version.
     /// @remarks Identifies the engine version. Use it to ensure if your code is
     /// compatible with the engine version.
     version_t *version;
+    
+    /// @brief DIV Games Studio 2 API abstraction.
+    div2_api_t *div2API;
+    
     /// @brief Engine services provider.
     service_provider_t *services;
+
     /// @brief Reserved for future implementations.
-    void *reserved1;
-    /// @brief Reserved for future implementations.
-    void *reserved2;
+    void *reserved;
 } tlsa98_engine_t;
 
 /// @brief Gets the TLSA98 Engine runtime instance.
@@ -202,7 +209,7 @@ tlsa98_engine_t *engine;
 /// memory allocations. If you try to use the standard malloc() the program starts to generate
 /// memory corruption and even crashes. This macro allows you to use safe malloc() calls but
 /// using the DIV implementation.
-#define malloc(size) div_malloc(size)
+#define malloc(size) engine->div2API->memory->_malloc(size)
 
 /// @brief free() alias to DIV implementation.
 /// @param ptr Pointer of the memory region to release.
@@ -210,7 +217,7 @@ tlsa98_engine_t *engine;
 /// memory deallocations. If you try to use the standard free() the program starts to generate
 /// memory corruption and even crashes. This macro allows you to use safe free() calls but
 /// using the DIV implementation.
-#define free(ptr) div_free(ptr)
+#define free(ptr) engine->div2API->memory->_free(ptr)
 
 /// @brief fopen() alias to DIV implementation.
 /// @param filename The path and name of the file to open.
@@ -221,7 +228,7 @@ tlsa98_engine_t *engine;
 /// file open operations. If you try to use the standard fopen() the program starts to
 /// generate memory corruption and even crashes. This macro allows you to use safe fopen()
 /// calls but using the DIV implementation.
-#define fopen(filename, mode) div_fopen(filename, mode)
+#define fopen(filename, mode) engine->div2API->fileSystem->_fopen(filename, mode)
 
 /// @brief fclose() alias to DIV implementation.
 /// @param file The pointer to file to close.
@@ -229,7 +236,7 @@ tlsa98_engine_t *engine;
 /// file close operations. If you try to use the standard fclose() the program starts to
 /// generate memory corruption and even crashes. This macro allows you to use safe fclose()
 /// calls but using the DIV implementation.
-#define fclose(file) div_fclose(file)
+#define fclose(file) engine->div2API->fileSystem->_fclose(file)
 
 /// @brief Finds and gets the service instance from the engine service provider.
 /// @param id The service id.
