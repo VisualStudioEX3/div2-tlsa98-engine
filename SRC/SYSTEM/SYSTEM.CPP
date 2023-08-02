@@ -10,8 +10,6 @@
 
 static void initializeEngineInterface()
 {
-    tlsa98_engine_t *engine = (tlsa98_engine_t *)NET;
-
     memset(engine, NULL, sizeof(tlsa98_engine_t));
 
     engine->signature = TLSA98_ENGINE_SIGNATURE;
@@ -39,6 +37,7 @@ static void initializeDIVCallbacks()
 void __export divmain(COMMON_PARAMS)
 {
     GLOBAL_IMPORT();
+    engine = (tlsa98_engine_t *)TLSA98_ENGINE_ADDRESS;
 
     initializeEngineInterface();
     initializeServices();
