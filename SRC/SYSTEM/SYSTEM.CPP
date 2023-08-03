@@ -44,7 +44,6 @@ static void initializeEngineInterface()
 
         version->major = TLSA98_ENGINE_VERSION_MAJOR;
         version->minor = TLSA98_ENGINE_VERSION_MINOR;
-        version->build = TLSA98_ENGINE_VERSION_BUILD;
         version->revision = TLSA98_ENGINE_VERSION_REVISION;
     }
 

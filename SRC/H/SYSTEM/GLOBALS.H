@@ -41,9 +41,6 @@
 /// @brief Minor engine version.
 #define TLSA98_ENGINE_VERSION_MINOR 1
 
-/// @brief Build engine version.
-#define TLSA98_ENGINE_VERSION_BUILD 0
-
 /// @brief Revision engine version.
 #define TLSA98_ENGINE_VERSION_REVISION 0
 
@@ -81,28 +78,47 @@ typedef struct
 {
     /// @brief Seconds after the minute (from 0).
     int seconds;
+
     /// @brief Minutes after the hour (from 0).
     int minutes;
+
     /// @brief Hour of the day (from 0).
     int hour;
+
     /// @brief Day of the month (from 1).
     int day;
+
     /// @brief Month of the year (from 1).
     int month;
+
     /// @brief Year (from 1900).
     int year;
 } datetime_t;
 
 /// @brief Semantic version.
+/// @remarks Used to identify an API changes and feature evolution, and to control compatibility level of third party
+/// libraries that interacts with the API.
 typedef struct
 {
-    /// @brief Major version.
+    /// @brief Major version. Represents major changes on API.
+    /// @remarks This number must be updated when the API implements a major changes, like a new main service or third
+    /// party libraries, or even a broken compatibility with previous versions.
+    /// When a major version is updated, minor version an revision number must be set to zero.
     byte major;
-    /// @brief Minor version.
+
+    /// @brief Minor version. Represents a feature changes on the current major version of the API.
+    /// @remarks This number must be updated when, in the current major version, the API upgrade an existing
+    /// service, add a new services as dependency of main ones (a service that not should be a main service) and minor
+    /// changes that not broken compatibility with previous versions.
+    /// When a minor version is updated, revision number must be set to zero.
     byte minor;
-    /// @brief Build number.
-    byte build;
-    /// @brief Revision number.
+
+    /// @brief Revision number. Represents a patch or bugfix applied on current minor version of the API.
+    /// @remarks This number must be updated only when, on a current minor version, it required apply a bugfix or patch
+    /// to solve problems whitout require make changes on API or current behaviours. If the fix implies implement new 
+    /// features, new top services or change any current expected behaviour, this should be considered as new minor 
+    /// version. If the fix implies remove or create new feature that broken the API compatibility, must be considered 
+    /// as new major version.
     byte revision;
 } version_t;
 
@@ -149,15 +165,15 @@ typedef struct
     /// @remarks Use it to check if the pointer address this interface and avoid errors
     /// if the engine is not properly initialized.
     int signature;
-    
+
     /// @brief Engine version.
     /// @remarks Identifies the engine version. Use it to ensure if your code is
     /// compatible with the engine version.
     version_t *version;
-    
+
     /// @brief DIV Games Studio 2 API abstraction.
     div2_api_t *div2API;
-    
+
     /// @brief Engine services provider.
     service_provider_t *services;
 
