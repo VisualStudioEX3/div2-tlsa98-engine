@@ -10,46 +10,74 @@
 
 #include <stdio.h>
 
+typedef int *(*div2_memory_array_f)();
 typedef void *(*div2_malloc_f)(size_t);
 typedef void (*div2_free_f)(void *);
-
-/// @brief DIV Games Studio 2 memory functions and members.
-typedef struct
-{
-    /// @brief Access to DIV Games Studio 2 session memory (the mem[] array).
-    int *session;
-
-    /// @brief DIV version of malloc.
-    div2_malloc_f _malloc;
-
-    /// @brief DIV version of free.
-    div2_free_f _free;
-} div2_api_memory_t;
-
+typedef int (*div2_get_int_parameter_f)();
+typedef char *(*div2_get_string_parameter_f)();
+typedef void (*div2_return_value_f)(int);
 typedef FILE *(*div2_fopen_f)(char *, char *);
 typedef void (*div2_fclose_f)(FILE *);
 
-/// @brief DIV Games Studio 2 file system functions and members.
-typedef struct
-{
-    /// @brief DIV version of fopen.
-    div2_fopen_f _fopen;
-
-    /// @brief DIV version of fclose.
-    div2_fclose_f _fclose;
-} div2_api_file_system_t;
-
 /// @brief DIV Games Studio 2 API abstraction.
-/// @remarks This implementation not only ease use the DIV2.H code, is also a way to avoid
-/// the linker warning 1027 issue with some parts of DIV2.H that always are redefined when you
-/// include the header in several files.
+/// @remarks DIV2.H header (the original DIV.H file) has member declarations that provokes
+/// linker warning 1027, redefinition of member ignored, when you include the header in two 
+/// or more files. This abstraction allows to point to required functions and macros from
+/// DIV header from SYSTEM library, avoiding the requirement of include DIV2.H on another
+/// files.
 typedef struct
 {
-    /// @brief DIV Games Studio 2 memory functions and members.
-    div2_api_memory_t *memory;
+    /// @brief Gets pointer to the DIV programm memory.
+    /// @return Returns an integer pointer to program memory.
+    /// @remarks DIV program memory is defined as an integer array.
+    div2_memory_array_f getProgramMemory;
 
-    /// @brief DIV Games Studio 2 file system functions and members.
-    div2_api_file_system_t *fileSystem;
+    /// @brief Allocates memory.
+    /// @param size Size of the memory region to allocate.
+    /// @return Returns the pointer to the new allocated memory region.
+    /// @remarks DIV Games Studio runtime has his own malloc() implementation to manage his
+    /// memory allocations. If you try to use the standard malloc() the program starts to
+    /// generate memory corruption and even crashes.
+    div2_malloc_f allocateMemory;
+
+    /// @brief Releases allocated memory.
+    /// @param ptr Pointer of the memory region to release.
+    /// @remarks DIV Games Studio runtime has his own free() implementation to manage his
+    /// memory deallocations. If you try to use the standard free() the program starts to
+    /// generate memory corruption and even crashes.
+    div2_free_f freeMemory;
+
+    /// @brief Gets next parameter as integer value from an exported DIV function.
+    /// @return Returns int value.
+    /// @remarks Remember that parameters are readed from a stack, from last to first.
+    div2_get_int_parameter_f getParameterAsInteger;
+
+    /// @brief Gets next parameter as string pointer from an exported DIV function.
+    /// @return Returns char pointer.
+    /// @remarks Remember that parameters are readed from a stack, from last to first.
+    div2_get_string_parameter_f getParameterAsString;
+
+    /// @brief Finalizes and setup the return value of an exported DIV function.
+    /// @param value Integer value to return.
+    /// @remarks This functions always must be called at the end of an exported function to 
+    /// DIV program.
+    div2_return_value_f setReturnValue;
+
+    /// @brief Opens or creates a file.
+    /// @param mode File access mode. See standard fopen documentation to know the avaiable 
+    /// modes: https://cplusplus.com/reference/cstdio/fopen/.
+    /// @return Returns the pointer to the opened file, #NULL otherwise.
+    /// @remarks DIV Games Studio runtime has his own fopen() implementation to manage his
+    /// file open operations. If you try to use the standard fopen() the program starts to
+    /// generate memory corruption and even crashes.
+    div2_fopen_f openFile;
+    
+    /// @brief fclose() alias to DIV implementation.
+    /// @param file The pointer to file to close.
+    /// @remarks DIV Games Studio runtime has his own fclose() implementation to manage his
+    /// file close operations. If you try to use the standard fclose() the program starts to
+    /// generate memory corruption and even crashes.
+    div2_fclose_f closeFile;
 } div2_api_t;
 
 #endif

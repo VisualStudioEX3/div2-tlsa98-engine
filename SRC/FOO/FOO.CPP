@@ -27,11 +27,11 @@ static void div_getHelloWorldMessage()
     assert(fooService != NULL);
     assert(fooService->getHelloWorldMessage != NULL);
 
-    string arg = getstrparm();
+    string arg = engine->div2API->getParameterAsString();
 
     strcpy(arg, fooService->getHelloWorldMessage());
 
-    retval(0);
+    engine->div2API->setReturnValue(0);
 }
 
 void registerFooService()

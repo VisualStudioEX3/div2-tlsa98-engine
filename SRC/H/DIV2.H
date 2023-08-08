@@ -324,8 +324,7 @@ void  (*div_text_out)(char *texto,int x,int y); // Screen print function
 // Macros to get parameters and return values in new functions
 // 컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴
 
-#define getparm()     stack[sp--]           // Get next parameter as integer
-#define getstrparm()  (char *)(&mem[text_offset + getparm()]) // Get next parameter as string
+#define getparm()     stack[sp--]
 #define retval(_x_sp) (stack[++sp]=(_x_sp)) // Set return value (is a must)
 
 // 컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴

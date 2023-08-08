@@ -9,28 +9,38 @@
 #include "..\H\SYSTEM\SERVICES.H"
 #include "..\H\DIV2.H"
 
+static int *div_getProgramMemoryArray()
+{
+    return mem;
+}
+
+static int div_getParameterAsInteger()
+{
+    return getparm();
+}
+
+static string div_getParameterAsString()
+{
+    return (char *)(&mem[text_offset + div_getParameterAsInteger()]);
+}
+
+static void div_returnValue(int value)
+{
+    retval(value);
+}
+
 static void initializeDIV2APIService()
 {
     engine->div2API = (div2_api_t *)div_malloc(sizeof(div2_api_t));
 
-    div2_api_t *div2 = engine->div2API;
-
-    div2->memory = (div2_api_memory_t *)div_malloc(sizeof(div2_api_memory_t));
-
-    div2_api_memory_t *memory = div2->memory;
-    {
-        memory->session = mem;
-        memory->_malloc = div_malloc;
-        memory->_free = div_free;
-    }
-
-    div2->fileSystem = (div2_api_file_system_t *)malloc(sizeof(div2_api_file_system_t));
-
-    div2_api_file_system_t *fileSystem = div2->fileSystem;
-    {
-        fileSystem->_fopen = div_fopen;
-        fileSystem->_fclose = div_fclose;
-    }
+    engine->div2API->getProgramMemory = div_getProgramMemoryArray;
+    engine->div2API->allocateMemory = div_malloc;
+    engine->div2API->freeMemory = div_free;
+    engine->div2API->getParameterAsInteger = div_getParameterAsInteger;
+    engine->div2API->getParameterAsString = div_getParameterAsString;
+    engine->div2API->setReturnValue = div_returnValue;
+    engine->div2API->openFile = div_fopen;
+    engine->div2API->closeFile = div_fclose;
 }
 
 static void initializeEngineInterface()

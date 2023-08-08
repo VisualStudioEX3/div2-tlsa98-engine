@@ -143,7 +143,7 @@ typedef struct
 
     /// @brief Gets the service instance.
     /// @param id The service id.
-    /// @return Returns the pointer to the service, #DIV::NULL if the id is not found.
+    /// @return Returns the pointer to the service, #NULL if the id is not found.
     get_service_f getService;
 
     /// @brief Gets the number of registered services.
@@ -225,7 +225,7 @@ tlsa98_engine_t *engine;
 /// memory allocations. If you try to use the standard malloc() the program starts to generate
 /// memory corruption and even crashes. This macro allows you to use safe malloc() calls but
 /// using the DIV implementation.
-#define malloc(size) engine->div2API->memory->_malloc(size)
+#define malloc(size) engine->div2API->allocateMemory(size)
 
 /// @brief free() alias to DIV implementation.
 /// @param ptr Pointer of the memory region to release.
@@ -233,18 +233,18 @@ tlsa98_engine_t *engine;
 /// memory deallocations. If you try to use the standard free() the program starts to generate
 /// memory corruption and even crashes. This macro allows you to use safe free() calls but
 /// using the DIV implementation.
-#define free(ptr) engine->div2API->memory->_free(ptr)
+#define free(ptr) engine->div2API->freeMemory(ptr)
 
 /// @brief fopen() alias to DIV implementation.
 /// @param filename The path and name of the file to open.
 /// @param mode File access mode. See standard fopen documentation to know the avaiable modes:
 /// https://cplusplus.com/reference/cstdio/fopen/.
-/// @return Returns the pointer to the opened file, #DIV::NULL otherwise.
+/// @return Returns the pointer to the opened file, #NULL otherwise.
 /// @remarks DIV Games Studio runtime has his own fopen() implementation to manage his
 /// file open operations. If you try to use the standard fopen() the program starts to
 /// generate memory corruption and even crashes. This macro allows you to use safe fopen()
 /// calls but using the DIV implementation.
-#define fopen(filename, mode) engine->div2API->fileSystem->_fopen(filename, mode)
+#define fopen(filename, mode) engine->div2API->openFile(filename, mode)
 
 /// @brief fclose() alias to DIV implementation.
 /// @param file The pointer to file to close.
@@ -252,11 +252,11 @@ tlsa98_engine_t *engine;
 /// file close operations. If you try to use the standard fclose() the program starts to
 /// generate memory corruption and even crashes. This macro allows you to use safe fclose()
 /// calls but using the DIV implementation.
-#define fclose(file) engine->div2API->fileSystem->_fclose(file)
+#define fclose(file) engine->div2API->closeFile(file)
 
 /// @brief Finds and gets the service instance from the engine service provider.
 /// @param id The service id.
-/// @return Returns the pointer to the service, #DIV::NULL if the id is not found.
+/// @return Returns the pointer to the service, #NULL if the id is not found.
 /// @remarks Shortcut to ENGINE->services->getService function.
 #define getService(id) engine->services->getService(id)
 
