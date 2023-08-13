@@ -119,11 +119,15 @@ void *createListItemExArgs(list_t *list, create_list_item_callback onBeforeCreat
 {
     void *item = NULL;
     bool canCreate = true;
+    va_list copyArgs;
 
     if (!isListFull(list))
     {
         if (onBeforeCreate)
-            canCreate = onBeforeCreate(list, args);
+        {
+            va_copy(copyArgs, args);
+            canCreate = onBeforeCreate(list, copyArgs);
+        }
 
         if (canCreate)
         {
@@ -159,9 +163,14 @@ void forEachList(const list_t *list, foreach_list_item_callback onItem, ...)
 
 void forEachListArgs(const list_t *list, foreach_list_item_callback onItem, va_list args)
 {
+    va_list copyArgs;
+
     if (!isListEmpty(list) && onItem)
         for (int i = 0; i < list->count; i++)
-            onItem(i, getItemPointer(list, i), args);
+        {
+            va_copy(copyArgs, args);
+            onItem(i, getItemPointer(list, i), copyArgs);
+        }
 }
 
 void *findListItem(const list_t *list, find_list_item_callback predicate, ...)
@@ -180,13 +189,16 @@ void *findListItem(const list_t *list, find_list_item_callback predicate, ...)
 void *findListItemArgs(const list_t *list, find_list_item_callback predicate, va_list args)
 {
     void *item = NULL;
+    va_list copyArgs;
 
     if (!isListEmpty(list) && predicate)
         for (int i = 0; i < list->count; i++)
         {
             void *iter = getListItem(list, i);
 
-            if (predicate(iter, args))
+            va_copy(copyArgs, args);
+
+            if (predicate(iter, copyArgs))
             {
                 item = iter;
 
@@ -212,5 +224,9 @@ bool isListItemExists(const list_t *list, find_list_item_callback predicate, ...
 
 bool isListItemExistsArgs(const list_t *list, find_list_item_callback predicate, va_list args)
 {
-    return findListItemArgs(list, predicate, args) != NULL;
+    va_list copyArgs;
+
+    va_copy(copyArgs, args);
+
+    return findListItemArgs(list, predicate, copyArgs) != NULL;
 }
