@@ -7,8 +7,8 @@
     Source: https://github.com/VisualStudioEX3/div2-framework/blob/master/SHARED/_LIST.H
 */
 
-#ifndef __SYSTEM_LIST_H_
-#define __SYSTEM_LIST_H_
+#ifndef __SYSTEM_DLL_LIST_H_
+#define __SYSTEM_DLL_LIST_H_
 
 #include "GLOBALS.H"
 

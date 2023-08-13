@@ -5,8 +5,8 @@
     Service provider.
 */
 
-#ifndef __SYSTEM_SERVICES_H_
-#define __SYSTEM_SERVICES_H_
+#ifndef __SYSTEM_DLL_SERVICES_H_
+#define __SYSTEM_DLL_SERVICES_H_
 
 #include "GLOBALS.H"
 
