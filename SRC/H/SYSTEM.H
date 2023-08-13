@@ -8,8 +8,8 @@
 #ifndef __SYSTEM_DLL_H_
 #define __SYSTEM_DLL_H_
 
-#include "SYSTEM\GLOBALS.H"     // Global definitions, macros and types, and DIV Games Studio 2 API include and extensions.
-#include "SYSTEM\LIST.H"        // Fixed allocated list.
-// TODO: Add here the include of services.
+#include "SYSTEM\GLOBALS.H"      // Global definitions, macros and types, and DIV Games Studio 2 API include and extensions.
+#include "SYSTEM\LIST.H"         // Fixed allocated list.
+#include "SYSTEM\SERVICES\MEM.H" // Memory service.
 
 #endif

@@ -9,6 +9,8 @@
 #include "..\H\SYSTEM\SERVICES.H"
 #include "..\H\SYSTEM\LIST.H"
 
+const int MAX_SERVICES = 64;
+
 list_t *serviceContainer;
 
 static bool serviceIdComparer(void *item, va_list args)
