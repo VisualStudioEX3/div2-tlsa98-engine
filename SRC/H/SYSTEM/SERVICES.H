@@ -10,8 +10,6 @@
 
 #include "GLOBALS.H"
 
-const int MAX_SERVICES = 64;
-
 typedef struct
 {
     service_id_t id;
