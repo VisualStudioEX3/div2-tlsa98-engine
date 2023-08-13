@@ -24,6 +24,8 @@ begin
     while (scan_code == 0)
         frame;
     end
+
+    exit("Ok", 0);
 end
 
 function helloWorldTest()
