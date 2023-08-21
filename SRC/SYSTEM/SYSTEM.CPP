@@ -64,6 +64,7 @@ static void initializeEngineInterface()
 static void initializeServices()
 {
     registerMemService();
+    registerStringService();
 }
 
 static void initializeDIVCallbacks()
