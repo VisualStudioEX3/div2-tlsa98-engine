@@ -175,7 +175,7 @@ void *createListItem(list_t *list);
 void *createListItemEx(list_t *list, create_list_item_callback onBeforeCreate, ...);
 
 /**
- * @brief Creates a new item in the list with condition callback.
+ * @brief Creates a new item in the list with condition callback (Variadic version).
  * @param list Pointer to the list.
  * @param onBeforeCreate Function callback that define a condition to satisfy to
  * create the item.
@@ -211,7 +211,7 @@ void *getListItem(const list_t *list, int index);
 void forEachList(const list_t *list, foreach_list_item_callback onItem, ...);
 
 /**
- * @brief Loops the entire list and execute a callback in each item.
+ * @brief Loops the entire list and execute a callback in each item (Variadic version).
  * @param list Pointer to the list.
  * @param onItem Callback to execute in each item.
  * @param args List of arguments to use as extra parameters in the callback.
@@ -234,7 +234,7 @@ void forEachListArgs(const list_t *list, foreach_list_item_callback onItem, va_l
 void *findListItem(const list_t *list, find_list_item_callback predicate, ...);
 
 /**
- * @brief Finds an item that match with the predicate.
+ * @brief Finds an item that match with the predicate (Variadic version).
  * @param list Pointer to the list.
  * @param predicate Function callback to execute in each item. This functions define a
  * predicate that an item must be match.
@@ -260,7 +260,7 @@ void *findListItemArgs(const list_t *list, find_list_item_callback predicate, va
 bool isListItemExists(const list_t *list, find_list_item_callback predicate, ...);
 
 /**
- * @brief Checks if an item exists.
+ * @brief Checks if an item exists (Variadic version).
  * @param list Pointer to the list.
  * @param predicate Function callback to execute in each item. This functions define a
  * predicate that an item must be match.

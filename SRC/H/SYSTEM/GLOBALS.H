@@ -10,9 +10,9 @@
 
 #define DOSBOX_SUPPORT // Uncomment this for support and fixes for DOSBox emulator.
 
-#include <stdarg.h> // Required for va_copy macro.
-#include <string.h> // Required for va_copy macro.
-#include "..\SYSTEM\DIV2API.H"
+#include <stdarg.h>            // Required for va_copy macro.
+#include <string.h>            // Required for va_copy macro.
+#include "..\SYSTEM\DIV2API.H" // DIV Games Studio 2 API abstraction.
 
 /// @brief NULL constant value.
 #define NULL 0
@@ -115,9 +115,9 @@ typedef struct
 
     /// @brief Revision number. Represents a patch or bugfix applied on current minor version of the API.
     /// @remarks This number must be updated only when, on a current minor version, it required apply a bugfix or patch
-    /// to solve problems whitout require make changes on API or current behaviours. If the fix implies implement new 
-    /// features, new top services or change any current expected behaviour, this should be considered as new minor 
-    /// version. If the fix implies remove or create new feature that broken the API compatibility, must be considered 
+    /// to solve problems whitout require make changes on API or current behaviours. If the fix implies implement new
+    /// features, new top services or change any current expected behaviour, this should be considered as new minor
+    /// version. If the fix implies remove or create new feature that broken the API compatibility, must be considered
     /// as new major version.
     byte revision;
 } version_t;
