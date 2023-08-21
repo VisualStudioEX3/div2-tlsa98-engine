@@ -27,7 +27,7 @@ typedef void (*div2_fclose_f)(FILE *);
 /// files.
 typedef struct
 {
-    /// @brief Gets pointer to the DIV programm memory.
+    /// @brief Gets pointer to the DIV program memory.
     /// @return Returns an integer pointer to program memory.
     /// @remarks DIV program memory is defined as an integer array.
     div2_memory_array_f getProgramMemory;
