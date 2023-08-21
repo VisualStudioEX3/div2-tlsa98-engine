@@ -5,7 +5,7 @@
 # 	Makefile.
 #
 
-sources	= system.cpp list.cpp services.cpp services\mem.cpp
+sources	= system.cpp list.cpp services.cpp services\mem.cpp services\string.cpp
 
 all: compile clean
 
