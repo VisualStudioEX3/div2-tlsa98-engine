@@ -120,6 +120,9 @@ typedef struct
     /// version. If the fix implies remove or create new feature that broken the API compatibility, must be considered
     /// as new major version.
     byte revision;
+
+    /// @brief Value reserved for future purposes.
+    byte reserved;
 } version_t;
 
 /// @brief Service id.
