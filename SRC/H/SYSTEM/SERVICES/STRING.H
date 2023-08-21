@@ -53,7 +53,7 @@ typedef struct
     /// @brief Gets the length of the string.
     /// @param str String to measure.
     /// @return Returns the number of characters until reach the first null character.
-    string_len_f len;
+    string_len_f length;
 
     /// @brief Determines whether all characters of a string are equal to character model.
     /// @param str String to check.
@@ -110,7 +110,7 @@ typedef struct
     /// https://cplusplus.com/reference/cstdio/printf/.
     /// @param args List of arguments to use in formatted string.
     /// @returns Returns #true if string is sucessful formatted, #false otherwise.
-    string_format_args_f vformat;
+    string_format_args_f formatArgs;
 
     /// @brief Concatenates the elements of the argument list using the specified separator.
     /// @param separator The string to use as a separator. Separator is included in the
@@ -129,7 +129,7 @@ typedef struct
     /// @param args Argument list that contains the strings to concatenate.
     /// @return Returns a new string that consists of the elements of the argument list
     /// delimited by the separator string.
-    string_join_args_f vjoin;
+    string_join_args_f joinArgs;
 } string_service_t;
 
 /// @brief Register and initializes the service.
