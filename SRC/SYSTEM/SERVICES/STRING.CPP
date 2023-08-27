@@ -165,6 +165,8 @@ static string stringJoinArgs(const string separator, int count, va_list args)
 
 void registerStringService()
 {
+    engine->fileLogger->log("Initializing String service...");
+
     memoryService = (mem_service_t *)getService(MEM_SERVICE);
 
     service.create = stringCreate;
@@ -186,4 +188,6 @@ void registerStringService()
     int result = engine->services->registerService(STRING_SERVICE, &service);
 
     assert(result == RESULT_OK);
+
+    engine->fileLogger->log("String service initialized.");
 }

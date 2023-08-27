@@ -158,6 +158,35 @@ typedef struct
     get_service_provider_capacity_f getCapacity;
 } service_provider_t;
 
+typedef void (*file_logger_log_message)(string, ...);
+typedef void (*file_logger_log_message_args)(string, va_list);
+typedef void (*file_logger_log_single_line)();
+typedef void (*file_logger_log_double_line)();
+
+/// @brief File logger.
+/// @remarks This file logger is a basic and standalone logger service to use for low-level
+/// debug purposes.
+typedef struct
+{
+    /// @brief Logs a formatted message.
+    /// @param message Message to log.
+    /// @param ... Optional values to formatted into mesaage.
+    /// @remarks The logged message contains a date time stamp at the start of line.
+    file_logger_log_message log;
+
+    /// @brief Logs a formatted message (Variadic).
+    /// @param message Message to log.
+    /// @param args Values to formatted into mesaage.
+    /// @remarks The logged message contains a date time stamp at the start of line.
+    file_logger_log_message_args logArgs;
+
+    /// @brief Logs a single line separator.
+    file_logger_log_single_line logSingleLine;
+
+    /// @brief Logs a double line separator.
+    file_logger_log_double_line logDoubleLine;
+} file_logger_service_t;
+
 /// @brief TLSA98 Engine main interface.
 /// @remarks This interface exposes the main access to engine services and other relevant
 /// data or implementations across the different engine libraries. The struct setup is
@@ -180,8 +209,11 @@ typedef struct
     /// @brief Engine services provider.
     service_provider_t *services;
 
-    /// @brief Reserved for future implementations.
-    void *reserved;
+    /// @brief Standalone File logger.
+    /// @remarks Use this logger when you required to log activity on core implementations, 
+    /// because this service is full-standalone, doesn't had any dependency with the engine
+    /// services.
+    file_logger_service_t *fileLogger;
 } tlsa98_engine_t;
 
 /// @brief Gets the TLSA98 Engine runtime instance.

@@ -32,15 +32,21 @@ static void div_getHelloWorldMessage()
     strcpy(arg, fooService->getHelloWorldMessage());
 
     engine->div2API->setReturnValue(0);
+
+    engine->fileLogger->log("div_getHelloWorldMessage() called.");
 }
 
 void registerFooService()
 {
+    engine->fileLogger->log("Initializating FOO service...");
+
     service.getHelloWorldMessage = getHelloWorldMessage;
 
     int result = engine->services->registerService(FOO_SERVICE, &service);
 
     assert(result == RESULT_OK);
+
+    engine->fileLogger->log("FOO service initialized.");
 }
 
 void exportFooService(void (*COM_export)(char *name, void *obj, int nparms))
@@ -50,11 +56,10 @@ void exportFooService(void (*COM_export)(char *name, void *obj, int nparms))
 
 void __export divmain(COMMON_PARAMS)
 {
-    // TODO: This call should be removed in the future if the DIV.H API is possible to 
-    // abstracted by a shared service from SYSTEM.DLL (this call should be executed one time 
-    // and only by SYSTEM.DLL).
-    GLOBAL_IMPORT();
+    GLOBAL_IMPORT(); // Required to get TLSA98_ENGINE_ADDRESS pointer address from _net struct.
     engine = (tlsa98_engine_t *)TLSA98_ENGINE_ADDRESS;
+
+    engine->fileLogger->log("Initializing FOO.DLL...");
 
     // TODO: Implement own assert to allow custom assertion messages, outputs like the future 
     // built-in game console or error reporter, and termination action (end program or 
@@ -67,16 +72,28 @@ void __export divmain(COMMON_PARAMS)
 
     // Register DIV callbacks:
     // ...
+
+    engine->fileLogger->log("FOO.DLL initialized.");
+    engine->fileLogger->logSingleLine();
 }
 
 void __export divlibrary(LIBRARY_PARAMS)
 {
     // Export here all services to DIV language:
     exportFooService(COM_export);
+
+    // BUG: FileLogger service crash program when you try to log any message from here or any child
+    // function call from here. Because SYSTEM.DLL should implements in a near future a service to
+    // register there the functions to DIV language, this bug seems to be avoided, because divlibrary()
+    // is not required in the child libraries, only in SYSTEM.DLL, where this bug not ocurr.
 }
 
 void __export divend(COMMON_PARAMS)
 {
+    engine->fileLogger->log("Terminating FOO.DLL...");
+
     // Terminate here services:
     // ...
+
+    engine->fileLogger->log("FOO.DLL terminated.");
 }

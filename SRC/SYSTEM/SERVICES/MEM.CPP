@@ -58,6 +58,8 @@ static bool memoryEquals(const void *ptr1, const void *ptr2, size_t size)
 
 void registerMemService()
 {
+    engine->fileLogger->log("Initializing Memory service...");
+
     service.clear = memoryClear;
     service.calloc = memoryCalloc;
     service.realloc = memoryRealloc;
@@ -68,4 +70,6 @@ void registerMemService()
     int result = engine->services->registerService(MEM_SERVICE, &service);
 
     assert(result == RESULT_OK);
+
+    engine->fileLogger->log("Memory service initialized.");
 }
