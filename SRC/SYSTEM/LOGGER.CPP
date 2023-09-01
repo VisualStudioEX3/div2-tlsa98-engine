@@ -15,9 +15,11 @@ const string LOG_MESSAGE_FORMAT = "[%.24s] %s\n";
 const string LOG_SEPARATOR_LINE_SINGLE = "─────────────────────────────────────────────────────────────────────────────────";
 const string LOG_SEPARATOR_LINE_DOUBLE = "═════════════════════════════════════════════════════════════════════════════════";
 const string LOG_SEPARATOR_LINE_TRIPPLE = "≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡";
+const int LOG_MESSAGE_MAX_LENGTH = 255;
+const int TIMESTAMP_LENGTH = 28; // "[Fri Sep  1 14:01:10 2023] " <- 28 characters length.
 
 FILE *file;
-char messageBuffer[255 - 28]; // Max length minus datetime stamp length.
+char messageBuffer[LOG_MESSAGE_MAX_LENGTH - TIMESTAMP_LENGTH];
 
 static string getDateTimeStamp()
 {
