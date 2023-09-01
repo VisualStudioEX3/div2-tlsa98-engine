@@ -229,7 +229,7 @@ typedef struct
 ///
 /// In this case, the _net struct memory is reserved in the DIV Games Studio runtime memory
 /// but not initialized until the game code tries to initialize the network system. This
-/// allow us to use this memory to store the pointer to the main eneigne interface, and be
+/// allow us to use this memory to store the pointer to the main engine interface, and be
 /// accessible for all DLLs that uses the SYSTEM.H header file.
 tlsa98_engine_t *engine;
 
