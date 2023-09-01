@@ -5,7 +5,7 @@
 # 	Makefile.
 #
 
-sources	= system.cpp list.cpp services.cpp logger.cpp services\mem.cpp services\string.cpp
+sources	= system.cpp list.cpp services.cpp logger.cpp services\mem.cpp services\string.cpp services\datetime.cpp
 
 all: compile clean
 
