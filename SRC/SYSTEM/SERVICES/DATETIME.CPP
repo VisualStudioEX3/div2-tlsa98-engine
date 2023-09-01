@@ -13,7 +13,8 @@
 const int CLOCKS_PER_MILLISECONDS = CLOCKS_PER_SEC / 1000;
 
 datetime_service_t service;
-mem_service_t *memoryService;
+
+static mem_service_t *memoryService;
 
 static void tm_to_datetime_t(const tm *src, datetime_t *dest)
 {

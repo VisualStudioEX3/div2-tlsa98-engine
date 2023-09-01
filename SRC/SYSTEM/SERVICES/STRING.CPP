@@ -11,7 +11,8 @@
 #include "..\..\H\SYSTEM\SERVICES\MEM.H"
 
 string_service_t service;
-mem_service_t *memoryService;
+
+static mem_service_t *memoryService;
 
 static string stringCreate(int chars)
 {
