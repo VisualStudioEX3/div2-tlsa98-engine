@@ -8,10 +8,11 @@
 #ifndef __SYSTEM_DLL_H_
 #define __SYSTEM_DLL_H_
 
-#include "SYSTEM\GLOBALS.H"         // Global definitions, macros and types, DIV Games Studio 2 API abstraction, and extensions.
-#include "SYSTEM\LIST.H"            // Fixed allocated list.
-#include "SYSTEM\LOGGER.H"          // Basic file logger.
-#include "SYSTEM\SERVICES\MEM.H"    // Memory service.
-#include "SYSTEM\SERVICES\STRING.H" // String service.
+#include "SYSTEM\GLOBALS.H"           // Global definitions, macros and types, DIV Games Studio 2 API abstraction, and extensions.
+#include "SYSTEM\LIST.H"              // Fixed allocated list.
+#include "SYSTEM\LOGGER.H"            // Basic file logger.
+#include "SYSTEM\SERVICES\MEM.H"      // Memory service.
+#include "SYSTEM\SERVICES\STRING.H"   // String service.
+#include "SYSTEM\SERVICES\DATETIME.H" // Datetime service.
 
 #endif

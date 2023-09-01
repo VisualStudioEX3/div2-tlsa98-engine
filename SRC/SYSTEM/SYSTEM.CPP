@@ -98,6 +98,7 @@ static void initializeServices()
 
     registerMemService();
     registerStringService();
+    registerDateTimeService();
 
     logMessage("Core services initialized.");
     logSingleSeparator();
@@ -130,7 +131,7 @@ void __export divlibrary(LIBRARY_PARAMS)
 
 void __export divend(COMMON_PARAMS)
 {
-    // FYI: Testing FOO.DLL we get the DIV2 runtime perform the divend calls in inverse order 
+    // FYI: Testing FOO.DLL we get the DIV2 runtime perform the divend calls in inverse order
     // of the libraries are initialized. For the "terminating engine" logs and actions, maybe
     // is a good idea to create an event of "engine termination" to do this.
     logDoubleSeparator();
