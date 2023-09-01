@@ -5,8 +5,8 @@
     String service.
 */
 
-#ifndef __SYSTEM_DLL_SERVICE_SERVICE_H_
-#define __SYSTEM_DLL_SERVICE_SERVICE_H_
+#ifndef __SYSTEM_DLL_STRING_SERVICE_H_
+#define __SYSTEM_DLL_STRING_SERVICE_H_
 
 #include "..\GLOBALS.H"
 

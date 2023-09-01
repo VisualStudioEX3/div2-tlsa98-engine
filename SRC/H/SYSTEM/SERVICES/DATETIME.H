@@ -5,8 +5,8 @@
     DateTime service.
 */
 
-#ifndef __SYSTEM_DATETIME_H_
-#define __SYSTEM_DATETIME_H_
+#ifndef __SYSTEM_DLL_DATETIME_SERVICE_H_
+#define __SYSTEM_DLL_DATETIME_SERVICE_H_
 
 #include "..\GLOBALS.H"
 
