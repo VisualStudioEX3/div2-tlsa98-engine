@@ -67,8 +67,8 @@ static datetime_t *getDateTime()
 
 static string dateTimeToString(const datetime_t *dateTime)
 {
-    struct tm *dt = (tm *)malloc(sizeof(tm));
-    time_t t = datetime_t_to_tm(dateTime, dt);
+    struct tm dt;
+    time_t t = datetime_t_to_tm(dateTime, &dt);
 
     return ctime(&t);
 }
