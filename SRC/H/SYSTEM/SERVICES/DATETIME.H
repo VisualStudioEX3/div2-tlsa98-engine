@@ -39,4 +39,7 @@ typedef struct
     datetime_dateTimeToString_f dateTimeToString;
 } datetime_service_t;
 
+/// @brief Register and initializes the service.
+void registerDateTimeService();
+
 #endif
