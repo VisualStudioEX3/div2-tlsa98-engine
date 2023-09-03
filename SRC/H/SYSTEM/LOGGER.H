@@ -12,7 +12,7 @@
 
 /// @brief Opens or creates the log file.
 /// @param fopen_f Pointer to fopen function (must be point to DIV2.H div_fopen).
-/// @remarks The files is opened in append mode.
+/// @remarks The file is opened in append mode.
 void openLogFile(FILE *(*fopen_f)(char *, char *));
 
 /// @brief Closes the log file.
