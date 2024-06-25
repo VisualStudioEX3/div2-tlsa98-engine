@@ -2,10 +2,10 @@
 <img src="https://github.com/VisualStudioEX3/VisualStudioEX3/blob/master/Shared/Images/div_games_studio/div2_logo/div2_logo.png" alt="DIV Games Studio 2 logo" width="512" />
 <br>
 TLSA98 Engine</h1>
-<h6 align="center">© Visual Studio EX3, José Miguel Sánchez Fernández - 2022 - 2023</h6>
+<h6 align="center">© Visual Studio EX3, José Miguel Sánchez Fernández - 2022 - 2024</h6>
 <h2 align="center">A native game engine for DIV Games Studio 2 (vanilla)</h2>
 
-> **Note**
+> [!Note]
 > Check the [**develop**](https://github.com/VisualStudioEX3/div2-tlsa98-engine/tree/develop) and [**feature**](https://github.com/VisualStudioEX3/div2-tlsa98-engine/branches/all?query=feature) branches to follow progress of this project.
 
 # Introduction
@@ -27,7 +27,7 @@ All effort is focused on build an engine for develop a possible 2D cinematic pla
 
 The engine is full developing in **ANSI C-89** and using **Watcom C++ 10.6** as compiler. This election of C language version and compiler is because that is the officially compiler supported to develop compatbile DLLs for **DIV Games Studio 2 'vanilla'**, the original published version on 1998 (other DIV Games Studio forks, no taking count of Fenix or Bennu forks, maybe support newer versions or other compilers).
 
-> **Note**
+> [!Note]
 > A previous attempt as a framework, a collection of individual DLLs, is available on the following repository: [DIV2 Framework](https://github.com/VisualStudioEX3/div2-framework).
 
 # What is DIV Games Studio?
