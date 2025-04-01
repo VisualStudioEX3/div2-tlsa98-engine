@@ -13,7 +13,7 @@ static uint getCurrentFirstIndex(const ring_buffer_t *buffer)
 
     if (isRingBufferFull(buffer))
     {
-        index = buffer->insertIndex + 1;
+        index = buffer->insertIndex;
 
         if (index == getRingBufferCapacity(buffer))
             index = 0;
