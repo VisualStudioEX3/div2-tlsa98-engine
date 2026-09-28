@@ -12,7 +12,7 @@
 
 #include <stdarg.h>            // Required for va_copy macro.
 #include <string.h>            // Required for va_copy macro.
-#include "..\SYSTEM\DIV2API.H" // DIV Games Studio 2 API abstraction.
+#include "../SYSTEM/DIV2API.H" // DIV Games Studio 2 API abstraction.
 
 /// @brief NULL constant value.
 #define NULL 0

@@ -7,8 +7,8 @@
 
 #include <assert.h>
 #include <time.h>
-#include "..\..\H\SYSTEM\SERVICES\DATETIME.H"
-#include "..\..\H\SYSTEM\SERVICES\MEM.H"
+#include "../../H/SYSTEM/SERVICES/DATETIME.H"
+#include "../../H/SYSTEM/SERVICES/MEM.H"
 
 const int CLOCKS_PER_MILLISECONDS = CLOCKS_PER_SEC / 1000;
 

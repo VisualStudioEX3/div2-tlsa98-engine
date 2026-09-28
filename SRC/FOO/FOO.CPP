@@ -6,8 +6,8 @@
 */
 
 #include <assert.h>
-#include "..\H\FOO.H"
-#include "..\H\DIV2.H"
+#include "../H/FOO.H"
+#include "../H/DIV2.H"
 
 const int TLSA_ENGINE_MAJOR_VERSION = 0;
 const int TLSA_ENGINE_MINOR_VERSION = 1;

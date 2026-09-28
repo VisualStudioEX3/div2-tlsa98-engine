@@ -8,7 +8,7 @@
 #ifndef __SYSTEM_DLL_STRING_SERVICE_H_
 #define __SYSTEM_DLL_STRING_SERVICE_H_
 
-#include "..\GLOBALS.H"
+#include "../GLOBALS.H"
 
 /// @brief String service id.
 #define STRING_SERVICE 1001

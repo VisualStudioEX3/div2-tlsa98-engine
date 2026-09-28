@@ -5,9 +5,9 @@
     System library entry point.
 */
 
-#include "..\H\SYSTEM.H"
-#include "..\H\SYSTEM\SERVICES.H"
-#include "..\H\DIV2.H"
+#include "../H/SYSTEM.H"
+#include "../H/SYSTEM/SERVICES.H"
+#include "../H/DIV2.H"
 
 static int *div_getProgramMemoryArray()
 {

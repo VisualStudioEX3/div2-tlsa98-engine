@@ -7,11 +7,11 @@
 
 #include "assert.h"
 #include "time.h"
-#include "..\H\SYSTEM\LOGGER.H"
+#include "../H/SYSTEM/LOGGER.H"
 
 const string LOG_NAME = "TLSA98 Engine Debug File Logger";
 const string LOG_FILENAME = "log.txt";
-const string LOG_MESSAGE_FORMAT = "[%.24s] %s\n";
+const string LOG_MESSAGE_FORMAT = "[%.24s] %s/n";
 const string LOG_SEPARATOR_LINE_SINGLE = "─────────────────────────────────────────────────────────────────────────────────";
 const string LOG_SEPARATOR_LINE_DOUBLE = "═════════════════════════════════════════════════════════════════════════════════";
 const string LOG_SEPARATOR_LINE_TRIPPLE = "≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡";

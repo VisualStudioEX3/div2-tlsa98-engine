@@ -7,8 +7,8 @@
 
 #include <assert.h>
 #include <ctype.h>
-#include "..\..\H\SYSTEM\SERVICES\STRING.H"
-#include "..\..\H\SYSTEM\SERVICES\MEM.H"
+#include "../../H/SYSTEM/SERVICES/STRING.H"
+#include "../../H/SYSTEM/SERVICES/MEM.H"
 
 string_service_t service;
 

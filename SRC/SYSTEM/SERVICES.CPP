@@ -6,8 +6,8 @@
 */
 
 #include <assert.h>
-#include "..\H\SYSTEM\SERVICES.H"
-#include "..\H\SYSTEM\LIST.H"
+#include "../H/SYSTEM/SERVICES.H"
+#include "../H/SYSTEM/LIST.H"
 
 const int MAX_SERVICES = 64;
 

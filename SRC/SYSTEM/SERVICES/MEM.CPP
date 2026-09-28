@@ -6,7 +6,7 @@
 */
 
 #include <assert.h>
-#include "..\..\H\SYSTEM\SERVICES\MEM.H"
+#include "../../H/SYSTEM/SERVICES/MEM.H"
 
 mem_service_t service;
 

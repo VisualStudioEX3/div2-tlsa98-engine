@@ -7,7 +7,7 @@
     Source: https://github.com/VisualStudioEX3/div2-framework/blob/master/SHARED/_LIST.CPP
 */
 
-#include "..\H\SYSTEM\LIST.H"
+#include "../H/SYSTEM/LIST.H"
 
 static void *getItemPointer(const list_t *list, int index)
 {

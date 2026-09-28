@@ -8,7 +8,7 @@
 #ifndef __FOO_DLL_H_
 #define __FOO_DLL_H_
 
-#include "..\H\SYSTEM.H"
+#include "../H/SYSTEM.H"
 
 #define FOO_SERVICE 0x00464F4F
 
