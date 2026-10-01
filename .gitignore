@@ -4,3 +4,6 @@
 *.err
 *.exe
 *.dll
+
+# IDEs caches, settings, etc...
+.vscode
