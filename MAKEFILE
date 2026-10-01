@@ -1,10 +1,10 @@
 # TLSA98 Engine - A service and component oriented engine for DIV Games Studio 2.
-# @copyright TLSA98 Engine (C) VisualStudioEX3, José Miguel Sánchez Fernández - 2022, 2025
+# @copyright TLSA98 Engine (C) VisualStudioEX3, José Miguel Sánchez Fernández - 2022, 2026
 # @copyright DIV Games Studio 2 (C) Hammer Technologies, Daniel Navarro Medrano - 1998, 1999
 #
 # 	Project makefile.
 #
-#	Use this MAKEFILE to compile all libraries or a single one. 
+#	Use this MAKEFILE to compile all libraries or a single one.
 #	Don't use directly the child MAKEFILEs.
 #
 #	Usage:

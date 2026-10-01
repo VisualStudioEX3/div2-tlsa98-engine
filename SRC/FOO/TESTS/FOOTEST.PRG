@@ -1,5 +1,5 @@
 //! FOO.DLL - Test library.
-//! @copyright TLSA98 Engine (C) VisualStudioEX3, Jos� Miguel S�nchez Fern�ndez - 2022, 2025
+//! @copyright TLSA98 Engine (C) VisualStudioEX3, Jos� Miguel S�nchez Fern�ndez - 2022, 2026
 //! @copyright DIV Games Studio 2 (C) Hammer Technologies, Daniel Navarro Medrano - 1998, 1999
 /*!
     DIV Games Studio 2 test program for FOO.DLL.

@@ -1,5 +1,5 @@
 //! DIV Games Studio 2 - Dinamic Link Library - Header File.
-//! @copyright TLSA98 Engine (C) VisualStudioEX3, José Miguel Sánchez Fernández - 2022, 2025
+//! @copyright TLSA98 Engine (C) VisualStudioEX3, José Miguel Sánchez Fernández - 2022, 2026
 //! @copyright DIV Games Studio 2 (C) Hammer Technologies, Daniel Navarro Medrano - 1998, 1999
 /*!
     Modified DIV Games Studio 2 API header for TLSA98 Engine.

@@ -1,5 +1,5 @@
 //! SYSTEM.DLL - System library for DIV Games Studio 2.
-//! @copyright TLSA98 Engine (C) VisualStudioEX3, José Miguel Sánchez Fernández - 2022, 2025
+//! @copyright TLSA98 Engine (C) VisualStudioEX3, José Miguel Sánchez Fernández - 2022, 2026
 //! @copyright DIV Games Studio 2 (C) Hammer Technologies, Daniel Navarro Medrano - 1998, 1999
 /*!
     Basic file logger, full-standalone from the engine services.
@@ -16,7 +16,7 @@ const string LOG_SEPARATOR_LINE_SINGLE = "────────────�
 const string LOG_SEPARATOR_LINE_DOUBLE = "═════════════════════════════════════════════════════════════════════════════════";
 const string LOG_SEPARATOR_LINE_TRIPPLE = "≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡";
 const int LOG_MESSAGE_MAX_LENGTH = 255;
-const int TIMESTAMP_LENGTH = 28; // "[Fri Sep  1 14:01:10 2025] " <- 28 characters length.
+const int TIMESTAMP_LENGTH = 28; // "[Fri Sep  1 14:01:10 2026] " <- 28 characters length.
 
 FILE *file;
 char messageBuffer[LOG_MESSAGE_MAX_LENGTH - TIMESTAMP_LENGTH];

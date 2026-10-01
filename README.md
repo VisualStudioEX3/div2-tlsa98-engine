@@ -2,7 +2,7 @@
 <img src="https://github.com/VisualStudioEX3/VisualStudioEX3/blob/master/Shared/Images/div_games_studio/div2_logo/div2_logo.png" alt="DIV Games Studio 2 logo" width="512" />
 <br>
 TLSA98 Engine</h1>
-<h6 align="center">© Visual Studio EX3, José Miguel Sánchez Fernández - 2022 - 2025</h6>
+<h6 align="center">© Visual Studio EX3, José Miguel Sánchez Fernández - 2022 - 2026</h6>
 <h2 align="center">A native game engine for DIV Games Studio 2 (vanilla)</h2>
 
 > [!Note]
