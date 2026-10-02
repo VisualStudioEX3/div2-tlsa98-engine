@@ -14,7 +14,6 @@
 
 bin_folder 			= BIN
 src_folder			= SRC
-target_cmd			= $(goto_target_path) & $(make_cmd) & $(goto_root_path)
 make_cmd			= wmake "COMPILER_CMD=$(compiler_cmd)"
 compiler_cmd		= wcl386 $(compiler_args)
 compiler_args		= /ox /l=div_dll /fe=..\..\$(bin_folder)\$@.DLL
@@ -27,7 +26,11 @@ all: FOO SYSTEM
 	@safemd.bat $(bin_folder)
 
 system: .SYMBOLIC
-	@$(target_cmd)
+	@$(goto_target_path)
+	@$(make_cmd)
+	@$(goto_root_path)
 
 foo: 	.SYMBOLIC
-	@$(target_cmd)
+	@$(goto_target_path)
+	@$(make_cmd)
+	@$(goto_root_path)
