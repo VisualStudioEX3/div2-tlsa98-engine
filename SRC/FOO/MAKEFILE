@@ -5,12 +5,18 @@
 #  	Makefile.
 #
 
-sources	= foo.cpp
+cpp_sources	= *.cpp
+
+.BEFORE:
+	@cd $(SRC_PATH)
+
+.AFTER:
+	@cd ..\..
 
 all: compile clean
 
 compile: 	.SYMBOLIC
-	$(COMPILER_CMD) $(sources)
+	@$(COMPILER_CMD) $(cpp_sources)
 
 clean: 		.SYMBOLIC
 	@echo cleaning directory
