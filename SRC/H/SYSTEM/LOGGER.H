@@ -8,33 +8,51 @@
 #ifndef __SYSTEM_DLL_LOGGER_H_
 #define __SYSTEM_DLL_LOGGER_H_
 
-#include "GLOBALS.H"
+/// @brief Log levels.
+typedef enum LogLevel
+{
+    /// @brief Debug log level.
+    /// @remarks This level only log if DEBUG preprocessor is defined.
+    DEBUG,
+    /// @brief Information log level.
+    INFO,
+    /// @brief Warning log level.
+    WARN,
+    /// @brief Error log level.
+    ERROR,
+    /// @brief Critical error log level.
+    CRITICAL
+};
 
 /// @brief Opens or creates the log file.
-/// @param fopen_f Pointer to fopen function (must be point to DIV2.H div_fopen).
+/// @param welcomeMessage First message logged in the session. Neither the log
+/// level nor the timestamp is included.
 /// @remarks The file is opened in append mode.
-void openLogFile(FILE *(*fopen_f)(char *, char *));
+void openLogFile(char *welcomeMessage);
 
 /// @brief Closes the log file.
-/// @param fclose_f Pointer to fclose function (must be point to DIV2.H div_fclose).
-void closeLogFile(void (*fclose_f)(FILE *));
+/// @param closeMessage Last message logged in the session. Neither the log
+/// level nor the timestamp is included.
+void closeLogFile(char *closeMessage);
 
 /// @brief Logs a formatted message.
+/// @param level Debug level.
 /// @param message Message to log.
 /// @param ... Optional values to formatted into mesaage.
-/// @remarks The logged message contains a date time stamp at the start of line.
-void logMessage(string message, ...);
+/// @returns Returns 1 if the message was logged, 0 otherwise.
+/// @remarks The logged message contains a date time stamp at the start of line
+/// followed by the log level tag like as follow:
+/// "2026-10-14 19:28:18 | INFO | Hello, world!"
+int logMessage(LogLevel level, char *message, ...);
 
 /// @brief Logs a formatted message (Variadic).
+/// @param level Debug level.
 /// @param message Message to log.
 /// @param args Values to formatted into mesaage.
-/// @remarks The logged message contains a date time stamp at the start of line.
-void logMessageArgs(string message, va_list args);
-
-/// @brief Logs a single line separator.
-void logSingleSeparator();
-
-/// @brief Logs a double line separator.
-void logDoubleSeparator();
+/// @returns Returns 1 if the message was logged, 0 otherwise.
+/// @remarks The logged message contains a date time stamp at the start of line
+/// followed by the log level tag like as follow:
+/// "2026-10-14 19:28:18 | INFO | Hello, world!"
+int logMessageArgs(LogLevel level, char *message, va_list args);
 
 #endif
