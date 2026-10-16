@@ -14,5 +14,6 @@
 #include "SYSTEM/SERVICES/MEM.H"      // Memory service.
 #include "SYSTEM/SERVICES/STRING.H"   // String service.
 #include "SYSTEM/SERVICES/DATETIME.H" // Datetime service.
+#include "SYSTEM/SERVICES/LOGGER.H"   // Logger service.
 
 #endif
