@@ -34,7 +34,7 @@ static void setEngineSignature()
 {
     engine->signature = TLSA98_ENGINE_SIGNATURE;
 
-    logMessage(INFO, "Engine signature: %i (0x%x)", engine->signature, engine->signature);
+    logMessage(LOG_INFO, "Engine signature: %i (0x%x)", engine->signature, engine->signature);
 }
 
 static void setEngineVersion()
@@ -47,7 +47,7 @@ static void setEngineVersion()
         version->minor = TLSA98_ENGINE_VERSION_MINOR;
         version->revision = TLSA98_ENGINE_VERSION_REVISION;
 
-        logMessage(INFO, "Engine version: %i.%i.%i", version->major, version->minor, version->revision);
+        logMessage(LOG_INFO, "Engine version: %i.%i.%i", version->major, version->minor, version->revision);
     }
 }
 
@@ -67,7 +67,7 @@ static void registerDIV2API()
 
 static void initializeEngineInterface()
 {
-    logMessage(DEBUG, "Initializing engine interface...");
+    logMessage(LOG_DEBUG, "Initializing engine interface...");
 
     engine = (tlsa98_engine_t *)TLSA98_ENGINE_ADDRESS;
 
@@ -78,19 +78,19 @@ static void initializeEngineInterface()
     registerDIV2API();
     initializeServiceProvider();
 
-    logMessage(DEBUG, "Engine interface initialized.");
+    logMessage(LOG_DEBUG, "Engine interface initialized.");
 }
 
 static void initializeServices()
 {
-    logMessage(DEBUG, "Registering core services...");
+    logMessage(LOG_DEBUG, "Registering core services...");
 
     registerLoggerService();
     registerMemService();
     registerStringService();
     registerDateTimeService();
 
-    logMessage(DEBUG, "Core services registered.");
+    logMessage(LOG_DEBUG, "Core services registered.");
 }
 
 static void initializeDIVCallbacks()
@@ -113,7 +113,7 @@ void __export divlibrary(LIBRARY_PARAMS)
     // Export here all services to DIV language:
     // ...
 
-    logMessage(INFO, "Engine initialized.");
+    logMessage(LOG_INFO, "Engine initialized.");
 }
 
 void __export divend(COMMON_PARAMS)
@@ -121,7 +121,7 @@ void __export divend(COMMON_PARAMS)
     // FYI: Testing FOO.DLL we get the DIV2 runtime perform the divend calls in inverse order
     // of the libraries are initialized. For the "terminating engine" logs and actions, maybe
     // is a good idea to create an event of "engine termination" to do this.
-    logMessage(INFO, "Terminating engine...");
+    logMessage(LOG_INFO, "Terminating engine...");
 
     // Terminate here services:
     // ...

@@ -13,15 +13,15 @@ typedef enum LogLevel
 {
     /// @brief Debug log level.
     /// @remarks This level only log if DEBUG preprocessor is defined.
-    DEBUG,
+    LOG_DEBUG,
     /// @brief Information log level.
-    INFO,
+    LOG_INFO,
     /// @brief Warning log level.
-    WARN,
+    LOG_WARN,
     /// @brief Error log level.
-    ERROR,
+    LOG_ERROR,
     /// @brief Critical error log level.
-    CRITICAL
+    LOG_CRITICAL
 };
 
 /// @brief Opens or creates the log file.

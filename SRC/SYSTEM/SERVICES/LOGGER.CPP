@@ -35,13 +35,13 @@ static void logDebug(const string message, ...)
     va_list args;
 
     va_start(args, message);
-    _logMessageArgs(DEBUG, message, args);
+    _logMessageArgs(LOG_DEBUG, message, args);
     va_end(args);
 }
 
 static void logDebugArgs(const string message, va_list args)
 {
-    _logMessageArgs(DEBUG, message, args);
+    _logMessageArgs(LOG_DEBUG, message, args);
 }
 
 static void logInfo(const string message, ...)
@@ -49,13 +49,13 @@ static void logInfo(const string message, ...)
     va_list args;
 
     va_start(args, message);
-    _logMessageArgs(INFO, message, args);
+    _logMessageArgs(LOG_INFO, message, args);
     va_end(args);
 }
 
 static void logInfoArgs(const string message, va_list args)
 {
-    _logMessageArgs(INFO, message, args);
+    _logMessageArgs(LOG_INFO, message, args);
 }
 
 static void logWarning(const string message, ...)
@@ -63,13 +63,13 @@ static void logWarning(const string message, ...)
     va_list args;
 
     va_start(args, message);
-    _logMessageArgs(WARN, message, args);
+    _logMessageArgs(LOG_WARN, message, args);
     va_end(args);
 }
 
 static void logWarningArgs(const string message, va_list args)
 {
-    _logMessageArgs(WARN, message, args);
+    _logMessageArgs(LOG_WARN, message, args);
 }
 
 static void logError(const string message, ...)
@@ -77,13 +77,13 @@ static void logError(const string message, ...)
     va_list args;
 
     va_start(args, message);
-    _logMessageArgs(ERROR, message, args);
+    _logMessageArgs(LOG_ERROR, message, args);
     va_end(args);
 }
 
 static void logErrorArgs(const string message, va_list args)
 {
-    _logMessageArgs(ERROR, message, args);
+    _logMessageArgs(LOG_ERROR, message, args);
 }
 
 static void logCritical(const string message, ...)
@@ -91,13 +91,13 @@ static void logCritical(const string message, ...)
     va_list args;
 
     va_start(args, message);
-    _logMessageArgs(CRITICAL, message, args);
+    _logMessageArgs(LOG_CRITICAL, message, args);
     va_end(args);
 }
 
 static void logCriticalArgs(const string message, va_list args)
 {
-    _logMessageArgs(CRITICAL, message, args);
+    _logMessageArgs(LOG_CRITICAL, message, args);
 }
 
 static void addListener(const log_message_callback listener)
@@ -107,7 +107,7 @@ static void addListener(const log_message_callback listener)
 
 void registerLoggerService()
 {
-    logMessage(DEBUG, "Initializing file logger service...");
+    logMessage(LOG_DEBUG, "Initializing file logger service...");
 
     service.debug = logDebug;
     service.debugArgs = logDebugArgs;
@@ -125,5 +125,5 @@ void registerLoggerService()
 
     assert(result == RESULT_OK);
 
-    logMessage(DEBUG, "File logger service initialized.");
+    logMessage(LOG_DEBUG, "File logger service initialized.");
 }

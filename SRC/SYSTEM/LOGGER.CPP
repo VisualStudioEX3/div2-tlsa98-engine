@@ -80,7 +80,7 @@ char *logMessageArgs(LogLevel level, const char *message, va_list args)
     va_list copyArgs;
 
 #if !DEBUG
-    if (level == DEBUG)
+    if (level == LOG_DEBUG)
         return NULL;
 #endif
 
