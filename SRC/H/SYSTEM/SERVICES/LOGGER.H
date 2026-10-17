@@ -17,11 +17,11 @@
 /// a message was logged.
 /// @param level Log level.
 /// @param message Log message.
-typedef void (*log_message_callback)(LogLevel, string);
+typedef void (*log_message_callback)(LogLevel, const string);
 
-typedef void (*file_logger_log_message)(string, ...);
-typedef void (*file_logger_log_message_args)(string, va_list);
-typedef void (*file_logger_add_listener)(log_message_callback);
+typedef void (*file_logger_log_message)(const string, ...);
+typedef void (*file_logger_log_message_args)(const string, va_list);
+typedef void (*file_logger_add_listener)(const log_message_callback);
 
 /// @brief File logger.
 /// @remarks This file logger is a basic and standalone logger service to use for

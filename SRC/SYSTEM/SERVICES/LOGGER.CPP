@@ -9,11 +9,9 @@
 #include "../../H/SYSTEM/LOGGER.H"
 #include "../../H/SYSTEM/SERVICES/LOGGER.H"
 
-static const int MAX_LISTENERS = 8;
-
 static file_logger_service_t service;
 
-static void _logMessage(LogLevel level, string message, ...)
+static void _logMessage(LogLevel level, const string message, ...)
 {
     va_list args;
 
@@ -22,15 +20,17 @@ static void _logMessage(LogLevel level, string message, ...)
     va_end(args);
 }
 
-static void _logMessageArgs(LogLevel level, string message, va_list args)
+static void _logMessageArgs(LogLevel level, const string message, va_list args)
 {
-    if (logMessageArgs(level, message, args))
+    string message = logMessageArgs(level, message, args);
+
+    if (message)
     {
         // TODO: Future event notification.
     }
 }
 
-static void logDebug(string message, ...)
+static void logDebug(const string message, ...)
 {
     va_list args;
 
@@ -39,12 +39,12 @@ static void logDebug(string message, ...)
     va_end(args);
 }
 
-static void logDebugArgs(string message, va_list args)
+static void logDebugArgs(const string message, va_list args)
 {
     _logMessageArgs(DEBUG, message, args);
 }
 
-static void logInfo(string message, ...)
+static void logInfo(const string message, ...)
 {
     va_list args;
 
@@ -53,12 +53,12 @@ static void logInfo(string message, ...)
     va_end(args);
 }
 
-static void logInfoArgs(string message, va_list args)
+static void logInfoArgs(const string message, va_list args)
 {
     _logMessageArgs(INFO, message, args);
 }
 
-static void logWarning(string message, ...)
+static void logWarning(const string message, ...)
 {
     va_list args;
 
@@ -67,12 +67,12 @@ static void logWarning(string message, ...)
     va_end(args);
 }
 
-static void logWarningArgs(string message, va_list args)
+static void logWarningArgs(const string message, va_list args)
 {
     _logMessageArgs(WARN, message, args);
 }
 
-static void logError(string message, ...)
+static void logError(const string message, ...)
 {
     va_list args;
 
@@ -81,12 +81,12 @@ static void logError(string message, ...)
     va_end(args);
 }
 
-static void logErrorArgs(string message, va_list args)
+static void logErrorArgs(const string message, va_list args)
 {
     _logMessageArgs(ERROR, message, args);
 }
 
-static void logCritical(string message, ...)
+static void logCritical(const string message, ...)
 {
     va_list args;
 
@@ -95,12 +95,12 @@ static void logCritical(string message, ...)
     va_end(args);
 }
 
-static void logCriticalArgs(string message, va_list args)
+static void logCriticalArgs(const string message, va_list args)
 {
     _logMessageArgs(CRITICAL, message, args);
 }
 
-static void addListener(log_message_callback listener)
+static void addListener(const log_message_callback listener)
 {
     // TODO: Implement array or list to store the function pointers for the listeners.
 }

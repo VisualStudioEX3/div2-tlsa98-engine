@@ -17,11 +17,12 @@ static const char *FILENAME_TIMESTAMP_TEMPLATE = "%Y%m%d.log"; // "20261014.log"
 static const int FILENAME_TIMESTAMP_LENGTH = 12;               // 8:3 MS-DOS filename format.
 static const size_t FILENAME_TIMESTAMP_STRING_SIZE = sizeof(char) * FILENAME_TIMESTAMP_LENGTH;
 static const char *LOG_TIMESTAMP_TEMPLATE = "%Y-%m-%d %H:%M:%S"; // "2026-10-14 19:28:18"
-static const int LOG_TIMESTAMP_LENGTH = strlen("2026-10-14 19:28:18");
+static const int LOG_TIMESTAMP_LENGTH = 19;
 static const size_t LOG_TIMESTAMP_STRING_SIZE = sizeof(char) * LOG_TIMESTAMP_LENGTH;
 static const char const *LOG_LEVELS[] = {"DEBUG", "INFO", "WARN", "ERROR", "CRITICAL"};
 
 static FILE *file;
+static char timeStamp[LOG_TIMESTAMP_LENGTH];
 static char messageBuffer[LOG_MESSAGE_MAX_LENGTH];
 
 #define va_copy(dst, src) memcpy((void *)dst, (void *)src, sizeof(va_list));
@@ -43,51 +44,49 @@ static char *getFilenameTimeStamp()
     return (char *)filename;
 }
 
-static char *getLogTimeStamp()
+static char *getLogTimeStampNotAllocated()
 {
-    char *timestamp = (char *)div_malloc(LOG_TIMESTAMP_STRING_SIZE);
+    strftime(timeStamp, LOG_TIMESTAMP_STRING_SIZE, LOG_TIMESTAMP_TEMPLATE, getLocalDateTime());
 
-    strftime(timestamp, LOG_TIMESTAMP_STRING_SIZE, LOG_TIMESTAMP_TEMPLATE, getLocalDateTime());
-
-    return (char *)timestamp;
+    return (char *)timeStamp;
 }
 
-void openLogFile(char *welcomeMessage)
+void openLogFile(const char *welcomeMessage)
 {
     file = div_fopen(getFilenameTimeStamp(), "a");
 
     fprintf(file, welcomeMessage);
 }
 
-void closeLogFile(char *closeMessage)
+void closeLogFile(const char *closeMessage)
 {
     fprintf(file, "%s\n", closeMessage);
     div_fclose(file);
 }
 
-int logMessage(LogLevel level, char *message, ...)
+char *logMessage(LogLevel level, const char *message, ...)
 {
     va_list args;
 
     va_start(args, message);
-    int result = logMessageArgs(level, message, args);
+    char *result = logMessageArgs(level, message, args);
     va_end(args);
 
     return result;
 }
 
-int logMessageArgs(LogLevel level, char *message, va_list args)
+char *logMessageArgs(LogLevel level, const char *message, va_list args)
 {
+    va_list copyArgs;
+
 #if !DEBUG
     if (level == DEBUG)
-        return 0;
+        return NULL;
 #endif
-
-    va_list copyArgs;
 
     va_copy(copyArgs, args);
     vsprintf(messageBuffer, message, copyArgs);
-    fprintf(file, LOG_MESSAGE_FORMAT, getLogTimeStamp(), LOG_LEVELS[level], messageBuffer);
+    fprintf(file, LOG_MESSAGE_FORMAT, getLogTimeStampNotAllocated(), LOG_LEVELS[level], messageBuffer);
 
-    return 1;
+    return messageBuffer;
 }
