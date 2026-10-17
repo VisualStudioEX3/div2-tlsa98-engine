@@ -28,31 +28,31 @@ typedef enum LogLevel
 /// @param welcomeMessage First message logged in the session. Neither the log
 /// level nor the timestamp is included.
 /// @remarks The file is opened in append mode.
-void openLogFile(char *welcomeMessage);
+void openLogFile(const char *welcomeMessage);
 
 /// @brief Closes the log file.
 /// @param closeMessage Last message logged in the session. Neither the log
 /// level nor the timestamp is included.
-void closeLogFile(char *closeMessage);
+void closeLogFile(const char *closeMessage);
 
 /// @brief Logs a formatted message.
 /// @param level Debug level.
 /// @param message Message to log.
 /// @param ... Optional values to formatted into mesaage.
-/// @returns Returns 1 if the message was logged, 0 otherwise.
+/// @returns Returns the formatted message, if was logged, NULL otherwise.
 /// @remarks The logged message contains a date time stamp at the start of line
 /// followed by the log level tag like as follow:
 /// "2026-10-14 19:28:18 | INFO | Hello, world!"
-int logMessage(LogLevel level, char *message, ...);
+char *logMessage(LogLevel level, const char *message, ...);
 
 /// @brief Logs a formatted message (Variadic).
 /// @param level Debug level.
 /// @param message Message to log.
 /// @param args Values to formatted into mesaage.
-/// @returns Returns 1 if the message was logged, 0 otherwise.
+/// @returns Returns the formatted message, if was logged, NULL otherwise.
 /// @remarks The logged message contains a date time stamp at the start of line
 /// followed by the log level tag like as follow:
 /// "2026-10-14 19:28:18 | INFO | Hello, world!"
-int logMessageArgs(LogLevel level, char *message, va_list args);
+char *logMessageArgs(LogLevel level, const char *message, va_list args);
 
 #endif
