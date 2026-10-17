@@ -8,12 +8,14 @@
 #include <assert.h>
 #include "../H/FOO.H"
 #include "../H/DIV2.H"
+#include "../H/SYSTEM/SERVICES/LOGGER.H"
 
-const int TLSA_ENGINE_MAJOR_VERSION = 0;
-const int TLSA_ENGINE_MINOR_VERSION = 1;
-const string HELLO_WORLD_MESSAGE = "Hello, World!";
+static const int TLSA_ENGINE_MAJOR_VERSION = 0;
+static const int TLSA_ENGINE_MINOR_VERSION = 1;
+static const string HELLO_WORLD_MESSAGE = "Hello, World!";
 
-foo_service_t service;
+static foo_service_t service;
+static file_logger_service_t *logger;
 
 static const string getHelloWorldMessage()
 {
@@ -33,12 +35,12 @@ static void div_getHelloWorldMessage()
 
     engine->div2API->setReturnValue(0);
 
-    engine->fileLogger->log("div_getHelloWorldMessage() called.");
+    logger->info("div_getHelloWorldMessage() called.");
 }
 
 void registerFooService()
 {
-    engine->fileLogger->log("Initializating FOO service...");
+    logger->debug("Initializating FOO service...");
 
     service.getHelloWorldMessage = getHelloWorldMessage;
 
@@ -46,7 +48,7 @@ void registerFooService()
 
     assert(result == RESULT_OK);
 
-    engine->fileLogger->log("FOO service initialized.");
+    logger->debug("FOO service initialized.");
 }
 
 void exportFooService(void (*COM_export)(char *name, void *obj, int nparms))
@@ -58,8 +60,9 @@ void __export divmain(COMMON_PARAMS)
 {
     GLOBAL_IMPORT(); // Required to get TLSA98_ENGINE_ADDRESS pointer address from _net struct.
     engine = (tlsa98_engine_t *)TLSA98_ENGINE_ADDRESS;
+    logger = (file_logger_service_t *)getService(LOGGER_SERVICE);
 
-    engine->fileLogger->log("Initializing FOO.DLL...");
+    logger->debug("Initializing FOO.DLL...");
 
     // TODO: Implement own assert to allow custom assertion messages, outputs like the future
     // built-in game console or error reporter, and termination action (end program or
@@ -73,8 +76,7 @@ void __export divmain(COMMON_PARAMS)
     // Register DIV callbacks:
     // ...
 
-    engine->fileLogger->log("FOO.DLL initialized.");
-    engine->fileLogger->logSingleLine();
+    logger->debug("FOO.DLL initialized.");
 }
 
 void __export divlibrary(LIBRARY_PARAMS)
@@ -90,10 +92,10 @@ void __export divlibrary(LIBRARY_PARAMS)
 
 void __export divend(COMMON_PARAMS)
 {
-    engine->fileLogger->log("Terminating FOO.DLL...");
+    logger->debug("Terminating FOO.DLL...");
 
     // Terminate here services:
     // ...
 
-    engine->fileLogger->log("FOO.DLL terminated.");
+    logger->debug("FOO.DLL terminated.");
 }

@@ -6,9 +6,11 @@
 */
 
 #include <assert.h>
+#include "../../H/SYSTEM/SERVICES/LOGGER.H"
 #include "../../H/SYSTEM/SERVICES/MEM.H"
 
-mem_service_t service;
+static mem_service_t service;
+static file_logger_service_t *logger;
 
 static void memoryClear(void *ptr, size_t size)
 {
@@ -58,7 +60,9 @@ static bool memoryEquals(const void *ptr1, const void *ptr2, size_t size)
 
 void registerMemService()
 {
-    engine->fileLogger->log("Initializing Memory service...");
+    logger = (file_logger_service_t *)getService(LOGGER_SERVICE);
+
+    logger->debug("Initializing Memory service...");
 
     service.clear = memoryClear;
     service.calloc = memoryCalloc;
@@ -71,5 +75,5 @@ void registerMemService()
 
     assert(result == RESULT_OK);
 
-    engine->fileLogger->log("Memory service initialized.");
+    logger->debug("Memory service initialized.");
 }

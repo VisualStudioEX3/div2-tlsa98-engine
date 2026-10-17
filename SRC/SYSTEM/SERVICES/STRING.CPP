@@ -7,12 +7,13 @@
 
 #include <assert.h>
 #include <ctype.h>
-#include "../../H/SYSTEM/SERVICES/STRING.H"
+#include "../../H/SYSTEM/SERVICES/LOGGER.H"
 #include "../../H/SYSTEM/SERVICES/MEM.H"
+#include "../../H/SYSTEM/SERVICES/STRING.H"
 
-string_service_t service;
-
+static string_service_t service;
 static mem_service_t *memoryService;
+static file_logger_service_t *logger;
 
 static string stringCreate(int chars)
 {
@@ -166,9 +167,10 @@ static string stringJoinArgs(const string separator, int count, va_list args)
 
 void registerStringService()
 {
-    engine->fileLogger->log("Initializing String service...");
-
+    logger = (file_logger_service_t *)getService(LOGGER_SERVICE);
     memoryService = (mem_service_t *)getService(MEM_SERVICE);
+
+    logger->debug("Initializing String service...");
 
     service.create = stringCreate;
     service.resize = stringResize;
@@ -190,5 +192,5 @@ void registerStringService()
 
     assert(result == RESULT_OK);
 
-    engine->fileLogger->log("String service initialized.");
+    logger->debug("String service initialized.");
 }

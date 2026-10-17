@@ -8,13 +8,14 @@
 #include <assert.h>
 #include <time.h>
 #include "../../H/SYSTEM/SERVICES/DATETIME.H"
+#include "../../H/SYSTEM/SERVICES/LOGGER.H"
 #include "../../H/SYSTEM/SERVICES/MEM.H"
 
-const int CLOCKS_PER_MILLISECONDS = CLOCKS_PER_SEC / 1000;
+static const int CLOCKS_PER_MILLISECONDS = CLOCKS_PER_SEC / 1000;
 
-datetime_service_t service;
-
+static datetime_service_t service;
 static mem_service_t *memoryService;
+static file_logger_service_t *logger;
 
 static void tm_to_datetime_t(const tm *src, datetime_t *dest)
 {
@@ -76,9 +77,10 @@ static string dateTimeToString(const datetime_t *dateTime)
 
 void registerDateTimeService()
 {
-    engine->fileLogger->log("Initializing DateTime service...");
-
+    logger = (file_logger_service_t *)getService(LOGGER_SERVICE);
     memoryService = (mem_service_t *)getService(MEM_SERVICE);
+
+    logger->debug("Initializing DateTime service...");
 
     service.getTickCount = getTickCount;
     service.getDateTime = getDateTime;
@@ -89,5 +91,5 @@ void registerDateTimeService()
 
     assert(result == RESULT_OK);
 
-    engine->fileLogger->log("DateTime service initialized.");
+    logger->debug("DateTime service initialized.");
 }
