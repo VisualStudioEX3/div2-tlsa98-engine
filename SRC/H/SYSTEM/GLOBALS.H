@@ -8,6 +8,7 @@
 #ifndef __SYSTEM_DLL_GLOBALS_H_
 #define __SYSTEM_DLL_GLOBALS_H_
 
+#define DEBUG
 #define DOSBOX_SUPPORT // Uncomment this for support and fixes for DOSBox emulator.
 
 #include <stdarg.h>            // Required for va_copy macro.
