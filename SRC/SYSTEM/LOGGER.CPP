@@ -5,20 +5,32 @@
     Basic file logger, full-standalone from the engine services.
 */
 
+#include <assert.h>
+#include <direct.h>
 #include <stdarg.h>
 #include <string.h>
+#include <sys/stat.h>
 #include <time.h>
 #include "../H/DIV2.H"
 #include "../H/SYSTEM/LOGGER.H"
 
 static const int LOG_MESSAGE_MAX_LENGTH = 256;
-static const char *LOG_MESSAGE_FORMAT = "%s | %s | %s\n";      // "2026-10-14 19:28:18 | INFO | Hello, world!"
-static const char *FILENAME_TIMESTAMP_TEMPLATE = "%Y%m%d.log"; // "20261014.log"
-static const int FILENAME_TIMESTAMP_LENGTH = 12;               // 8:3 MS-DOS filename format.
+static const char LOG_MESSAGE_FORMAT[] = "%s | %s | %s\n"; // "2026-10-14 19:28:18 | INFO | Hello, world!"
+
+static const char LOGS_FOLDERNAME[] = "LOGS";
+
+static const char FILENAME_TIMESTAMP_TEMPLATE[] = "%Y%m%d"; // 2026-10-14 -> "20261014"
+static const int FILENAME_TIMESTAMP_LENGTH = strlen(FILENAME_TIMESTAMP_TEMPLATE);
 static const size_t FILENAME_TIMESTAMP_STRING_SIZE = sizeof(char) * FILENAME_TIMESTAMP_LENGTH;
-static const char *LOG_TIMESTAMP_TEMPLATE = "%Y-%m-%d %H:%M:%S"; // "2026-10-14 19:28:18"
+
+static const char LOG_FILENAME_TEMPLATE[] = "%s\\%s.LOG"; // "LOGS\20261014.LOG"
+static const int LOG_FILENAME_LENGTH = strlen(LOG_FILENAME_TEMPLATE);
+static const size_t LOG_FILENAME_STRING_SIZE = sizeof(char) * LOG_FILENAME_LENGTH;
+
+static const char LOG_TIMESTAMP_TEMPLATE[] = "%Y-%m-%d %H:%M:%S"; // "2026-10-14 19:28:18"
 static const int LOG_TIMESTAMP_LENGTH = 19;
 static const size_t LOG_TIMESTAMP_STRING_SIZE = sizeof(char) * LOG_TIMESTAMP_LENGTH;
+
 static const char const *LOG_LEVELS[] = {"DEBUG", "INFO", "WARN", "ERROR", "CRITICAL"};
 
 static FILE *file;
@@ -35,11 +47,39 @@ static tm *getLocalDateTime()
     return currentDateTime;
 }
 
+static int checkIfLogFolderExists()
+{
+    struct stat *buf = (struct stat *)div_malloc(sizeof(struct stat));
+
+    stat(LOGS_FOLDERNAME, buf);
+
+    int folderExists = buf->st_mode == S_IFDIR;
+
+    div_free(buf);
+
+    return folderExists;
+}
+
+static void createLogsFolder()
+{
+    if (checkIfLogFolderExists())
+        assert(mkdir(LOGS_FOLDERNAME) == 0);
+}
+
 static char *getFilenameTimeStamp()
 {
-    char *filename = (char *)div_malloc(FILENAME_TIMESTAMP_STRING_SIZE);
+    char *timeStamp = (char *)div_malloc(FILENAME_TIMESTAMP_STRING_SIZE);
 
-    strftime(filename, FILENAME_TIMESTAMP_STRING_SIZE, FILENAME_TIMESTAMP_TEMPLATE, getLocalDateTime());
+    strftime(timeStamp, FILENAME_TIMESTAMP_STRING_SIZE, FILENAME_TIMESTAMP_TEMPLATE, getLocalDateTime());
+
+    return (char *)timeStamp;
+}
+
+static char *getLogFilename()
+{
+    char *filename = (char *)div_malloc(LOG_FILENAME_STRING_SIZE);
+
+    sprintf(filename, LOG_FILENAME_TEMPLATE, LOGS_FOLDERNAME, getFilenameTimeStamp());
 
     return (char *)filename;
 }
@@ -53,7 +93,9 @@ static char *getLogTimeStampNotAllocated()
 
 void openLogFile(const char *welcomeMessage)
 {
-    file = div_fopen(getFilenameTimeStamp(), "a");
+    createLogsFolder();
+
+    file = div_fopen(getLogFilename(), "a");
 
     fprintf(file, welcomeMessage);
 }
