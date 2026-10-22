@@ -9,7 +9,7 @@
 #define __SYSTEM_DLL_LOGGER_H_
 
 /// @brief Log levels.
-typedef enum LogLevel
+typedef enum E_LOG_LEVEL
 {
     /// @brief Debug log level.
     /// @remarks This level only log if DEBUG preprocessor is defined.
@@ -43,7 +43,7 @@ void closeLogFile(const char *closeMessage);
 /// @remarks The logged message contains a date time stamp at the start of line
 /// followed by the log level tag like as follow:
 /// "2026-10-14 19:28:18 | INFO | Hello, world!"
-char *logMessage(LogLevel level, const char *message, ...);
+char *logMessage(const E_LOG_LEVEL level, const char *message, ...);
 
 /// @brief Logs a formatted message (Variadic).
 /// @param level Debug level.
@@ -53,6 +53,6 @@ char *logMessage(LogLevel level, const char *message, ...);
 /// @remarks The logged message contains a date time stamp at the start of line
 /// followed by the log level tag like as follow:
 /// "2026-10-14 19:28:18 | INFO | Hello, world!"
-char *logMessageArgs(LogLevel level, const char *message, va_list args);
+char *logMessageArgs(const E_LOG_LEVEL level, const char *message, va_list args);
 
 #endif

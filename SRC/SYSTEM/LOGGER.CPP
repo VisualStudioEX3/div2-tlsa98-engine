@@ -106,7 +106,7 @@ void closeLogFile(const char *closeMessage)
     div_fclose(file);
 }
 
-char *logMessage(LogLevel level, const char *message, ...)
+char *logMessage(const E_LOG_LEVEL level, const char *message, ...)
 {
     va_list args;
 
@@ -117,7 +117,7 @@ char *logMessage(LogLevel level, const char *message, ...)
     return result;
 }
 
-char *logMessageArgs(LogLevel level, const char *message, va_list args)
+char *logMessageArgs(const E_LOG_LEVEL level, const char *message, va_list args)
 {
     va_list copyArgs;
 

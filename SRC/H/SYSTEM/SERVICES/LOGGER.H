@@ -18,7 +18,7 @@
 /// a message was logged.
 /// @param level Log level.
 /// @param message Log message.
-typedef void (*log_message_callback)(LogLevel, const string);
+typedef void (*log_message_callback)(const E_LOG_LEVEL, const string);
 
 typedef void (*file_logger_log_message)(const string, ...);
 typedef void (*file_logger_log_message_args)(const string, va_list);

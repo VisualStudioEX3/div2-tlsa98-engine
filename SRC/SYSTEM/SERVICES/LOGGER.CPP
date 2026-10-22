@@ -10,7 +10,7 @@
 
 static file_logger_service_t service;
 
-static void _logMessage(LogLevel level, const string message, ...)
+static void _logMessage(const E_LOG_LEVEL level, const string message, ...)
 {
     va_list args;
 
@@ -19,9 +19,9 @@ static void _logMessage(LogLevel level, const string message, ...)
     va_end(args);
 }
 
-static void _logMessageArgs(LogLevel level, const string message, va_list args)
+static void _logMessageArgs(const E_LOG_LEVEL level, const string message, va_list args)
 {
-    string message = logMessageArgs(level, message, args);
+    const string message = logMessageArgs(level, message, args);
 
     if (message)
     {
