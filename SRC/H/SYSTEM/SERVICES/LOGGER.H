@@ -9,6 +9,7 @@
 #define __SYSTEM_DLL_LOGGER_SERVICE_H_
 
 #include "../GLOBALS.H"
+#include "../LOGGER.H"
 
 /// @brief DateTime service id.
 #define LOGGER_SERVICE 1003

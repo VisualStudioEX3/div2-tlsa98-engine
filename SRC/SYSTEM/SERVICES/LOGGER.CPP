@@ -6,7 +6,6 @@
 */
 
 #include <assert.h>
-#include "../../H/SYSTEM/LOGGER.H"
 #include "../../H/SYSTEM/SERVICES/LOGGER.H"
 
 static file_logger_service_t service;
