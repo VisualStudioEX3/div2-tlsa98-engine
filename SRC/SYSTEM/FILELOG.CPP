@@ -98,9 +98,9 @@ void openLogFile(const char *welcomeMessage)
 {
     createLogsFolder();
 
-    file = div_fopen(getLogFilename(), "a");
+    file = fopen(getLogFilename(), "a");
 
-    fprintf(file, welcomeMessage);
+    fprintf(file, "%s\n", welcomeMessage);
 }
 
 void closeLogFile(const char *closeMessage)
