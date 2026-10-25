@@ -10,6 +10,16 @@
 
 static file_logger_service_t service;
 
+static void _logMessageArgs(const E_LOG_LEVEL level, const string message, va_list args)
+{
+    const string formattedMessage = logMessageArgs(level, message, args);
+
+    if (formattedMessage)
+    {
+        // TODO: Future event notification.
+    }
+}
+
 static void _logMessage(const E_LOG_LEVEL level, const string message, ...)
 {
     va_list args;
@@ -17,16 +27,6 @@ static void _logMessage(const E_LOG_LEVEL level, const string message, ...)
     va_start(args, message);
     _logMessageArgs(level, message, args);
     va_end(args);
-}
-
-static void _logMessageArgs(const E_LOG_LEVEL level, const string message, va_list args)
-{
-    const string message = logMessageArgs(level, message, args);
-
-    if (message)
-    {
-        // TODO: Future event notification.
-    }
 }
 
 static void logDebug(const string message, ...)
