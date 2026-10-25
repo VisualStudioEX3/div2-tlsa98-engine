@@ -9,7 +9,7 @@
 #define __SYSTEM_DLL_LOGGER_H_
 
 /// @brief Log levels.
-typedef enum E_LOG_LEVEL
+typedef enum
 {
     /// @brief Debug log level.
     /// @remarks This level only log if DEBUG preprocessor is defined.
@@ -22,7 +22,7 @@ typedef enum E_LOG_LEVEL
     LOG_ERROR,
     /// @brief Critical error log level.
     LOG_CRITICAL
-};
+} E_LOG_LEVEL;
 
 /// @brief Opens or creates the log file.
 /// @param welcomeMessage First message logged in the session. Neither the log
