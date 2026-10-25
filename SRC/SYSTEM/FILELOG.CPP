@@ -42,9 +42,9 @@ static char messageBuffer[LOG_MESSAGE_MAX_LENGTH];
 #define fclose(file) div_fclose(file)
 #define va_copy(dst, src) memcpy((void *)dst, (void *)src, sizeof(va_list))
 
-static tm *getLocalDateTime()
+static struct tm *getLocalDateTime()
 {
-    time_t currentTime = time(NULL);
+    const time_t currentTime = time(NULL);
     struct tm *currentDateTime = localtime(&currentTime);
 
     return currentDateTime;
