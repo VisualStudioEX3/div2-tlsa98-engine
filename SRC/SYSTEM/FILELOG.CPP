@@ -12,7 +12,7 @@
 #include <sys/stat.h>
 #include <time.h>
 #include "../H/DIV2.H"
-#include "../H/SYSTEM/LOGGER.H"
+#include "../H/SYSTEM/FILELOG.H"
 
 static const int LOG_MESSAGE_MAX_LENGTH = 256;
 static const char LOG_MESSAGE_FORMAT[] = "%s | %s | %s\n"; // "2026-10-14 19:28:18 | INFO | Hello, world!"

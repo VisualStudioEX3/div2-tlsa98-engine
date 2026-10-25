@@ -7,7 +7,7 @@
 
 #include "../H/DIV2.H"
 #include "../H/SYSTEM.H"
-#include "../H/SYSTEM/LOGGER.H"
+#include "../H/SYSTEM/FILELOG.H"
 #include "../H/SYSTEM/SERVICES.H"
 
 static int *div_getProgramMemoryArray()
