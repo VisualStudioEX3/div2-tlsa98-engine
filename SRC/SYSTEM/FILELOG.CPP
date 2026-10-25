@@ -20,7 +20,7 @@ static const char LOG_MESSAGE_FORMAT[] = "%s | %s | %s\n"; // "2026-10-14 19:28:
 static const char LOGS_FOLDERNAME[] = "LOGS";
 
 static const char FILENAME_TIMESTAMP_TEMPLATE[] = "%Y%m%d"; // 2026-10-14 -> "20261014"
-static const int FILENAME_TIMESTAMP_LENGTH = strlen(FILENAME_TIMESTAMP_TEMPLATE);
+static const int FILENAME_TIMESTAMP_LENGTH = strlen("20261014");
 static const size_t FILENAME_TIMESTAMP_STRING_SIZE = sizeof(char) * FILENAME_TIMESTAMP_LENGTH;
 
 static const char LOG_FILENAME_TEMPLATE[] = "%s\\%s.LOG"; // "LOGS\20261014.LOG"
