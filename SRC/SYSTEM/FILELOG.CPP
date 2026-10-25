@@ -37,7 +37,10 @@ static FILE *file;
 static char timeStamp[LOG_TIMESTAMP_LENGTH];
 static char messageBuffer[LOG_MESSAGE_MAX_LENGTH];
 
-#define va_copy(dst, src) memcpy((void *)dst, (void *)src, sizeof(va_list));
+#define malloc(size) div_malloc(size)
+#define fopen(filename, mode) div_fopen(filename, mode)
+#define fclose(file) div_fclose(file)
+#define va_copy(dst, src) memcpy((void *)dst, (void *)src, sizeof(va_list))
 
 static tm *getLocalDateTime()
 {
@@ -49,7 +52,7 @@ static tm *getLocalDateTime()
 
 static int checkIfLogFolderExists()
 {
-    struct stat *buf = (struct stat *)div_malloc(sizeof(struct stat));
+    struct stat *buf = (struct stat *)malloc(sizeof(struct stat));
 
     stat(LOGS_FOLDERNAME, buf);
 
@@ -68,7 +71,7 @@ static void createLogsFolder()
 
 static char *getFilenameTimeStamp()
 {
-    char *timeStamp = (char *)div_malloc(FILENAME_TIMESTAMP_STRING_SIZE);
+    char *timeStamp = (char *)malloc(FILENAME_TIMESTAMP_STRING_SIZE);
 
     strftime(timeStamp, FILENAME_TIMESTAMP_STRING_SIZE, FILENAME_TIMESTAMP_TEMPLATE, getLocalDateTime());
 
@@ -77,7 +80,7 @@ static char *getFilenameTimeStamp()
 
 static char *getLogFilename()
 {
-    char *filename = (char *)div_malloc(LOG_FILENAME_STRING_SIZE);
+    char *filename = (char *)malloc(LOG_FILENAME_STRING_SIZE);
 
     sprintf(filename, LOG_FILENAME_TEMPLATE, LOGS_FOLDERNAME, getFilenameTimeStamp());
 
@@ -103,7 +106,7 @@ void openLogFile(const char *welcomeMessage)
 void closeLogFile(const char *closeMessage)
 {
     fprintf(file, "%s\n", closeMessage);
-    div_fclose(file);
+    fclose(file);
 }
 
 char *logMessage(const E_LOG_LEVEL level, const char *message, ...)
