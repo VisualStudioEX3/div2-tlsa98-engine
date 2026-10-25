@@ -31,7 +31,7 @@ static const char LOG_TIMESTAMP_TEMPLATE[] = "%Y-%m-%d %H:%M:%S"; // "2026-10-14
 static const int LOG_TIMESTAMP_LENGTH = 19;
 static const size_t LOG_TIMESTAMP_STRING_SIZE = sizeof(char) * LOG_TIMESTAMP_LENGTH;
 
-static const char const *LOG_LEVELS[] = {"DEBUG", "INFO", "WARN", "ERROR", "CRITICAL"};
+static const char *LOG_LEVELS[] = {"DEBUG", "INFO", "WARN", "ERROR", "CRITICAL"};
 
 static FILE *file;
 static char timeStamp[LOG_TIMESTAMP_LENGTH];
