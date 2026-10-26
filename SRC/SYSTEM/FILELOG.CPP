@@ -38,6 +38,7 @@ static char timeStamp[LOG_TIMESTAMP_LENGTH];
 static char messageBuffer[LOG_MESSAGE_MAX_LENGTH];
 
 #define malloc(size) div_malloc(size)
+#define free(ptr) div_free(ptr)
 #define fopen(filename, mode) div_fopen(filename, mode)
 #define fclose(file) div_fclose(file)
 #define va_copy(dst, src) memcpy((void *)dst, (void *)src, sizeof(va_list))
@@ -58,7 +59,7 @@ static int checkIfLogFolderExists()
 
     int folderExists = buf->st_mode == S_IFDIR;
 
-    div_free(buf);
+    free(buf);
 
     return folderExists;
 }
