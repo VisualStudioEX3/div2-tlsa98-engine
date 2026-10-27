@@ -24,7 +24,7 @@ static const int FILENAME_TIMESTAMP_LENGTH = strlen("20261014");
 static const size_t FILENAME_TIMESTAMP_STRING_SIZE = sizeof(char) * FILENAME_TIMESTAMP_LENGTH;
 
 static const char LOG_FILENAME_TEMPLATE[] = "%s\\%s.LOG"; // "LOGS\20261014.LOG"
-static const int LOG_FILENAME_LENGTH = strlen(LOG_FILENAME_TEMPLATE);
+static const int LOG_FILENAME_LENGTH = strlen("LOGS\\20261014.LOG");
 static const size_t LOG_FILENAME_STRING_SIZE = sizeof(char) * LOG_FILENAME_LENGTH;
 
 static const char LOG_TIMESTAMP_TEMPLATE[] = "%Y-%m-%d %H:%M:%S"; // "2026-10-14 19:28:18"
