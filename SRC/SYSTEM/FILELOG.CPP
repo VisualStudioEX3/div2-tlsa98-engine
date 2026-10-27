@@ -66,7 +66,7 @@ static int checkIfLogFolderExists()
 
 static void createLogsFolder()
 {
-    if (checkIfLogFolderExists())
+    if (!checkIfLogFolderExists())
         assert(mkdir(LOGS_FOLDERNAME) == 0);
 }
 
