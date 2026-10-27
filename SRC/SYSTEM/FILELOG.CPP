@@ -57,7 +57,7 @@ static int checkIfLogFolderExists()
 
     stat(LOGS_FOLDERNAME, buf);
 
-    int folderExists = buf->st_mode == S_IFDIR;
+    int folderExists = S_ISDIR(buf->st_mode);
 
     free(buf);
 
