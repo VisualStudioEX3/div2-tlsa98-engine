@@ -124,7 +124,7 @@ char *logMessageArgs(const E_LOG_LEVEL level, const char *message, va_list args)
 {
     va_list copyArgs;
 
-#if !DEBUG
+#ifndef DEBUG
     if (level == LOG_DEBUG)
         return NULL;
 #endif
