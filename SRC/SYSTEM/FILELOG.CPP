@@ -16,25 +16,12 @@
 
 static const int LOG_MESSAGE_MAX_LENGTH = 256;
 static const char LOG_MESSAGE_FORMAT[] = "%s | %s | %s\n"; // "2026-10-14 19:28:18 | INFO | Hello, world!"
-
 static const char LOGS_FOLDERNAME[] = "LOGS";
-
-static const char FILENAME_TIMESTAMP_TEMPLATE[] = "%Y%m%d"; // 2026-10-14 -> "20261014"
-static const int FILENAME_TIMESTAMP_LENGTH = strlen("20261014");
-static const size_t FILENAME_TIMESTAMP_STRING_SIZE = sizeof(char) * FILENAME_TIMESTAMP_LENGTH;
-
-static const char LOG_FILENAME_TEMPLATE[] = "%s\\%s.LOG"; // "LOGS\20261014.LOG"
-static const int LOG_FILENAME_LENGTH = strlen("LOGS\\20261014.LOG");
-static const size_t LOG_FILENAME_STRING_SIZE = sizeof(char) * LOG_FILENAME_LENGTH;
-
-static const char LOG_TIMESTAMP_TEMPLATE[] = "%Y-%m-%d %H:%M:%S"; // "2026-10-14 19:28:18"
-static const int LOG_TIMESTAMP_LENGTH = 19;
-static const size_t LOG_TIMESTAMP_STRING_SIZE = sizeof(char) * LOG_TIMESTAMP_LENGTH;
-
+static const size_t LOG_TIMESTAMP_LENGTH = 20; // "2026-10-14 19:28:18"
 static const char *LOG_LEVELS[] = {"DEBUG", "INFO", "WARN", "ERROR", "CRITICAL"};
 
 static FILE *file;
-static char timeStamp[LOG_TIMESTAMP_LENGTH];
+static char logTimeStamp[LOG_TIMESTAMP_LENGTH];
 static char messageBuffer[LOG_MESSAGE_MAX_LENGTH];
 
 #define malloc(size) div_malloc(size)
@@ -57,7 +44,7 @@ static int checkIfLogFolderExists()
 
     stat(LOGS_FOLDERNAME, buf);
 
-    int folderExists = S_ISDIR(buf->st_mode);
+    const int folderExists = S_ISDIR(buf->st_mode);
 
     free(buf);
 
@@ -72,35 +59,47 @@ static void createLogsFolder()
 
 static char *getFilenameTimeStamp()
 {
-    char *timeStamp = (char *)malloc(FILENAME_TIMESTAMP_STRING_SIZE);
+    const size_t size = sizeof(char) * strlen("20261014") + 1; // 2026-10-14 -> "20261014"
 
-    strftime(timeStamp, FILENAME_TIMESTAMP_STRING_SIZE, FILENAME_TIMESTAMP_TEMPLATE, getLocalDateTime());
+    char *timeStamp = (char *)malloc(size);
+    struct tm *dateTime = getLocalDateTime();
+
+    strftime(timeStamp, size, "%Y%m%d", dateTime);
 
     return (char *)timeStamp;
 }
 
 static char *getLogFilename()
 {
-    char *filename = (char *)malloc(LOG_FILENAME_STRING_SIZE);
+    const size_t size = sizeof(char) * strlen("LOGS\\20261014.LOG") + 1;
 
-    sprintf(filename, LOG_FILENAME_TEMPLATE, LOGS_FOLDERNAME, getFilenameTimeStamp());
+    char *filename = (char *)malloc(size);
+    char *timeStamp = getFilenameTimeStamp();
+
+    sprintf(filename, "%s\\%s.LOG", LOGS_FOLDERNAME, timeStamp);
+    free(timeStamp);
 
     return (char *)filename;
 }
 
 static char *getLogTimeStampNotAllocated()
 {
-    strftime(timeStamp, LOG_TIMESTAMP_STRING_SIZE, LOG_TIMESTAMP_TEMPLATE, getLocalDateTime());
+    const size_t size = sizeof(char) * strlen("2026-10-14 19:28:18") + 1;
 
-    return (char *)timeStamp;
+    struct tm *dateTime = getLocalDateTime();
+
+    strftime(logTimeStamp, LOG_TIMESTAMP_LENGTH, "%Y-%m-%d %H:%M:%S", dateTime); // "2026-10-14 19:28:18"
+
+    return (char *)logTimeStamp;
 }
 
 void openLogFile(const char *welcomeMessage)
 {
+    char *filename = getLogFilename();
+
     createLogsFolder();
-
-    file = fopen(getLogFilename(), "a");
-
+    file = fopen(filename, "a");
+    free(filename);
     fprintf(file, "%s\n", welcomeMessage);
 }
 
