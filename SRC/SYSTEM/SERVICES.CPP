@@ -9,9 +9,15 @@
 #include "../H/SYSTEM/SERVICES.H"
 #include "../H/SYSTEM/LIST.H"
 
-const int MAX_SERVICES = 64;
+static const int MAX_SERVICES = 64;
 
-list_t *serviceContainer;
+typedef struct
+{
+    service_id_t id;
+    const void *service;
+} service_t;
+
+static list_t *serviceContainer;
 
 static bool serviceIdComparer(void *item, va_list args)
 {
@@ -31,9 +37,9 @@ static int getServiceProviderCount()
     return serviceContainer->count;
 }
 
-static const void *findService(service_id_t id)
+static const void *findService(const service_id_t id)
 {
-    void *servicePointer = NULL;
+    const void *servicePointer = NULL;
     service_t *item = (service_t *)findListItem(serviceContainer, serviceIdComparer, id);
 
     if (item)
@@ -43,7 +49,7 @@ static const void *findService(service_id_t id)
     return servicePointer;
 }
 
-static int registerService(service_id_t id, void *service)
+static int registerService(const service_id_t id, const void *service)
 {
     if (isListFull(serviceContainer))
         return RESULT_ERROR_SERVICE_CONTAINER_IS_FULL;
