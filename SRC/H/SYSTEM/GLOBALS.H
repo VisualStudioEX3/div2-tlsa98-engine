@@ -16,7 +16,7 @@
 #include "../SYSTEM/DIV2API.H" // DIV Games Studio 2 API abstraction.
 
 /// @brief NULL constant value.
-#define NULL 0
+#define NULL (void *)0
 
 /// @brief True constant value.
 /// @remarks In DIV Games Studio, all odd values are considered as true value.
