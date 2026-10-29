@@ -74,28 +74,6 @@ typedef unsigned long ulong;
 /// received as integer values as a position in DIV managed memory of the parameter is stored.
 typedef char *string;
 
-/// @brief Date and time value.
-typedef struct
-{
-    /// @brief Seconds after the minute (from 0).
-    int seconds;
-
-    /// @brief Minutes after the hour (from 0).
-    int minutes;
-
-    /// @brief Hour of the day (from 0).
-    int hour;
-
-    /// @brief Day of the month (from 1).
-    int day;
-
-    /// @brief Month of the year (from 1).
-    int month;
-
-    /// @brief Year (from 1900).
-    int year;
-} datetime_t;
-
 /// @brief Semantic version.
 /// @remarks Used to identify an API changes and feature evolution, and to control compatibility level of third party
 /// libraries that interacts with the API.

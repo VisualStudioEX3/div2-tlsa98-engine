@@ -13,6 +13,28 @@
 /// @brief DateTime service id.
 #define DATETIME_SERVICE 1002
 
+/// @brief Date and time value.
+typedef struct
+{
+    /// @brief Seconds after the minute (from 0).
+    int seconds;
+
+    /// @brief Minutes after the hour (from 0).
+    int minutes;
+
+    /// @brief Hour of the day (from 0).
+    int hour;
+
+    /// @brief Day of the month (from 1).
+    int day;
+
+    /// @brief Month of the year (from 1).
+    int month;
+
+    /// @brief Year (from 1900).
+    int year;
+} datetime_t;
+
 typedef ulong (*datetime_getTickCount_f)();
 typedef datetime_t *(*datetime_getDateTime_f)();
 typedef void (*datetime_getDateTimeNotAlloc_f)(datetime_t *);
@@ -21,21 +43,31 @@ typedef string (*datetime_dateTimeToString_f)(const datetime_t *);
 /// @brief DateTime service interface.
 typedef struct
 {
-    /// @brief Retrieves the number of milliseconds that have elapsed since the system was started.
-    /// @return Returns the number of milliseconds that have elapsed since the system was started.
+    /**
+     * @brief Retrieves the number of milliseconds that have elapsed since the
+     * system was started.
+     * @return Returns the number of milliseconds that have elapsed since the
+     * system was started.
+     */
     datetime_getTickCount_f getTickCount;
 
-    /// @brief Get current date and time.
-    /// @return Returns the current system date and time.
+    /**
+     * @brief Get current date and time.
+     * @return Returns the current system date and time.
+     */
     datetime_getDateTime_f getDateTime;
 
-    /// @brief Get current date and time.
-    /// @param dateTime Pointer to variable to store the date and time values.
+    /**
+     * @brief Get current date and time.
+     * @param dateTime Pointer to variable to store the date and time values.
+     */
     datetime_getDateTimeNotAlloc_f getDateTimeNotAlloc;
 
-    /// @brief Converts date time value to string representation.
-    /// @param dateTime Pointer to date time value to converts.
-    /// @return Returns the string rerpresentation of the date time value.
+    /**
+     * @brief Converts date time value to string representation.
+     * @param dateTime Pointer to date time value to converts.
+     * @return Returns the string rerpresentation of the date time value.
+     */
     datetime_dateTimeToString_f dateTimeToString;
 } datetime_service_t;
 
