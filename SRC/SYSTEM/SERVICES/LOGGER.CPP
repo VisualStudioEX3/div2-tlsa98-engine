@@ -2,7 +2,7 @@
 //! @copyright TLSA98 Engine (C) VisualStudioEX3, José Miguel Sánchez Fernández - 2022, 2026
 //! @copyright DIV Games Studio 2 (C) Hammer Technologies, Daniel Navarro Medrano - 1998, 1999
 /*!
-    File logger service.
+    Logger service.
 */
 
 #include <assert.h>
@@ -106,7 +106,7 @@ static void addListener(const logger_message_callback_f listener)
 
 void registerLoggerService()
 {
-    logMessage(LOG_DEBUG, "Initializing file logger service...");
+    logMessage(LOG_DEBUG, "Initializing logger service...");
 
     service.debug = logDebug;
     service.debugArgs = logDebugArgs;
@@ -124,5 +124,5 @@ void registerLoggerService()
 
     assert(result == RESULT_OK);
 
-    logMessage(LOG_DEBUG, "File logger service initialized.");
+    logMessage(LOG_DEBUG, "Logger service initialized.");
 }
