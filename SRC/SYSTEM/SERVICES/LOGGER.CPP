@@ -8,7 +8,7 @@
 #include <assert.h>
 #include "../../H/SYSTEM/SERVICES/LOGGER.H"
 
-static file_logger_service_t service;
+static logger_service_t service;
 
 static void _logMessageArgs(const E_LOG_LEVEL level, const string message, va_list args)
 {
@@ -99,7 +99,7 @@ static void logCriticalArgs(const string message, va_list args)
     _logMessageArgs(LOG_CRITICAL, message, args);
 }
 
-static void addListener(const log_message_callback_f listener)
+static void addListener(const logger_message_callback_f listener)
 {
     // TODO: Implement array or list to store the function pointers for the listeners.
 }

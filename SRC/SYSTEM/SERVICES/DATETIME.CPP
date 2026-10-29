@@ -15,7 +15,7 @@ static const int CLOCKS_PER_MILLISECONDS = CLOCKS_PER_SEC / 1000;
 
 static datetime_service_t service;
 static mem_service_t *memoryService;
-static file_logger_service_t *logger;
+static logger_service_t *logger;
 
 static void tm_to_datetime_t(const tm *src, datetime_t *dest)
 {
@@ -77,7 +77,7 @@ static string dateTimeToString(const datetime_t *dateTime)
 
 void registerDateTimeService()
 {
-    logger = (file_logger_service_t *)getService(LOGGER_SERVICE);
+    logger = (logger_service_t *)getService(LOGGER_SERVICE);
     memoryService = (mem_service_t *)getService(MEM_SERVICE);
 
     logger->debug("Initializing DateTime service...");

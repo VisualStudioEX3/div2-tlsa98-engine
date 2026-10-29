@@ -10,7 +10,7 @@
 #include "../../H/SYSTEM/SERVICES/MEM.H"
 
 static mem_service_t service;
-static file_logger_service_t *logger;
+static logger_service_t *logger;
 
 static void memoryClear(void *ptr, size_t size)
 {
@@ -60,7 +60,7 @@ static bool memoryEquals(const void *ptr1, const void *ptr2, size_t size)
 
 void registerMemService()
 {
-    logger = (file_logger_service_t *)getService(LOGGER_SERVICE);
+    logger = (logger_service_t *)getService(LOGGER_SERVICE);
 
     logger->debug("Initializing Memory service...");
 

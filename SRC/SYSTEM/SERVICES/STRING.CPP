@@ -13,7 +13,7 @@
 
 static string_service_t service;
 static mem_service_t *memoryService;
-static file_logger_service_t *logger;
+static logger_service_t *logger;
 
 static string stringCreate(int chars)
 {
@@ -167,7 +167,7 @@ static string stringJoinArgs(const string separator, int count, va_list args)
 
 void registerStringService()
 {
-    logger = (file_logger_service_t *)getService(LOGGER_SERVICE);
+    logger = (logger_service_t *)getService(LOGGER_SERVICE);
     memoryService = (mem_service_t *)getService(MEM_SERVICE);
 
     logger->debug("Initializing String service...");

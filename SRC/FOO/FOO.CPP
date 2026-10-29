@@ -15,7 +15,7 @@ static const int TLSA_ENGINE_MINOR_VERSION = 1;
 static const string HELLO_WORLD_MESSAGE = "Hello, World!";
 
 static foo_service_t service;
-static file_logger_service_t *logger;
+static logger_service_t *logger;
 
 static const string getHelloWorldMessage()
 {
@@ -60,7 +60,7 @@ void __export divmain(COMMON_PARAMS)
 {
     GLOBAL_IMPORT(); // Required to get TLSA98_ENGINE_ADDRESS pointer address from _net struct.
     engine = (tlsa98_engine_t *)TLSA98_ENGINE_ADDRESS;
-    logger = (file_logger_service_t *)getService(LOGGER_SERVICE);
+    logger = (logger_service_t *)getService(LOGGER_SERVICE);
 
     logger->debug("Initializing FOO.DLL...");
 
