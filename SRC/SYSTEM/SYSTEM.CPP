@@ -72,7 +72,7 @@ static void initializeEngineInterface()
 
     engine = (tlsa98_engine_t *)TLSA98_ENGINE_ADDRESS;
 
-    memset(engine, NULL, sizeof(tlsa98_engine_t));
+    memset(engine, 0, sizeof(tlsa98_engine_t));
 
     setEngineSignature();
     setEngineVersion();

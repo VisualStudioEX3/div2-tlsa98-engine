@@ -14,7 +14,7 @@ static logger_service_t *logger;
 
 static void memoryClear(void *ptr, size_t size)
 {
-    memset(ptr, NULL, size);
+    memset(ptr, 0, size);
 }
 
 // We can't use standard calloc, so we implemented own version.

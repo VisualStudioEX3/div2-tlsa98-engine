@@ -16,7 +16,7 @@
 #include "../SYSTEM/DIV2API.H" // DIV Games Studio 2 API abstraction.
 #include "SERVICES.H"
 
-/// @brief NULL constant value.
+/// @brief NULL pointer constant value.
 #define NULL (void *)0
 
 /// @brief True constant value.
