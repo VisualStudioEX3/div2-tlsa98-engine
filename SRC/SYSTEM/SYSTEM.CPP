@@ -34,7 +34,7 @@ static void setEngineSignature()
 {
     engine->signature = TLSA98_ENGINE_SIGNATURE;
 
-    logMessage(LOG_INFO, "Engine signature: %i (0x%x)", engine->signature, engine->signature);
+    logMessage(LOG_INFO, "Engine signature: 0x%x", engine->signature);
 }
 
 static void setEngineVersion()
@@ -46,6 +46,7 @@ static void setEngineVersion()
         version->major = TLSA98_ENGINE_VERSION_MAJOR;
         version->minor = TLSA98_ENGINE_VERSION_MINOR;
         version->revision = TLSA98_ENGINE_VERSION_REVISION;
+        version->reserved = 0;
 
         logMessage(LOG_INFO, "Engine version: %i.%i.%i", version->major, version->minor, version->revision);
     }
