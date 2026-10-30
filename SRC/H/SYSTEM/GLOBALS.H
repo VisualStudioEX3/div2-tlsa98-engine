@@ -139,20 +139,20 @@ typedef struct
      * @remarks Use it to check if the pointer address this interface and avoid
      * errors if the engine is not properly initialized.
      */
-    int signature;
+    const int signature;
 
     /**
      * @brief Engine version.
      * @remarks Identifies the engine version. Use it to ensure if your code is
      * compatible with the engine version.
      */
-    version_t *version;
+    const version_t *version;
 
     /// @brief DIV Games Studio 2 API abstraction.
-    div2_api_t *div2API;
+    const div2_api_t *div2API;
 
     /// @brief Engine services provider.
-    service_provider_t *services;
+    const service_provider_t *services;
 } tlsa98_engine_t;
 
 /**

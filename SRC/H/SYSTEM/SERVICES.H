@@ -35,29 +35,32 @@ typedef struct
      * already registered with this id, [RESULT_ERROR_SERVICE_CONTAINER_IS_FULL]
      * if the service container is full, [RESULT_OK] otherwise.
      */
-    register_service_f registerService;
+    const register_service_f registerService;
 
     /**
      * @brief Gets the service instance.
      * @param id The service id.
      * @return Returns the pointer to the service, [NULL] if the id is not found.
      */
-    get_service_f getService;
+    const get_service_f getService;
 
     /**
      * @brief Gets the number of registered services.
      * @return Returns the number of registered services in the container.
      */
-    get_registered_services_count getCount;
+    const get_registered_services_count getCount;
 
     /**
      * @brief Gets the max number of services that service provider can register.
      * @return Returns the capacity of the service provider.
      */
-    get_service_provider_capacity_f getCapacity;
+    const get_service_provider_capacity_f getCapacity;
 } service_provider_t;
 
-/// @brief Initializes the service provider.
-void initializeServiceProvider();
+/**
+ * @brief Initializes the service provider.
+ * @returns The service provider instance.
+ */
+service_provider_t *initializeServiceProvider();
 
 #endif

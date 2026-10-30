@@ -13,6 +13,14 @@ static const int MAX_SERVICES = 64;
 
 typedef struct
 {
+    register_service_f registerService;
+    get_service_f getService;
+    get_registered_services_count getCount;
+    get_service_provider_capacity_f getCapacity;
+} _service_provider_t;
+
+typedef struct
+{
     service_id_t id;
     const void *service;
 } service_t;
@@ -67,19 +75,19 @@ static int registerService(const service_id_t id, const void *service)
     return RESULT_OK;
 }
 
-void initializeServiceProvider()
+service_provider_t *initializeServiceProvider()
 {
     // Create and initialize the service container:
     serviceContainer = createList(MAX_SERVICES, sizeof(service_t));
 
     // Create and initialize the service provider:
-    engine->services = (service_provider_t *)malloc(sizeof(service_provider_t));
+    _service_provider_t *provider = (_service_provider_t *)malloc(sizeof(_service_provider_t));
     {
-        service_provider_t *services = engine->services;
-
-        services->getCapacity = getServiceProviderCapacity;
-        services->getCount = getServiceProviderCount;
-        services->getService = findService;
-        services->registerService = registerService;
+        provider->getCapacity = getServiceProviderCapacity;
+        provider->getCount = getServiceProviderCount;
+        provider->getService = findService;
+        provider->registerService = registerService;
     }
+
+    return (service_provider_t *)provider;
 }

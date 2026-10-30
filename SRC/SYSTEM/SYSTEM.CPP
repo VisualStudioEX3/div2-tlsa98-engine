@@ -10,38 +10,28 @@
 #include "../H/SYSTEM/FILELOG.H"
 #include "../H/SYSTEM/SERVICES.H"
 
-static int *div_getProgramMemoryArray()
+typedef struct
 {
-    return mem;
-}
+    int signature;
+    version_t *version;
+    div2_api_t *div2API;
+    service_provider_t *services;
+} _tlsa98_engine_t;
 
-static int div_getParameterAsInteger()
-{
-    return getparm();
-}
-
-static string div_getParameterAsString()
-{
-    return (char *)(&mem[text_offset + div_getParameterAsInteger()]);
-}
-
-static void div_returnValue(int value)
-{
-    retval(value);
-}
+static _tlsa98_engine_t *_engine;
 
 static void setEngineSignature()
 {
-    engine->signature = TLSA98_ENGINE_SIGNATURE;
+    _engine->signature = TLSA98_ENGINE_SIGNATURE;
 
-    logMessage(LOG_INFO, "Engine signature: 0x%x", engine->signature);
+    logMessage(LOG_INFO, "Engine signature: 0x%x", _engine->signature);
 }
 
 static void setEngineVersion()
 {
-    engine->version = (version_t *)div_malloc(sizeof(version_t));
+    _engine->version = (version_t *)div_malloc(sizeof(version_t));
     {
-        version_t *version = engine->version;
+        version_t *version = _engine->version;
 
         version->major = TLSA98_ENGINE_VERSION_MAJOR;
         version->minor = TLSA98_ENGINE_VERSION_MINOR;
@@ -52,32 +42,22 @@ static void setEngineVersion()
     }
 }
 
-static void registerDIV2API()
-{
-    engine->div2API = (div2_api_t *)div_malloc(sizeof(div2_api_t));
-
-    engine->div2API->getProgramMemory = div_getProgramMemoryArray;
-    engine->div2API->allocateMemory = div_malloc;
-    engine->div2API->freeMemory = div_free;
-    engine->div2API->getParameterAsInteger = div_getParameterAsInteger;
-    engine->div2API->getParameterAsString = div_getParameterAsString;
-    engine->div2API->setReturnValue = div_returnValue;
-    engine->div2API->openFile = div_fopen;
-    engine->div2API->closeFile = div_fclose;
-}
-
 static void initializeEngineInterface()
 {
     logMessage(LOG_DEBUG, "Initializing engine interface...");
 
-    engine = (tlsa98_engine_t *)TLSA98_ENGINE_ADDRESS;
+    _engine = (_tlsa98_engine_t *)TLSA98_ENGINE_ADDRESS;
+    {
+        memset(_engine, NULL, sizeof(_tlsa98_engine_t));
 
-    memset(engine, 0, sizeof(tlsa98_engine_t));
+        setEngineSignature();
+        setEngineVersion();
 
-    setEngineSignature();
-    setEngineVersion();
-    registerDIV2API();
-    initializeServiceProvider();
+        _engine->div2API = registerDIV2API();
+        _engine->services = initializeServiceProvider();
+
+        engine = (const tlsa98_engine_t *)_engine;
+    }
 
     logMessage(LOG_DEBUG, "Engine interface initialized.");
 }
