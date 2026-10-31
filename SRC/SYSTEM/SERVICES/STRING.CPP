@@ -11,18 +11,37 @@
 #include "../../H/SYSTEM/SERVICES/MEM.H"
 #include "../../H/SYSTEM/SERVICES/STRING.H"
 
-static string_service_t service;
+typedef struct
+{
+    string_create_f create;
+    string_resize_f resize;
+    string_clear_f clear;
+    string_len_f length;
+    string_all_f all;
+    string_any_f any;
+    string_empty_f isEmpty;
+    string_equals_f equals;
+    string_copy_f copy;
+    string_to_lower_f toLower;
+    string_to_upper_f toUpper;
+    string_format_f format;
+    string_format_args_f formatArgs;
+    string_join_f join;
+    string_join_args_f joinArgs;
+} _string_service_t;
+
+static _string_service_t service;
 static mem_service_t *memoryService;
 static logger_service_t *logger;
 
-static string stringCreate(int chars)
+static string stringCreate(const int chars)
 {
-    return (string)memoryService->calloc(++chars); // Add extra char for null terminated char.
+    return (string)memoryService->clearAllocate(chars + 1); // Add extra char for null terminated char.
 }
 
-static string stringResize(string str, int chars)
+static string stringResize(string str, const int chars)
 {
-    return (string)memoryService->realloc(str, ++chars, true); // Add extra char for null terminated char.
+    return (string)memoryService->reAllocate(str, chars + 1, true); // Add extra char for null terminated char.
 }
 
 static void stringClear(string str)
@@ -113,7 +132,7 @@ static bool stringFormatArgs(string str, const string format, va_list args)
     return vsprintf(str, format, copyArgs) > 0;
 }
 
-static string stringJoin(const string separator, int count, ...)
+static string stringJoin(const string separator, const int count, ...)
 {
     va_list args;
 
@@ -126,7 +145,7 @@ static string stringJoin(const string separator, int count, ...)
     return str;
 }
 
-static int stringGetTotalCharsFromArgumentList(int count, va_list args)
+static int stringGetTotalCharsFromArgumentList(const int count, va_list args)
 {
     int chars = 0;
     va_list copyArgs;
@@ -143,7 +162,7 @@ static int stringGetTotalCharsFromArgumentList(int count, va_list args)
     return chars;
 }
 
-static string stringJoinArgs(const string separator, int count, va_list args)
+static string stringJoinArgs(const string separator, const int count, va_list args)
 {
     va_list copyArgs;
 
@@ -188,9 +207,7 @@ void registerStringService()
     service.join = stringJoin;
     service.joinArgs = stringJoinArgs;
 
-    int result = engine->services->registerService(STRING_SERVICE, &service);
-
-    assert(result == RESULT_OK);
+    assert(addService(STRING_SERVICE, &service) == RESULT_OK);
 
     logger->debug("String service initialized.");
 }
