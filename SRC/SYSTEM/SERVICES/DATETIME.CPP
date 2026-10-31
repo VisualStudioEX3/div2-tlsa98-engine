@@ -13,11 +13,29 @@
 
 static const int CLOCKS_PER_MILLISECONDS = CLOCKS_PER_SEC / 1000;
 
-static datetime_service_t service;
+typedef struct
+{
+    int seconds;
+    int minutes;
+    int hour;
+    int day;
+    int month;
+    int year;
+} _datetime_t;
+
+typedef struct
+{
+    datetime_get_tick_count_f getTickCount;
+    datetime_get_datetime_f getDateTime;
+    datetime_get_datetime_not_alloc_f getDateTimeNotAlloc;
+    datetime_datetime_to_string_f dateTimeToString;
+} _datetime_service_t;
+
+static _datetime_service_t service;
 static mem_service_t *memoryService;
 static logger_service_t *logger;
 
-static void tm_to_datetime_t(const tm *src, datetime_t *dest)
+static void tm_to_datetime_t(const struct tm *src, _datetime_t *dest)
 {
     dest->seconds = src->tm_sec;
     dest->minutes = src->tm_min;
@@ -27,9 +45,9 @@ static void tm_to_datetime_t(const tm *src, datetime_t *dest)
     dest->year = src->tm_year + 1900; // Fix year value.
 }
 
-static time_t datetime_t_to_tm(const datetime_t *src, tm *dest)
+static time_t datetime_t_to_tm(const _datetime_t *src, struct tm *dest)
 {
-    memoryService->clear(dest, sizeof(tm));
+    memoryService->clear(dest, sizeof(struct tm));
 
     dest->tm_sec = src->seconds;
     dest->tm_min = src->minutes;
@@ -50,12 +68,10 @@ static ulong getTickCount()
 
 static void getDateTimeNotAlloc(datetime_t *dateTime)
 {
-    time_t now;
-    struct tm *dt;
+    const time_t currentTime = time(NULL);
+    const struct tm *currentDateTime = localtime(&currentTime);
 
-    time(&now);
-    dt = localtime(&now);
-    tm_to_datetime_t(dt, dateTime);
+    tm_to_datetime_t(currentDateTime, (_datetime_t *)dateTime);
 }
 
 static datetime_t *getDateTime()
@@ -70,7 +86,7 @@ static datetime_t *getDateTime()
 static string dateTimeToString(const datetime_t *dateTime)
 {
     struct tm dt;
-    time_t t = datetime_t_to_tm(dateTime, &dt);
+    time_t t = datetime_t_to_tm((_datetime_t *)dateTime, &dt);
 
     return ctime(&t);
 }
@@ -87,9 +103,7 @@ void registerDateTimeService()
     service.getDateTimeNotAlloc = getDateTimeNotAlloc;
     service.dateTimeToString = dateTimeToString;
 
-    int result = engine->services->registerService(DATETIME_SERVICE, &service);
-
-    assert(result == RESULT_OK);
+    assert(addService(DATETIME_SERVICE, &service) == RESULT_OK);
 
     logger->debug("DateTime service initialized.");
 }
