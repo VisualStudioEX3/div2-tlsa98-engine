@@ -8,7 +8,22 @@
 #include <assert.h>
 #include "../../H/SYSTEM/SERVICES/LOGGER.H"
 
-static logger_service_t service;
+typedef struct
+{
+    logger_log_message_f debug;
+    logger_log_message_args_f debugArgs;
+    logger_log_message_f info;
+    logger_log_message_args_f infoArgs;
+    logger_log_message_f warning;
+    logger_log_message_args_f warningArgs;
+    logger_log_message_f error;
+    logger_log_message_args_f errorArgs;
+    logger_log_message_f critical;
+    logger_log_message_args_f criticalArgs;
+    logger_add_listener_f addListener;
+} _logger_service_t;
+
+static _logger_service_t service;
 
 static void _logMessageArgs(const E_LOG_LEVEL level, const string message, va_list args)
 {
@@ -120,9 +135,7 @@ void registerLoggerService()
     service.criticalArgs = logCriticalArgs;
     service.addListener = addListener;
 
-    int result = engine->services->registerService(LOGGER_SERVICE, &service);
-
-    assert(result == RESULT_OK);
+    assert(addService(LOGGER_SERVICE, &service) == RESULT_OK);
 
     logMessage(LOG_DEBUG, "Logger service initialized.");
 }

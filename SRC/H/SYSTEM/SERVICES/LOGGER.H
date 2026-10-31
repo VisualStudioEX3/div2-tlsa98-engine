@@ -45,7 +45,7 @@ typedef struct
      * "2026-10-14 19:28:18 | DEBUG | Hello, world!"
      * The message only log if the DEBUG preprocessor is defined.
      */
-    logger_log_message_f debug;
+    const logger_log_message_f debug;
 
     /**
      * @brief Logs a debug message (Variadic).
@@ -56,7 +56,7 @@ typedef struct
      * "2026-10-14 19:28:18 | DEBUG | Hello, world!"
      * The message only log if the DEBUG preprocessor is defined.
      */
-    logger_log_message_args_f debugArgs;
+    const logger_log_message_args_f debugArgs;
 
     /**
      * @brief Logs an information message.
@@ -66,7 +66,7 @@ typedef struct
      * followed by the log level tag like as follow:
      * "2026-10-14 19:28:18 | INFO | Hello, world!"
      */
-    logger_log_message_f info;
+    const logger_log_message_f info;
 
     /**
      * @brief Logs an information message (Variadic).
@@ -76,7 +76,7 @@ typedef struct
      * followed by the log level tag like as follow:
      * "2026-10-14 19:28:18 | INFO | Hello, world!"
      */
-    logger_log_message_args_f infoArgs;
+    const logger_log_message_args_f infoArgs;
 
     /**
      * @brief Logs a warning message.
@@ -86,7 +86,7 @@ typedef struct
      * followed by the log level tag like as follow:
      * "2026-10-14 19:28:18 | WARN | Hello, world!"
      */
-    logger_log_message_f warning;
+    const logger_log_message_f warning;
 
     /**
      * @brief Logs a warning message (Variadic).
@@ -96,7 +96,7 @@ typedef struct
      * followed by the log level tag like as follow:
      * "2026-10-14 19:28:18 | WARN | Hello, world!"
      */
-    logger_log_message_args_f warningArgs;
+    const logger_log_message_args_f warningArgs;
 
     /**
      * @brief Logs an error message.
@@ -106,7 +106,7 @@ typedef struct
      * followed by the log level tag like as follow:
      * "2026-10-14 19:28:18 | ERROR | Hello, world!"
      */
-    logger_log_message_f error;
+    const logger_log_message_f error;
 
     /**
      * @brief Logs an error message (Variadic).
@@ -116,7 +116,7 @@ typedef struct
      * followed by the log level tag like as follow:
      * "2026-10-14 19:28:18 | ERROR | Hello, world!"
      */
-    logger_log_message_args_f errorArgs;
+    const logger_log_message_args_f errorArgs;
 
     /**
      * @brief Logs a critical error message.
@@ -126,7 +126,7 @@ typedef struct
      * followed by the log level tag like as follow:
      * "2026-10-14 19:28:18 | CRITICAL | Hello, world!"
      */
-    logger_log_message_f critical;
+    const logger_log_message_f critical;
 
     /**
      * @brief Logs a critical error message (Variadic).
@@ -136,7 +136,7 @@ typedef struct
      * followed by the log level tag like as follow:
      * "2026-10-14 19:28:18 | CRITICAL | Hello, world!"
      */
-    logger_log_message_args_f criticalArgs;
+    const logger_log_message_args_f criticalArgs;
 
     /**
      * @brief Add event listener.
@@ -144,7 +144,7 @@ typedef struct
      * @remarks Use this method to register callback listeners for when a message
      * was logged.
      */
-    logger_add_listener_f addListener;
+    const logger_add_listener_f addListener;
 } logger_service_t;
 
 /// @brief Register and initializes the service.
