@@ -9,16 +9,26 @@
 #include "../../H/SYSTEM/SERVICES/LOGGER.H"
 #include "../../H/SYSTEM/SERVICES/MEM.H"
 
-static mem_service_t service;
+typedef struct
+{
+    mem_clear_f clear;
+    mem_calloc_f clearAllocate;
+    mem_realloc_f reAllocate;
+    mem_copy_f copy;
+    mem_copy_to_f copyTo;
+    mem_equals_f equals;
+} _mem_service_t;
+
+static _mem_service_t service;
 static logger_service_t *logger;
 
-static void memoryClear(void *ptr, size_t size)
+static void memoryClear(void *ptr, const size_t size)
 {
-    memset(ptr, 0, size);
+    memset(ptr, NULL, size);
 }
 
 // We can't use standard calloc, so we implemented own version.
-static void *memoryCalloc(size_t size)
+static void *memoryCalloc(const size_t size)
 {
     void *ptr = malloc(size);
 
@@ -27,10 +37,11 @@ static void *memoryCalloc(size_t size)
     return ptr;
 }
 
-static void *memoryRealloc(void *ptr, size_t size, bool useCalloc)
+// We can't use standard realloc, so we implemented own version.
+static void *memoryRealloc(void *ptr, const size_t size, const bool clearMemory)
 {
-    void *newPtr = useCalloc
-                       ? service.calloc(size)
+    void *newPtr = clearMemory
+                       ? service.clearAllocate(size)
                        : malloc(size);
 
     service.copyTo(ptr, newPtr, size);
@@ -39,7 +50,7 @@ static void *memoryRealloc(void *ptr, size_t size, bool useCalloc)
     return newPtr;
 }
 
-static void *memoryCopy(const void *ptr, size_t size)
+static void *memoryCopy(const void *ptr, const size_t size)
 {
     void *copyPtr = malloc(size);
 
@@ -48,12 +59,12 @@ static void *memoryCopy(const void *ptr, size_t size)
     return copyPtr;
 }
 
-static void memoryCopyTo(const void *from, void *to, size_t size)
+static void memoryCopyTo(const void *from, void *to, const size_t size)
 {
     memmove(to, from, size);
 }
 
-static bool memoryEquals(const void *ptr1, const void *ptr2, size_t size)
+static bool memoryEquals(const void *ptr1, const void *ptr2, const size_t size)
 {
     return memcmp(ptr1, ptr2, size) == 0;
 }
@@ -65,15 +76,13 @@ void registerMemService()
     logger->debug("Initializing Memory service...");
 
     service.clear = memoryClear;
-    service.calloc = memoryCalloc;
-    service.realloc = memoryRealloc;
+    service.clearAllocate = memoryCalloc;
+    service.reAllocate = memoryRealloc;
     service.copy = memoryCopy;
     service.copyTo = memoryCopyTo;
     service.equals = memoryEquals;
 
-    int result = engine->services->registerService(MEM_SERVICE, &service);
-
-    assert(result == RESULT_OK);
+    assert(addService(MEM_SERVICE, &service) == RESULT_OK);
 
     logger->debug("Memory service initialized.");
 }
