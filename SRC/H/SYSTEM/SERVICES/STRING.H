@@ -11,7 +11,7 @@
 #include "../GLOBALS.H"
 
 /// @brief String service id.
-#define STRING_SERVICE 1001
+#define STRING_SERVICE 1002
 
 typedef string (*string_create_f)(const int);
 typedef string (*string_resize_f)(string, const int);

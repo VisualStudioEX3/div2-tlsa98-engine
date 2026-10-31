@@ -12,7 +12,7 @@
 #include "../FILELOG.H"
 
 /// @brief Logger service id.
-#define LOGGER_SERVICE 1003
+#define LOGGER_SERVICE 1000
 
 /**
  * @brief Callback predicate to define an event listener to get notifications

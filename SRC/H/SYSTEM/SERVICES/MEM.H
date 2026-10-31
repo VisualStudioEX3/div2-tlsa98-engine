@@ -11,7 +11,7 @@
 #include "../GLOBALS.H"
 
 /// @brief Memory service id.
-#define MEM_SERVICE 1000
+#define MEM_SERVICE 1001
 
 typedef void (*mem_clear_f)(void *, const size_t);
 typedef void *(*mem_calloc_f)(const size_t);

@@ -11,7 +11,7 @@
 #include "../GLOBALS.H"
 
 /// @brief DateTime service id.
-#define DATETIME_SERVICE 1002
+#define DATETIME_SERVICE 1003
 
 /// @brief Inmutable date and time value.
 typedef struct
