@@ -8,7 +8,7 @@
 #ifndef __SYSTEM_DLL_DATETIME_SERVICE_H_
 #define __SYSTEM_DLL_DATETIME_SERVICE_H_
 
-#include "../GLOBALS.H"
+#include "../SYSTEM.H"
 
 /// @brief DateTime service id.
 #define DATETIME_SERVICE 1003

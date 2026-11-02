@@ -5,7 +5,7 @@
     Ring buffer.
 */
 
-#include "../H/SYSTEM/RINGBUFF.H"
+#include "H/RINGBUFF.H"
 
 static uint getCurrentFirstIndex(const ring_buffer_t *buffer)
 {

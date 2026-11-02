@@ -5,8 +5,7 @@
     DIV Games Studio 2 API abstraction.
 */
 
-#include "../H/DIV2.H"
-#include "../H/SYSTEM/DIV2API.H"
+#include "H/DIV2API.H"
 
 typedef struct
 {

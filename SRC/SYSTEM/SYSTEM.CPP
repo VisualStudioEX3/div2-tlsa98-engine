@@ -5,10 +5,8 @@
     System library entry point.
 */
 
-#include "../H/DIV2.H"
-#include "../H/SYSTEM.H"
-#include "../H/SYSTEM/FILELOG.H"
-#include "../H/SYSTEM/SERVICES.H"
+#include "H/SYSTEM.H"
+#include "H/FILELOG.H"
 
 typedef struct
 {

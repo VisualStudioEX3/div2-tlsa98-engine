@@ -8,38 +8,23 @@
 #ifndef __SYSTEM_DLL_H_
 #define __SYSTEM_DLL_H_
 
-#include "SYSTEM/GLOBALS.H"           // Global definitions, macros and types, DIV Games Studio 2 API abstraction, and extensions.
-#include "SYSTEM/LIST.H"              // Fixed allocated list.
-#include "SYSTEM/FILELOG.H"           // Basic file logger.
-#include "SYSTEM/SERVICES/MEM.H"      // Memory service.
-#include "SYSTEM/SERVICES/STRING.H"   // String service.
-#include "SYSTEM/SERVICES/DATETIME.H" // Datetime service.
-#include "SYSTEM/SERVICES/LOGGER.H"   // Logger service.
-
 #define DEBUG
 
-#include <stdarg.h>  // Required for va_copy macro.
-#include <string.h>  // Required for va_copy macro.
-#include "DIV2API.H" // DIV Games Studio 2 API abstraction.
+#include <assert.h>
+#include <stdarg.h>
+#include <string.h>
+
+// Core dependencies:
+#include "DIV2API.H"
 #include "SERVICES.H"
+#include "SERVICES.H"
+#include "LIST.H"
 
-/**
- * @brief True constant value.
- * @remarks In DIV Games Studio, all odd values are considered as true value.
- */
-#define true 1
-
-/**
- * @brief False constant value.
- * @remarks In DIV Games Studio, all even values are considered as false value.
- */
-#define false 0
-
-/// @brief Default function success result.
-#define RESULT_OK 0
-
-/// @brief Default function error result.
-#define RESULT_ERROR -1
+// Core services:
+#include "SERVICES/MEM.H"
+#include "SERVICES/STRING.H"
+#include "SERVICES/DATETIME.H"
+#include "SERVICES/LOGGER.H"
 
 /**
  * @brief The engine signature to identify the runtime instance.
@@ -56,11 +41,29 @@
 /// @brief Revision engine version.
 #define TLSA98_ENGINE_VERSION_REVISION 0
 
+/// @brief Default function success result.
+#define RESULT_OK 0
+
+/// @brief Default function error result.
+#define RESULT_ERROR -1
+
 /**
  * @brief Boolean alias.
  * @remarks In DIV Games Studio, like in C, a boolean value is an integer value.
  */
 typedef int bool;
+
+/**
+ * @brief True constant value.
+ * @remarks In DIV Games Studio, all odd values are considered as true value.
+ */
+#define true 1
+
+/**
+ * @brief False constant value.
+ * @remarks In DIV Games Studio, all even values are considered as false value.
+ */
+#define false 0
 
 /**
  * @brief BYTE type in DIV Games Studio 2.

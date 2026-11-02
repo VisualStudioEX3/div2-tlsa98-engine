@@ -10,7 +10,7 @@
 #ifndef __SYSTEM_DLL_LIST_H_
 #define __SYSTEM_DLL_LIST_H_
 
-#include "GLOBALS.H"
+#include "SYSTEM.H"
 
 /**
  * @brief Fixed typed allocated list.

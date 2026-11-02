@@ -8,6 +8,8 @@
 #ifndef __SYSTEM_DLL_LOGGER_H_
 #define __SYSTEM_DLL_LOGGER_H_
 
+#include <stdarg.h>
+
 /// @brief Log levels.
 typedef enum
 {

@@ -8,7 +8,7 @@
 #ifndef __SYSTEM_DLL_LOGGER_SERVICE_H_
 #define __SYSTEM_DLL_LOGGER_SERVICE_H_
 
-#include "../GLOBALS.H"
+#include "../SYSTEM.H"
 #include "../FILELOG.H"
 
 /// @brief Logger service id.

@@ -5,9 +5,8 @@
     Memory service.
 */
 
-#include <assert.h>
-#include "../../H/SYSTEM/SERVICES/LOGGER.H"
-#include "../../H/SYSTEM/SERVICES/MEM.H"
+#include "../H/SERVICES/LOGGER.H"
+#include "../H/SERVICES/MEM.H"
 
 typedef struct
 {

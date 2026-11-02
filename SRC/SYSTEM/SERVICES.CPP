@@ -5,9 +5,7 @@
     Service provider.
 */
 
-#include <assert.h>
-#include "../H/SYSTEM/SERVICES.H"
-#include "../H/SYSTEM/LIST.H"
+#include "H/SERVICES.H"
 
 static const int MAX_SERVICES = 64;
 

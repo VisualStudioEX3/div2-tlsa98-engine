@@ -5,11 +5,10 @@
     DateTime service.
 */
 
-#include <assert.h>
 #include <time.h>
-#include "../../H/SYSTEM/SERVICES/DATETIME.H"
-#include "../../H/SYSTEM/SERVICES/LOGGER.H"
-#include "../../H/SYSTEM/SERVICES/MEM.H"
+#include "../H/SERVICES/DATETIME.H"
+#include "../H/SERVICES/LOGGER.H"
+#include "../H/SERVICES/MEM.H"
 
 static const int CLOCKS_PER_MILLISECONDS = CLOCKS_PER_SEC / 1000;
 

@@ -5,8 +5,7 @@
     Logger service.
 */
 
-#include <assert.h>
-#include "../../H/SYSTEM/SERVICES/LOGGER.H"
+#include "../H/SERVICES/LOGGER.H"
 
 typedef struct
 {

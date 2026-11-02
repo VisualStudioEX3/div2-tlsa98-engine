@@ -8,7 +8,6 @@
 #ifndef __SYSTEM_DLL_RING_BUFFER_H_
 #define __SYSTEM_DLL_RING_BUFFER_H_
 
-#include "GLOBALS.H"
 #include "LIST.H"
 
 /**

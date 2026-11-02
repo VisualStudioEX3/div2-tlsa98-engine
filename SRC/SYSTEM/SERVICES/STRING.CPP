@@ -5,11 +5,10 @@
     String service.
 */
 
-#include <assert.h>
 #include <ctype.h>
-#include "../../H/SYSTEM/SERVICES/LOGGER.H"
-#include "../../H/SYSTEM/SERVICES/MEM.H"
-#include "../../H/SYSTEM/SERVICES/STRING.H"
+#include "../H/SERVICES/LOGGER.H"
+#include "../H/SERVICES/MEM.H"
+#include "../H/SERVICES/STRING.H"
 
 typedef struct
 {
