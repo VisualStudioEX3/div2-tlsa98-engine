@@ -55,7 +55,7 @@ typedef void (*foreach_ring_buffer_item_callback)(int, void *, va_list);
  * @param buffer Pointer to the ring buffer.
  * @return Returns the capacity or #RESULT_ERROR if the buffer is #NULL.
  */
-int getRingBufferCapacity(const ring_buffer_t *buffer);
+int getRingBufferCapacity(const ring_buffer_t *ringBuffer);
 
 /**
  * @brief Gets the number of items stored in the ring buffer.
@@ -63,21 +63,21 @@ int getRingBufferCapacity(const ring_buffer_t *buffer);
  * @return Returns the number of items stored or #RESULT_ERROR if the
  * ring buffer is #NULL.
  */
-int getRingBufferCount(const ring_buffer_t *buffer);
+int getRingBufferCount(const ring_buffer_t *ringBuffer);
 
 /**
  * @brief Gets if the ring buffer is empty.
  * @param buffer Pointer to the ring buffer.
  * @return Returns #true if the ring buffer is empty, #false otherwise.
  */
-bool isRingBufferEmpty(const ring_buffer_t *buffer);
+bool isRingBufferEmpty(const ring_buffer_t *ringBuffer);
 
 /**
  * @brief Gets if the ring buffer is full.
  * @param buffer Pointer to the ring buffer.
  * @return Returns #true if the ring buffer is full, #false otherwise.
  */
-bool isRingBufferFull(const ring_buffer_t *buffer);
+bool isRingBufferFull(const ring_buffer_t *ringBuffer);
 
 /**
  * @brief Creates a new ring buffer.
@@ -95,7 +95,7 @@ ring_buffer_t *createRingBuffer(uint capacity, size_t itemSize);
  * reuse the ring buffer for store new items. This function not free the memory
  * used by the ring buffer.
  */
-void clearRingBuffer(ring_buffer_t *buffer);
+void clearRingBuffer(ring_buffer_t *ringBuffer);
 
 /**
  * @brief Clears the content of the ring buffer and execute a callback on each item
@@ -106,7 +106,7 @@ void clearRingBuffer(ring_buffer_t *buffer);
  * to zero, but allow to execute a callback on each item in the ring buffer (e.g.
  * free memory of an inner pointer).
  */
-void clearRingBufferEx(ring_buffer_t *buffer, foreach_ring_buffer_item_callback onItem);
+void clearRingBufferEx(ring_buffer_t *ringBuffer, foreach_ring_buffer_item_callback onItem);
 
 /**
  * @brief Destroys the ring buffer.
@@ -114,7 +114,7 @@ void clearRingBufferEx(ring_buffer_t *buffer, foreach_ring_buffer_item_callback 
  * @remarks This function free the memory ocuped by the ring buffer and by the
  * pointer itself.
  */
-void destroyRingBuffer(ring_buffer_t *buffer);
+void destroyRingBuffer(ring_buffer_t *ringBuffer);
 
 /**
  * @brief Destroys the ring buffer and execute a callback on each item of the ring
@@ -125,7 +125,7 @@ void destroyRingBuffer(ring_buffer_t *buffer);
  * by the ring buffer and by the pointer itself, and allow to execute first a clean up
  * operation on each item, like in clearRingBufferEx function.
  */
-void destroyRingBufferEx(ring_buffer_t *buffer, foreach_ring_buffer_item_callback onItem);
+void destroyRingBufferEx(ring_buffer_t *ringBuffer, foreach_ring_buffer_item_callback onItem);
 
 /**
  * @brief Creates a new item in the ring buffer and moves the cursor to the next
@@ -136,7 +136,7 @@ void destroyRingBufferEx(ring_buffer_t *buffer, foreach_ring_buffer_item_callbac
  * @remarks This function not allocated new memory for the item, only point to the
  * next available position in the reserved memory.
  */
-void *createRingBufferItem(ring_buffer_t *buffer);
+void *createRingBufferItem(ring_buffer_t *ringBuffer);
 
 /**
  * @brief Creates a new item in the ring buffer and moves the cursor to the next
@@ -154,7 +154,7 @@ void *createRingBufferItem(ring_buffer_t *buffer);
  * Like the createRingBufferItem function, this function not allocated new memory for
  * the item, only point to the next available position in the reserved memory.
  */
-void *createRingBufferItemEx(ring_buffer_t *buffer, create_ring_buffer_item_callback onBeforeCreate, ...);
+void *createRingBufferItemEx(ring_buffer_t *ringBuffer, create_ring_buffer_item_callback onBeforeCreate, ...);
 
 /**
  * @brief Creates a new item in the ring buffer and moves the cursor to the next,
@@ -172,7 +172,7 @@ void *createRingBufferItemEx(ring_buffer_t *buffer, create_ring_buffer_item_call
  * Like the createRingBufferItem function, this function not allocated new memory for
  * the item, only point to the next available position in the reserved memory.
  */
-void *createRingBufferItemExArgs(ring_buffer_t *buffer, create_ring_buffer_item_callback onBeforeCreate, va_list args);
+void *createRingBufferItemExArgs(ring_buffer_t *ringBuffer, create_ring_buffer_item_callback onBeforeCreate, va_list args);
 
 /**
  * @brief Gets the pointer to an item in the ring buffer.
@@ -183,7 +183,7 @@ void *createRingBufferItemExArgs(ring_buffer_t *buffer, create_ring_buffer_item_
  * index is over the ring buffer count or capacity or below zero, or if the list is
  * #NULL.
  */
-void *getRingBufferItem(const ring_buffer_t *buffer, int index);
+void *getRingBufferItem(const ring_buffer_t *ringBuffer, int index);
 
 /**
  * @brief Loops the entire ring buffer and execute a callback in each item.
@@ -193,7 +193,7 @@ void *getRingBufferItem(const ring_buffer_t *buffer, int index);
  * @remarks Use this function execute a callback on each item in the ring buffer
  * sequentially.
  */
-void forEachRingBuffer(const ring_buffer_t *buffer, foreach_ring_buffer_item_callback onItem, ...);
+void forEachRingBuffer(const ring_buffer_t *ringBuffer, foreach_ring_buffer_item_callback onItem, ...);
 
 /**
  * @brief Loops the entire ring buffer and execute a callback in each item (Variadic
@@ -204,5 +204,5 @@ void forEachRingBuffer(const ring_buffer_t *buffer, foreach_ring_buffer_item_cal
  * @remarks Use this function execute a callback on each item in the ring buffer
  * sequentially.
  */
-void forEachRingBufferArgs(const ring_buffer_t *buffer, foreach_ring_buffer_item_callback onItem, va_list args);
+void forEachRingBufferArgs(const ring_buffer_t *ringBuffer, foreach_ring_buffer_item_callback onItem, va_list args);
 #endif
