@@ -67,8 +67,9 @@ typedef int bool;
 
 /**
  * @brief BYTE type in DIV Games Studio 2.
- * @remarks You can use this alias instead of normal char (-127 to 127) to manage
- * memory stream data, ensuring that all values are valid byte values (0 to 255).
+ * @remarks You can use this alias instead of normal char (-127 to 127) to
+ * manage memory stream data, ensuring that all values are valid byte values (0
+ * to 255).
  */
 typedef unsigned char byte;
 
@@ -197,8 +198,8 @@ const tlsa98_engine_t *engine;
  * than major and minor parameters.
  * @param _major Required major version.
  * @param _minor Required minor version.
- * @return Returns [true] if engine instance major and minor version are major or
- * equal than requiured [_major] and [_minor] parameters, [false] otherwise.
+ * @return Returns [true] if engine instance major and minor version are major
+ * or equal than requiured [_major] and [_minor] parameters, [false] otherwise.
  */
 #define TLSA98_ENGINE_VERSION_MAJOR_OR_EQUALS(_major, _minor) \
     engine->version->major >= _major && engine->version->minor >= _minor

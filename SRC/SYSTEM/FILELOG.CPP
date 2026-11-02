@@ -17,7 +17,8 @@ static const int LOG_MESSAGE_MAX_LENGTH = 256;
 static const char LOG_MESSAGE_FORMAT[] = "%s | %s | %s\n"; // "2026-10-14 19:28:18 | INFO | Hello, world!"
 static const char LOGS_FOLDERNAME[] = "LOGS";
 static const size_t LOG_TIMESTAMP_LENGTH = 20; // "2026-10-14 19:28:18"
-static const char *LOG_LEVELS[] = {"DEBUG", "INFO", "WARN", "ERROR", "CRITICAL"};
+static const char *LOG_LEVELS[] =
+    {"DEBUG", "INFO", "WARN", "ERROR", "CRITICAL"};
 
 static FILE *file;
 static char logTimeStamp[LOG_TIMESTAMP_LENGTH];
@@ -58,7 +59,8 @@ static void createLogsFolder()
 
 static char *getFilenameTimeStamp()
 {
-    const size_t size = sizeof(char) * strlen("20261014") + 1; // 2026-10-14 -> "20261014"
+    // 2026-10-14 -> "20261014":
+    const size_t size = sizeof(char) * strlen("20261014") + 1;
 
     char *timeStamp = (char *)malloc(size);
     struct tm *dateTime = getLocalDateTime();
@@ -70,7 +72,8 @@ static char *getFilenameTimeStamp()
 
 static char *getLogFilename()
 {
-    const size_t size = sizeof(char) * strlen("LOGS\\20261014.LOG") + 1;
+    const size_t size =
+        sizeof(char) * strlen("LOGS\\20261014.LOG") + 1;
 
     char *filename = (char *)malloc(size);
     char *timeStamp = getFilenameTimeStamp();
@@ -83,11 +86,13 @@ static char *getLogFilename()
 
 static char *getLogTimeStampNotAllocated()
 {
-    const size_t size = sizeof(char) * strlen("2026-10-14 19:28:18") + 1;
+    const size_t size =
+        sizeof(char) * strlen("2026-10-14 19:28:18") + 1;
 
     struct tm *dateTime = getLocalDateTime();
 
-    strftime(logTimeStamp, LOG_TIMESTAMP_LENGTH, "%Y-%m-%d %H:%M:%S", dateTime); // "2026-10-14 19:28:18"
+    // "2026-10-14 19:28:18":
+    strftime(logTimeStamp, LOG_TIMESTAMP_LENGTH, "%Y-%m-%d %H:%M:%S", dateTime);
 
     return (char *)logTimeStamp;
 }
@@ -130,7 +135,8 @@ char *logMessageArgs(const E_LOG_LEVEL level, const char *message, va_list args)
 
     va_copy(copyArgs, args);
     vsprintf(messageBuffer, message, copyArgs);
-    fprintf(file, LOG_MESSAGE_FORMAT, getLogTimeStampNotAllocated(), LOG_LEVELS[level], messageBuffer);
+    fprintf(file, LOG_MESSAGE_FORMAT,
+            getLogTimeStampNotAllocated(), LOG_LEVELS[level], messageBuffer);
 
     return messageBuffer;
 }

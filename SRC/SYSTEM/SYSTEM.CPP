@@ -36,7 +36,8 @@ static void setEngineVersion()
         version->revision = TLSA98_ENGINE_VERSION_REVISION;
         version->reserved = 0;
 
-        logMessage(LOG_INFO, "Engine version: %i.%i.%i", version->major, version->minor, version->revision);
+        logMessage(LOG_INFO, "Engine version: %i.%i.%i",
+                   version->major, version->minor, version->revision);
     }
 }
 

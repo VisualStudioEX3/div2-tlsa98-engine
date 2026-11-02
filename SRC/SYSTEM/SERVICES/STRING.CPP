@@ -35,12 +35,14 @@ static logger_service_t *logger;
 
 static string stringCreate(const int chars)
 {
-    return (string)memoryService->clearAllocate(chars + 1); // Add extra char for null terminated char.
+    // Add extra char for null terminated char:
+    return (string)memoryService->clearAllocate(chars + 1);
 }
 
 static string stringResize(string str, const int chars)
 {
-    return (string)memoryService->reAllocate(str, chars + 1, true); // Add extra char for null terminated char.
+    // Add extra char for null terminated char:
+    return (string)memoryService->reAllocate(str, chars + 1, true);
 }
 
 static void stringClear(string str)
