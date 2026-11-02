@@ -5,10 +5,7 @@
     Test library to perform tests over the engine libraries.
 */
 
-#include <assert.h>
-#include "../H/FOO.H"
-#include "../H/DIV2.H"
-#include "../H/SYSTEM/SERVICES/LOGGER.H"
+#include "H/FOO.H"
 
 static const int TLSA_ENGINE_MAJOR_VERSION = 0;
 static const int TLSA_ENGINE_MINOR_VERSION = 1;
