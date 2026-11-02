@@ -8,7 +8,8 @@
 #ifndef __SYSTEM_DLL_DIV2_API_H_
 #define __SYSTEM_DLL_DIV2_API_H_
 
-#include <stdio.h>
+#include "DIV2.H"
+#include "SYSTEM.H"
 
 typedef int *(*div2_memory_array_f)();
 typedef void *(*div2_malloc_f)(size_t);
@@ -103,5 +104,49 @@ typedef struct
  * @returns Returns the [div2_api_t] instance.
  */
 div2_api_t *registerDIV2API();
+
+/**
+ * @brief [malloc] alias to DIV implementation.
+ * @param size Size of the memory region to allocate.
+ * @return Returns the pointer to the new allocated memory region.
+ * @remarks DIV Games Studio runtime has his own [malloc] implementation to
+ * manage his memory allocations. If you try to use the standard [malloc] the
+ * program starts to generate memory corruption and even crashes. This macro
+ * allows you to use safe [malloc] calls but using the DIV implementation.
+ */
+#define malloc(size) engine->div2API->allocateMemory(size)
+
+/**
+ * @brief [free] alias to DIV implementation.
+ * @param ptr Pointer of the memory region to release.
+ * @remarks DIV Games Studio runtime has his own [free] implementation to
+ * manage his memory deallocations. If you try to use the standard [free] the
+ * program starts to generate memory corruption and even crashes. This macro
+ * allows you to use safe [free] calls but using the DIV implementation.
+ */
+#define free(ptr) engine->div2API->freeMemory(ptr)
+
+/**
+ * @brief [fopen] alias to DIV implementation.
+ * @param filename The path and name of the file to open.
+ * @param mode File access mode. See standard fopen documentation to know the
+ * avaiable modes: https://cplusplus.com/reference/cstdio/fopen/.
+ * @return Returns the pointer to the opened file, [NULL] otherwise.
+ * @remarks DIV Games Studio runtime has his own [fopen] implementation to
+ * manage his file open operations. If you try to use the standard [fopen] the
+ * program starts to generate memory corruption and even crashes. This macro
+ * allows you to use safe [fopen] calls but using the DIV implementation.
+ */
+#define fopen(filename, mode) engine->div2API->openFile(filename, mode)
+
+/**
+ * @brief [fclose] alias to DIV implementation.
+ * @param file The pointer to file to close.
+ * @remarks DIV Games Studio runtime has his own [fclose] implementation to
+ * manage his file close operations. If you try to use the standard [fclose]
+ * the program starts to generate memory corruption and even crashes. This
+ * macro allows you to use safe [fclose] calls but using the DIV implementation.
+ */
+#define fclose(file) engine->div2API->closeFile(file)
 
 #endif

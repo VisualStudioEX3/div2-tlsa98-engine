@@ -8,7 +8,7 @@
 #ifndef __SYSTEM_DLL_SERVICES_H_
 #define __SYSTEM_DLL_SERVICES_H_
 
-#include "GLOBALS.H"
+#include "SYSTEM.H"
 
 /// @brief A service is already registered with the used id.
 #define RESULT_ERROR_SERVICE_ALREADY_REGISTERED 1000
@@ -62,5 +62,24 @@ typedef struct
  * @returns The service provider instance.
  */
 service_provider_t *initializeServiceProvider();
+
+/**
+ * @brief Gets the service instance.
+ * @param id The service id.
+ * @return Returns the pointer to the service, [NULL] if the id is not found.
+ * @remarks Shortcut to [engine->services->getService] function.
+ */
+#define getService(id) engine->services->getService(id)
+
+/**
+ * @brief Registers a new service.
+ * @param id Unique id used to identify the service.
+ * @param service Pointer to the service.
+ * @return Returns [RESULT_ERROR_SERVICE_ALREADY_REGISTERED] if a service is
+ * already registered with this id, [RESULT_ERROR_SERVICE_CONTAINER_IS_FULL]
+ * if the service container is full, [RESULT_OK] otherwise.
+ * @remarks Shortcut to [engine->services->registerService] function.
+ */
+#define addService(id, service) engine->services->registerService(id, service)
 
 #endif
