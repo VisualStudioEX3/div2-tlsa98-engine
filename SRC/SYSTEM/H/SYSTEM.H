@@ -17,7 +17,6 @@
 // Core dependencies:
 #include "DIV2API.H"
 #include "SERVICES.H"
-#include "SERVICES.H"
 #include "LIST.H"
 
 // Core services:
