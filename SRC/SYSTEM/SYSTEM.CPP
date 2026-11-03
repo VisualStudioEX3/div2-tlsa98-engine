@@ -45,7 +45,11 @@ static void initializeEngineInterface()
 {
     logMessage(LOG_DEBUG, "Initializing engine interface...");
 
-    _engine = (_tlsa98_engine_t *)TLSA98_ENGINE_ADDRESS;
+    /*
+     * Used DIV.H NET struct address to share the TLSA98 Engine address location
+     * between different DLLs loaded into DIV Games Studio runtime.
+     */
+    _engine = (_tlsa98_engine_t *)NET;
     {
         memset(_engine, NULL, sizeof(_tlsa98_engine_t));
 
