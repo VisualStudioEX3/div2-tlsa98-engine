@@ -84,9 +84,6 @@ static char *getLogFilename()
 
 static char *getLogTimeStampNotAllocated()
 {
-    const size_t size =
-        sizeof(char) * strlen("2026-10-14 19:28:18") + 1;
-
     struct tm *dateTime = getLocalDateTime();
 
     // "2026-10-14 19:28:18":
