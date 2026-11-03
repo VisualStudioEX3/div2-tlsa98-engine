@@ -15,9 +15,9 @@ typedef int *(*div2_memory_array_f)();
 typedef void *(*div2_malloc_f)(size_t);
 typedef void (*div2_free_f)(void *);
 typedef int (*div2_get_int_parameter_f)();
-typedef char *(*div2_get_string_parameter_f)();
+typedef string (*div2_get_string_parameter_f)();
 typedef void (*div2_return_value_f)(int);
-typedef FILE *(*div2_fopen_f)(char *, char *);
+typedef FILE *(*div2_fopen_f)(string, string);
 typedef void (*div2_fclose_f)(FILE *);
 
 /**

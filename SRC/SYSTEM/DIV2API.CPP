@@ -29,9 +29,9 @@ static int div_getParameterAsInteger()
     return getparm();
 }
 
-static char *div_getParameterAsString()
+static string div_getParameterAsString()
 {
-    return (char *)(&mem[text_offset + div_getParameterAsInteger()]);
+    return (string)(&mem[text_offset + div_getParameterAsInteger()]);
 }
 
 static void div_returnValue(int value)
