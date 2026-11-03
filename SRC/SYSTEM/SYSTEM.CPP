@@ -58,8 +58,6 @@ static void initializeEngineInterface()
 
         _engine->div2API = registerDIV2API();
         _engine->services = initializeServiceProvider();
-
-        engine = (const tlsa98_engine_t *)_engine;
     }
 
     logMessage(LOG_DEBUG, "Engine interface initialized.");

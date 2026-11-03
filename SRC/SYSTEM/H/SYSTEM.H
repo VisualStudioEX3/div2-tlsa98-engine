@@ -183,7 +183,7 @@ typedef struct
  * the main engine interface, and be accessible for all DLLs that uses the
  * [SYSTEM.H] header file.
  */
-const tlsa98_engine_t *engine;
+const tlsa98_engine_t *engine = (const tlsa98_engine_t *)NET;
 
 /**
  * @brief Returns [true] if engine instance signature matches with header
