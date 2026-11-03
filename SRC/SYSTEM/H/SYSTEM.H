@@ -8,7 +8,7 @@
 #ifndef __SYSTEM_DLL_H_
 #define __SYSTEM_DLL_H_
 
-#define DEBUG
+#define DEBUG // Uncomment this to enable DEBUG features.
 
 #include <assert.h>
 #include <stdarg.h>
@@ -65,14 +65,14 @@ typedef int bool;
 #define false 0
 
 /**
- * @brief BYTE type in DIV Games Studio 2.
+ * @brief BYTE type in DIV Games Studio.
  * @remarks You can use this alias instead of normal char (-127 to 127) to
  * manage memory stream data, ensuring that all values are valid byte values (0
  * to 255).
  */
 typedef unsigned char byte;
 
-/// @brief WORD type in DIV Games Studio 2.
+/// @brief WORD type in DIV Games Studio.
 typedef unsigned short word;
 
 /// @brief Unsigned integer alias.
@@ -211,7 +211,7 @@ const tlsa98_engine_t *engine;
 #define arraylen(a) sizeof(a) / sizeof(a[0])
 
 /**
- * @brief Custom implemnetation of ANSI C99 va_copy macro.
+ * @brief Custom implementation of ANSI C99 va_copy macro.
  * @remarks Watcom C++ 10.6 (C89/ANSI C) not implements [va_copy] macro.
  */
 #define va_copy(dst, src) memcpy((void *)dst, (void *)src, sizeof(va_list));
