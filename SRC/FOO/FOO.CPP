@@ -41,9 +41,7 @@ void registerFooService()
 
     service.getHelloWorldMessage = getHelloWorldMessage;
 
-    int result = engine->services->registerService(FOO_SERVICE, &service);
-
-    assert(result == RESULT_OK);
+    assert(addService(FOO_SERVICE, &service) == RESULT_OK);
 
     logger->debug("FOO service initialized.");
 }
@@ -56,7 +54,7 @@ void exportFooService(void (*COM_export)(char *name, void *obj, int nparms))
 void __export divmain(COMMON_PARAMS)
 {
     GLOBAL_IMPORT(); // Required to get TLSA98_ENGINE_ADDRESS pointer address from _net struct.
-    engine = (tlsa98_engine_t *)TLSA98_ENGINE_ADDRESS;
+
     logger = (logger_service_t *)getService(LOGGER_SERVICE);
 
     logger->debug("Initializing FOO.DLL...");
