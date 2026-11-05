@@ -7,16 +7,97 @@
 
 #include "H/SYSTEM.H"
 #include "H/FILELOG.H"
+#include "H/LIST.H"
+
+static const int MAX_SERVICES = 64;
+
+typedef struct
+{
+    register_service_f registerService;
+    get_service_f getService;
+    get_registered_services_count getCount;
+} _service_provider_t;
+
+typedef struct
+{
+    service_id_t id;
+    const void *service;
+} service_t;
 
 typedef struct
 {
     int signature;
     version_t *version;
-    div2_api_t *div2API;
     service_provider_t *services;
 } _tlsa98_engine_t;
 
+static list_t *serviceContainer;
 static _tlsa98_engine_t *_engine;
+
+// Service provider //
+
+static bool serviceIdComparer(void *item, va_list args)
+{
+    service_t *service = (service_t *)item;
+    service_id_t id = va_arg(args, service_id_t);
+
+    return service->id == id;
+}
+
+static int getServiceProviderCapacity()
+{
+    return serviceContainer->capacity;
+}
+
+static int getServiceProviderCount()
+{
+    return serviceContainer->count;
+}
+
+static const void *findService(const service_id_t id)
+{
+    const void *servicePointer = NULL;
+    service_t *item = (service_t *)findListItem(serviceContainer, serviceIdComparer, id);
+
+    if (item)
+        servicePointer = item->service;
+    // TODO: Assert service id not found.
+
+    return servicePointer;
+}
+
+static int registerService(const service_id_t id, const void *service)
+{
+    if (isListItemExists(serviceContainer, serviceIdComparer, id))
+        return RESULT_ERROR_SERVICE_ALREADY_REGISTERED;
+
+    service_t *slot = (service_t *)createListItem(serviceContainer);
+
+    slot->id = id;
+    slot->service = service;
+
+    // TODO: Assert failed register service (check if pointer is null).
+
+    return RESULT_OK;
+}
+
+void initializeServiceProvider()
+{
+    // Create and initialize the service container:
+    serviceContainer = createList(MAX_SERVICES, sizeof(service_t));
+
+    // Create and initialize the service provider:
+    _service_provider_t *provider = (_service_provider_t *)malloc(sizeof(_service_provider_t));
+    {
+        provider->getCount = getServiceProviderCount;
+        provider->getService = findService;
+        provider->registerService = registerService;
+    }
+
+    _engine->services = (service_provider_t *)provider;
+}
+
+// Engine initialization //
 
 static void setEngineSignature()
 {
@@ -55,9 +136,7 @@ static void initializeEngineInterface()
 
         setEngineSignature();
         setEngineVersion();
-
-        _engine->div2API = registerDIV2API();
-        _engine->services = initializeServiceProvider();
+        initializeServiceProvider();
     }
 
     logMessage(LOG_DEBUG, "Engine interface initialized.");
