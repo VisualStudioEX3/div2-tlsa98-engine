@@ -8,7 +8,7 @@
 #ifndef __SYSTEM_DLL_MEMORY_SERVICE_H_
 #define __SYSTEM_DLL_MEMORY_SERVICE_H_
 
-#include "../SYSTEM.H"
+#include "../ENGINE.H"
 
 /// @brief Memory service id.
 #define MEM_SERVICE 1001
