@@ -2,12 +2,16 @@
 //! @copyright TLSA98 Engine (C) VisualStudioEX3, José Miguel Sánchez Fernández - 2022, 2026
 //! @copyright DIV Games Studio 2 (C) Hammer Technologies, Daniel Navarro Medrano - 1998, 1999
 /*!
-    System library entry point.
+    Engine interface.
 */
 
-#include "H/SYSTEM.H"
+#include "H/ENGINE.H"
 #include "H/FILELOG.H"
 #include "H/LIST.H"
+#include "H/SERVICES/MEM.H"
+#include "H/SERVICES/STRING.H"
+#include "H/SERVICES/DATETIME.H"
+#include "H/SERVICES/LOGGER.H"
 
 static const int MAX_SERVICES = 64;
 
