@@ -5,11 +5,13 @@
     Basic file logger, full-standalone from the engine services.
 */
 
+#include <assert.h>
 #include <direct.h>
+#include <string.h>
 #include <sys/stat.h>
 #include <time.h>
+#include "H/DIV2.H"
 #include "H/FILELOG.H"
-#include "H/SYSTEM.H" // Required to read the DEBUG preprocessor.
 
 static const int LOG_MESSAGE_MAX_LENGTH = 256;
 static const char LOG_MESSAGE_FORMAT[] = "%s | %s | %s\n"; // "2026-10-14 19:28:18 | INFO | Hello, world!"
@@ -23,10 +25,7 @@ static char logTimeStamp[LOG_TIMESTAMP_LENGTH];
 static char messageBuffer[LOG_MESSAGE_MAX_LENGTH];
 
 // Local macros pointed right to DIV2.H:
-#define malloc(size) div_malloc(size)
-#define free(ptr) div_free(ptr)
-#define fopen(filename, mode) div_fopen(filename, mode)
-#define fclose(file) div_fclose(file)
+#define va_copy(dst, src) memcpy((void *)dst, (void *)src, sizeof(va_list));
 
 static struct tm *getLocalDateTime()
 {
