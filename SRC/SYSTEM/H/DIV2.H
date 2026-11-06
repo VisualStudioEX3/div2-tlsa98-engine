@@ -383,6 +383,15 @@ void (*div_text_out)(char *texto, int x, int y); // Screen print function
 #define VIDEO_MODES ((_video_modes *)&mem[long_header + 14 + 10 * 10 + 10 * 7 + 8 + 11 + 9 + 10 * 4 + 1026 + 146])
 
 // ============================================================================
+// Macro aliases for standard ANSI C methods implemented by DIV2 runtime
+// ============================================================================
+
+#define malloc(size) div_malloc(size)
+#define free(ptr) div_free(ptr)
+#define fopen(filename, mode) div_fopen(filename, mode)
+#define fclose(file) div_fclose(file)
+
+// ============================================================================
 // Definition to get the offset of objects
 // ============================================================================
 

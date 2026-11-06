@@ -146,54 +146,10 @@ const tlsa98_engine_t *engine = (const tlsa98_engine_t *)NET;
 #define arraylen(array) sizeof(array) / sizeof(array[0])
 
 /**
- * @brief [malloc] alias to DIV implementation.
- * @param size Size of the memory region to allocate.
- * @return Returns the pointer to the new allocated memory region.
- * @remarks DIV Games Studio runtime has his own [malloc] implementation to
- * manage his memory allocations. If you try to use the standard [malloc] the
- * program starts to generate memory corruption and even crashes. This macro
- * allows you to use safe [malloc] calls but using the DIV implementation.
- */
-#define malloc(size) div_malloc(size)
-
-/**
- * @brief [free] alias to DIV implementation.
- * @param ptr Pointer of the memory region to release.
- * @remarks DIV Games Studio runtime has his own [free] implementation to
- * manage his memory deallocations. If you try to use the standard [free] the
- * program starts to generate memory corruption and even crashes. This macro
- * allows you to use safe [free] calls but using the DIV implementation.
- */
-#define free(ptr) div_free(ptr)
-
-/**
  * @brief Custom implementation of ANSI C99 va_copy macro.
  * @remarks Watcom C++ 10.6 (C89/ANSI C) not implements [va_copy] macro.
  */
 #define va_copy(dst, src) memcpy((void *)dst, (void *)src, sizeof(va_list));
-
-/**
- * @brief [fopen] alias to DIV implementation.
- * @param filename The path and name of the file to open.
- * @param mode File access mode. See standard fopen documentation to know the
- * avaiable modes: https://cplusplus.com/reference/cstdio/fopen/.
- * @return Returns the pointer to the opened file, [NULL] otherwise.
- * @remarks DIV Games Studio runtime has his own [fopen] implementation to
- * manage his file open operations. If you try to use the standard [fopen] the
- * program starts to generate memory corruption and even crashes. This macro
- * allows you to use safe [fopen] calls but using the DIV implementation.
- */
-#define fopen(filename, mode) div_fopen(filename, mode)
-
-/**
- * @brief [fclose] alias to DIV implementation.
- * @param file The pointer to file to close.
- * @remarks DIV Games Studio runtime has his own [fclose] implementation to
- * manage his file close operations. If you try to use the standard [fclose]
- * the program starts to generate memory corruption and even crashes. This
- * macro allows you to use safe [fclose] calls but using the DIV implementation.
- */
-#define fclose(file) div_fclose(file)
 
 /**
  * @brief Registers a new service.
