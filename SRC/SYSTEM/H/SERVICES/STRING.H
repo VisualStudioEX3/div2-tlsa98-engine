@@ -71,8 +71,8 @@ typedef struct
      * character model.
      * @param str String to check.
      * @param chr Character to compare.
-     * @return Returns [true] if all characters are the character model, [false]
-     *  otherwise.
+     * @return Returns [true] if all characters are the character model,
+     * [false] otherwise.
      */
     const string_all_f all;
 
@@ -81,8 +81,8 @@ typedef struct
      * character of the string model.
      * @param str String to check.
      * @param chars String with characters to compare.
-     * @return Returns [true] if any character is present in the string, [false]
-     * otherwise.
+     * @return Returns [true] if any character is present in the string,
+     * [false] otherwise.
      */
     const string_any_f any;
 
@@ -148,8 +148,8 @@ typedef struct
     const string_format_args_f formatArgs;
 
     /**
-     * @brief Concatenates the elements of the argument list using the specified
-     * separator.
+     * @brief Concatenates the elements of the argument list using the
+     * specified separator.
      * @param separator The string to use as a separator. Separator is included
      * in the returned string only if values has more than one element.
      * @param count Number of elements of the argument list.
@@ -160,8 +160,8 @@ typedef struct
     const string_join_f join;
 
     /**
-     * @brief Concatenates the elements of the argument list using the specified
-     * separator (Variadic version).
+     * @brief Concatenates the elements of the argument list using the
+     * specified separator (Variadic version).
      * @param separator The string to use as a separator. Separator is included
      * in the returned string only if values has more than one element.
      * @param count Number of elements of the argument list.

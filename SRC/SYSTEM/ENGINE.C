@@ -7,98 +7,93 @@
 
 #include "H/ENGINE.H"
 #include "H/FILELOG.H"
-#include "H/LIST.H"
 #include "H/SERVICES/MEM.H"
 #include "H/SERVICES/STRING.H"
 #include "H/SERVICES/DATETIME.H"
 #include "H/SERVICES/LOGGER.H"
 
-static const int MAX_SERVICES = 64;
-
 typedef struct
 {
-    register_service_f registerService;
-    get_service_f getService;
-    get_registered_services_count getCount;
+    register_service_f add;
+    get_service_f get;
+    get_registered_services_count count;
 } _service_provider_t;
 
 typedef struct
 {
     service_id_t id;
-    const void *service;
+    void *service;
 } service_t;
 
 typedef struct
 {
     int signature;
     version_t *version;
-    service_provider_t *services;
+    _service_provider_t *services;
 } _tlsa98_engine_t;
 
-static list_t *serviceContainer;
+static int servicesCount = 0;
+static service_t servicesContainer[32];
 static _tlsa98_engine_t *_engine;
 
 // Service provider //
 
-static bool serviceIdComparer(void *item, va_list args)
-{
-    service_t *service = (service_t *)item;
-    service_id_t id = va_arg(args, service_id_t);
-
-    return service->id == id;
-}
-
-static int getServiceProviderCapacity()
-{
-    return serviceContainer->capacity;
-}
-
 static int getServiceProviderCount()
 {
-    return serviceContainer->count;
+    return servicesCount;
 }
 
 static const void *findService(const service_id_t id)
 {
-    const void *servicePointer = NULL;
-    service_t *item = (service_t *)findListItem(serviceContainer, serviceIdComparer, id);
+    int i;
 
-    if (item)
-        servicePointer = item->service;
-    // TODO: Assert service id not found.
+    logMessage(LOG_DEBUG, "Request service %d...", id);
 
-    return servicePointer;
+    for (i = 0; i < servicesCount; i++)
+    {
+        if (servicesContainer[i].id == id)
+        {
+            logMessage(LOG_DEBUG, "Service %d found.", id);
+
+            return servicesContainer[i].service;
+        }
+    }
+
+    logMessage(LOG_DEBUG, "Service %d not found.", id);
+
+    return NULL;
 }
 
-static int registerService(const service_id_t id, const void *service)
+static bool registerService(const service_id_t id, const void *service)
 {
-    if (isListItemExists(serviceContainer, serviceIdComparer, id))
-        return RESULT_ERROR_SERVICE_ALREADY_REGISTERED;
+    if (servicesCount < 32 && findService(id) == NULL)
+    {
+        logMessage(LOG_DEBUG, "Registering service %d...", id);
+        {
+            servicesContainer[servicesCount].id = id;
+            servicesContainer[servicesCount].service = (void *)service;
+            servicesCount++;
+        }
+        logMessage(LOG_DEBUG, "Service %d registered.", id);
 
-    service_t *slot = (service_t *)createListItem(serviceContainer);
-
-    slot->id = id;
-    slot->service = service;
-
-    // TODO: Assert failed register service (check if pointer is null).
-
-    return RESULT_OK;
+        return true;
+    }
+    else
+    {
+        logMessage(LOG_CRITICAL, "Error registering service %d.", id);
+        return false;
+    }
 }
 
 void initializeServiceProvider()
 {
-    // Create and initialize the service container:
-    serviceContainer = createList(MAX_SERVICES, sizeof(service_t));
-
     // Create and initialize the service provider:
-    _service_provider_t *provider = (_service_provider_t *)malloc(sizeof(_service_provider_t));
+    _engine->services = (_service_provider_t *)malloc(sizeof(_service_provider_t));
     {
-        provider->getCount = getServiceProviderCount;
-        provider->getService = findService;
-        provider->registerService = registerService;
+        _engine->services->add = registerService;
+        _engine->services->get = findService;
+        _engine->services->count = getServiceProviderCount;
     }
-
-    _engine->services = (service_provider_t *)provider;
 }
 
 // Engine initialization //
@@ -112,7 +107,7 @@ static void setEngineSignature()
 
 static void setEngineVersion()
 {
-    _engine->version = (version_t *)div_malloc(sizeof(version_t));
+    _engine->version = (version_t *)malloc(sizeof(version_t));
     {
         version_t *version = _engine->version;
 
@@ -134,7 +129,7 @@ static void initializeEngineInterface()
      * Used DIV.H NET struct address to share the TLSA98 Engine address location
      * between different DLLs loaded into DIV Games Studio runtime.
      */
-    _engine = (_tlsa98_engine_t *)NET;
+    _engine = ((_tlsa98_engine_t *)(void *)NET);
     {
         memset(_engine, NULL, sizeof(_tlsa98_engine_t));
 
@@ -149,12 +144,12 @@ static void initializeEngineInterface()
 static void initializeServices()
 {
     logMessage(LOG_DEBUG, "Registering core services...");
-
-    registerLoggerService();
-    registerMemService();
-    registerStringService();
-    registerDateTimeService();
-
+    {
+        registerLoggerService();
+        registerMemService();
+        registerStringService();
+        registerDateTimeService();
+    }
     logMessage(LOG_DEBUG, "Core services registered.");
 }
 

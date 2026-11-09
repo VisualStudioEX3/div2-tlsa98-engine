@@ -10,7 +10,7 @@
 #include "../H/SERVICES/LOGGER.H"
 #include "../H/SERVICES/MEM.H"
 
-static const int CLOCKS_PER_MILLISECONDS = CLOCKS_PER_SEC / 1000;
+#define CLOCKS_PER_MILLISECONDS CLOCKS_PER_SEC / 1000
 
 typedef struct
 {
@@ -30,9 +30,10 @@ typedef struct
     datetime_datetime_to_string_f dateTimeToString;
 } _datetime_service_t;
 
+static const mem_service_t *memoryService;
+static const logger_service_t *logger;
+
 static _datetime_service_t service;
-static mem_service_t *memoryService;
-static logger_service_t *logger;
 
 static void tm_to_datetime_t(const struct tm *src, _datetime_t *dest)
 {
@@ -102,7 +103,7 @@ void registerDateTimeService()
     service.getDateTimeNotAlloc = getDateTimeNotAlloc;
     service.dateTimeToString = dateTimeToString;
 
-    assert(addService(DATETIME_SERVICE, &service) == RESULT_OK);
+    assert(addService(DATETIME_SERVICE, &service));
 
     logger->debug("DateTime service initialized.");
 }

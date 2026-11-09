@@ -18,8 +18,9 @@ typedef struct
     mem_equals_f equals;
 } _mem_service_t;
 
+static const logger_service_t *logger;
+
 static _mem_service_t service;
-static logger_service_t *logger;
 
 static void memoryClear(void *ptr, const size_t size)
 {
@@ -81,7 +82,7 @@ void registerMemService()
     service.copyTo = memoryCopyTo;
     service.equals = memoryEquals;
 
-    assert(addService(MEM_SERVICE, &service) == RESULT_OK);
+    assert(addService(MEM_SERVICE, &service));
 
     logger->debug("Memory service initialized.");
 }

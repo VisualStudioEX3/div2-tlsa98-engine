@@ -16,7 +16,8 @@
 
 /**
  * @brief The engine signature to identify the runtime instance.
- * @remarks Integer value that contains "TLSA" characters in hexadecimal format.
+ * @remarks Integer value that contains "TLSA" characters in hexadecimal
+ * format.
  */
 #define TLSA98_ENGINE_SIGNATURE 0x544c5341
 
@@ -35,13 +36,10 @@
 /// @brief Default function error result.
 #define RESULT_ERROR -1
 
-/// @brief A service is already registered with the used id.
-#define RESULT_ERROR_SERVICE_ALREADY_REGISTERED 1000
-
 /// @brief Service id type.
 typedef int service_id_t;
 
-typedef int (*register_service_f)(const service_id_t, const void *);
+typedef bool (*register_service_f)(const service_id_t, const void *);
 typedef const void *(*get_service_f)(const service_id_t);
 typedef int (*get_registered_services_count)();
 
@@ -52,24 +50,24 @@ typedef struct
      * @brief Registers a new service.
      * @param id Unique id used to identify the service.
      * @param service Pointer to the service.
-     * @return Returns [RESULT_ERROR_SERVICE_ALREADY_REGISTERED] if a service is
-     * already registered with this id, [RESULT_ERROR_SERVICE_CONTAINER_IS_FULL]
-     * if the service container is full, [RESULT_OK] otherwise.
+     * @return Returns [false] if a service is already registered with this id,
+     * [true] otherwise.
      */
-    const register_service_f registerService;
+    const register_service_f add;
 
     /**
      * @brief Gets the service instance.
      * @param id The service id.
-     * @return Returns the pointer to the service, [NULL] if the id is not found.
+     * @return Returns the pointer to the service, [NULL] if the id is not
+     * found.
      */
-    const get_service_f getService;
+    const get_service_f get;
 
     /**
      * @brief Gets the number of registered services.
      * @return Returns the number of registered services in the container.
      */
-    const get_registered_services_count getCount;
+    const get_registered_services_count count;
 } service_provider_t;
 
 /**
@@ -109,8 +107,8 @@ typedef struct
  * As a solution to share the services between different DLLs, not only with
  * DIV Games Studio runtime, we used a little trick to store the service
  * provider and another data directly in the DIV Games Studio runtime memory
- * session, using one of the unused structures like [_net] (because this project
- * not require the network system).
+ * session, using one of the unused structures like [_net] (because this
+ * project not require the network system).
  *
  * In this case, the [_net] struct memory is reserved in the DIV Games Studio
  * runtime memory but not initialized until the game code tries to initialize
@@ -118,7 +116,7 @@ typedef struct
  * the main engine interface, and be accessible for all DLLs that uses the
  * [SYSTEM.H] header file.
  */
-const tlsa98_engine_t *engine = (const tlsa98_engine_t *)NET;
+#define engine ((tlsa98_engine_t *)((void *)NET))
 
 /**
  * @brief Returns [true] if engine instance signature matches with header
@@ -149,45 +147,55 @@ const tlsa98_engine_t *engine = (const tlsa98_engine_t *)NET;
  * @brief Custom implementation of ANSI C99 va_copy macro.
  * @remarks Watcom C++ 10.6 (C89/ANSI C) not implements [va_copy] macro.
  */
-#define va_copy(dst, src) memcpy((void *)dst, (void *)src, sizeof(va_list));
+#define va_copy(dst, src) memcpy((void *)dst, (void *)src, sizeof(va_list))
 
 /**
  * @brief Registers a new service.
  * @param id Unique id used to identify the service.
  * @param service Pointer to the service.
- * @return Returns [RESULT_ERROR_SERVICE_ALREADY_REGISTERED] if a service is
- * already registered with this id, [RESULT_OK] otherwise.
- * @remarks Shortcut to [engine->services->registerService] function.
+ * @return Returns [false] if a service is already registered with this id,
+ * [true] otherwise.
+ * @remarks Shortcut to [engine->services->add] function.
  */
-#define addService(id, service) engine->services->registerService(id, service)
+#define addService(id, service) engine->services->add(id, service)
 
 /**
  * @brief Gets the service instance.
  * @param id The service id.
  * @return Returns the pointer to the service, [NULL] if the id is not found.
- * @remarks Shortcut to [engine->services->getService] function.
+ * @remarks Shortcut to [engine->services->get] function.
  */
-#define getService(id) engine->services->getService(id)
+#define getService(id) engine->services->get(id)
 
 /**
  * @brief Gets next parameter as integer value from an exported DIV function.
  * @return Returns [int] value.
- * @remarks Remember that parameters are readed from a stack, from last to first.
+ * @remarks Remember that parameters are readed from a stack, from last to
+ * first.
  */
-#define div_readIntParameter getparm()
+#define div_readIntParameter() getparm()
 
 /**
  * @brief Gets next parameter as string pointer from an exported DIV function.
  * @return Returns [char] pointer.
- * @remarks Remember that parameters are readed from a stack, from last to first.
+ * @remarks Remember that parameters are readed from a stack, from last to
+ * first.
  */
-#define div_readStringParameter (string)(&mem[text_offset + getparm()])
+#define div_readStringParameter() (string)(&mem[text_offset + getparm()])
+
+/**
+ * @brief Gets next parameter as struct pointer from an exported DIV function.
+ * @return Returns pointer to the struct.
+ * @remarks Remember that parameters are readed from a stack, from last to
+ * first.
+ */
+#define div_readStructParameter() (void *)(&mem[getparm()])
 
 /**
  * @brief Finalizes and setup the return value of an exported DIV function.
  * @param value Integer value to return.
- * @remarks This functions always must be called at the end of an exported function to
- * DIV program.
+ * @remarks This functions always must be called at the end of an exported
+ * function to DIV program.
  */
 #define div_return(value) retval(value)
 

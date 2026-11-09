@@ -7,30 +7,33 @@
 
 #include "H/FOO.H"
 
-static const int TLSA_ENGINE_MAJOR_VERSION = 0;
-static const int TLSA_ENGINE_MINOR_VERSION = 1;
-static const string HELLO_WORLD_MESSAGE = "Hello, World!";
+#define TLSA_ENGINE_MAJOR_VERSION 0
+#define TLSA_ENGINE_MINOR_VERSION 1
+
+static const logger_service_t *logger;
 
 static foo_service_t service;
-static logger_service_t *logger;
 
 static const string getHelloWorldMessage()
 {
-    return HELLO_WORLD_MESSAGE;
+    return "Hello, World!";
 }
 
 static void div_getHelloWorldMessage()
 {
+    string arg;
+
     foo_service_t *fooService = (foo_service_t *)getService(FOO_SERVICE);
 
     assert(fooService != NULL);
     assert(fooService->getHelloWorldMessage != NULL);
 
-    string arg = engine->div2API->getParameterAsString();
+    arg = div_readStringParameter();
 
+    // Copy string value returned by C functon to DIV argument address:
     strcpy(arg, fooService->getHelloWorldMessage());
 
-    engine->div2API->setReturnValue(0);
+    div_return(0);
 
     logger->info("div_getHelloWorldMessage() called.");
 }
@@ -40,8 +43,7 @@ void registerFooService()
     logger->debug("Initializating FOO service...");
 
     service.getHelloWorldMessage = getHelloWorldMessage;
-
-    assert(addService(FOO_SERVICE, &service) == RESULT_OK);
+    assert(addService(FOO_SERVICE, &service));
 
     logger->debug("FOO service initialized.");
 }

@@ -13,10 +13,11 @@
 #include "H/DIV2.H"
 #include "H/FILELOG.H"
 
-static const int LOG_MESSAGE_MAX_LENGTH = 256;
-static const char LOG_MESSAGE_FORMAT[] = "%s | %s | %s\n"; // "2026-10-14 19:28:18 | INFO | Hello, world!"
-static const char LOGS_FOLDERNAME[] = "LOGS";
-static const size_t LOG_TIMESTAMP_LENGTH = 20; // "2026-10-14 19:28:18"
+#define LOG_MESSAGE_MAX_LENGTH 256
+#define LOG_MESSAGE_FORMAT "%s | %s | %s\n" // "2026-10-14 19:28:18 | INFO | Hello, world!"
+#define LOGS_FOLDERNAME "LOGS"
+#define LOG_TIMESTAMP_LENGTH 20 // "2026-10-14 19:28:18"
+
 static const char *LOG_LEVELS[] =
     {"DEBUG", "INFO", "WARN", "ERROR", "CRITICAL"};
 
@@ -37,15 +38,11 @@ static struct tm *getLocalDateTime()
 
 static int checkIfLogFolderExists()
 {
-    struct stat *buf = (struct stat *)malloc(sizeof(struct stat));
+    struct stat buf;
 
-    stat(LOGS_FOLDERNAME, buf);
+    stat(LOGS_FOLDERNAME, &buf);
 
-    const int folderExists = S_ISDIR(buf->st_mode);
-
-    free(buf);
-
-    return folderExists;
+    return S_ISDIR(buf.st_mode);
 }
 
 static void createLogsFolder()
@@ -110,9 +107,10 @@ void closeLogFile(const char *closeMessage)
 char *logMessage(const E_LOG_LEVEL level, const char *message, ...)
 {
     va_list args;
+    char *result;
 
     va_start(args, message);
-    char *result = logMessageArgs(level, message, args);
+    result = logMessageArgs(level, message, args);
     va_end(args);
 
     return result;
@@ -122,10 +120,10 @@ char *logMessageArgs(const E_LOG_LEVEL level, const char *message, va_list args)
 {
     va_list copyArgs;
 
-#ifndef DEBUG
-    if (level == LOG_DEBUG)
-        return NULL;
-#endif
+    /* #ifndef DEBUG
+        if (level == LOG_DEBUG)
+            return NULL;
+    #endif */
 
     va_copy(copyArgs, args);
     vsprintf(messageBuffer, message, copyArgs);

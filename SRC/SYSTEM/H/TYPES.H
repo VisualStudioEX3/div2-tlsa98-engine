@@ -10,7 +10,8 @@
 
 /**
  * @brief Boolean alias.
- * @remarks In DIV Games Studio, like in C, a boolean value is an integer value.
+ * @remarks In DIV Games Studio, like in C, a boolean value is an integer
+ * value.
  */
 typedef int bool;
 
@@ -46,8 +47,8 @@ typedef unsigned long ulong;
 /**
  * @brief STRING type in DIV Games Studio 2.
  * @remarks An alias for char pointer type. All DIV parameters, even the string
- * values, are received as integer values as a position in DIV managed memory of
- * the parameter is stored.
+ * values, are received as integer values as a position in DIV managed memory
+ * of the parameter is stored.
  */
 typedef char *string;
 
@@ -73,9 +74,9 @@ typedef struct
      * version of the API.
      * @remarks This number must be updated when, in the current major version,
      * the API upgrade an existing service, add a new services as dependency of
-     * main ones (a service that not should be a main service) and minor changes
-     * that not broken compatibility with previous versions. When a minor
-     * version is updated, revision number must be set to zero.
+     * main ones (a service that not should be a main service) and minor
+     * changes that not broken compatibility with previous versions. When a
+     * minor version is updated, revision number must be set to zero.
      */
     byte minor;
 

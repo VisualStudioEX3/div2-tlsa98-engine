@@ -5,7 +5,7 @@
 #  	Makefile.
 #
 
-cpp_sources	= *.cpp
+cpp_sources	= *.c
 
 .BEFORE:
 	@cd $(SRC_PATH)

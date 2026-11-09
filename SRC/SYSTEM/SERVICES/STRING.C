@@ -29,9 +29,10 @@ typedef struct
     string_join_args_f joinArgs;
 } _string_service_t;
 
+static const mem_service_t *memoryService;
+static const logger_service_t *logger;
+
 static _string_service_t service;
-static mem_service_t *memoryService;
-static logger_service_t *logger;
 
 static string stringCreate(const int chars)
 {
@@ -94,8 +95,9 @@ static string stringCopy(const string str)
 static string stringToCase(const string str, int (*case_f)(int))
 {
     string strCopy = service.copy(str);
+    char *chr;
 
-    for (char *chr = &strCopy[0]; *chr != '\0'; chr++)
+    for (chr = &strCopy[0]; *chr != '\0'; chr++)
         *chr = case_f(*chr);
 
     return strCopy;
@@ -113,12 +115,11 @@ static string stringToUpperCase(const string str)
 
 static bool stringFormat(string str, const string format, ...)
 {
+    bool ret;
     va_list args;
 
     va_start(args, format);
-
-    bool ret = service.formatArgs(str, format, args);
-
+    ret = service.formatArgs(str, format, args);
     va_end(args);
 
     return ret;
@@ -135,15 +136,14 @@ static bool stringFormatArgs(string str, const string format, va_list args)
 
 static string stringJoin(const string separator, const int count, ...)
 {
+    string ret;
     va_list args;
 
     va_start(args, count);
-
-    string str = service.joinArgs(separator, count, args);
-
+    ret = service.joinArgs(separator, count, args);
     va_end(args);
 
-    return str;
+    return ret;
 }
 
 static int stringGetTotalCharsFromArgumentList(const int count, va_list args)
@@ -151,10 +151,11 @@ static int stringGetTotalCharsFromArgumentList(const int count, va_list args)
     int chars = 0;
     va_list copyArgs;
     string arg;
+    int i;
 
     va_copy(copyArgs, args);
 
-    for (int i = 0; i < count; i++)
+    for (i = 0; i < count; i++)
     {
         arg = va_arg(copyArgs, string);
         chars += service.length(arg);
@@ -166,15 +167,17 @@ static int stringGetTotalCharsFromArgumentList(const int count, va_list args)
 static string stringJoinArgs(const string separator, const int count, va_list args)
 {
     va_list copyArgs;
+    string str, arg;
+    int strChars, i;
 
     va_copy(copyArgs, args);
 
-    int strChars = stringGetTotalCharsFromArgumentList(count, copyArgs);
-    string str = service.create(strChars);
+    strChars = stringGetTotalCharsFromArgumentList(count, copyArgs);
+    str = service.create(strChars);
 
-    for (int i = 0; i < count; i++)
+    for (i = 0; i < count; i++)
     {
-        string arg = va_arg(copyArgs, string);
+        arg = va_arg(copyArgs, string);
 
         if (i > 0)
             strcat(str, separator);
@@ -208,7 +211,7 @@ void registerStringService()
     service.join = stringJoin;
     service.joinArgs = stringJoinArgs;
 
-    assert(addService(STRING_SERVICE, &service) == RESULT_OK);
+    assert(addService(STRING_SERVICE, &service));
 
     logger->debug("String service initialized.");
 }
