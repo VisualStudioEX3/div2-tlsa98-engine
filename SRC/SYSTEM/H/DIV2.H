@@ -14,9 +14,9 @@ void main()
 {
 }
 
-// ����������������������������������������������������������������������������
+// ============================================================================
 // Common definitions for all libraries
-// ����������������������������������������������������������������������������
+// ============================================================================
 
 #define NULL 0
 
@@ -29,9 +29,9 @@ void main()
 
 #define AutoLoad() DIV_export("Autoload", divmain)
 
-// ����������������������������������������������������������������������������
+// ============================================================================
 // Definitions of basic language structures
-// ����������������������������������������������������������������������������
+// ============================================================================
 
 typedef struct __reserved
 {
@@ -208,9 +208,9 @@ typedef struct __video_modes
         int mode;
 } _video_modes;
 
-// ����������������������������������������������������������������������������
+// ============================================================================
 // Description of some basic DIV archives (for modifying them once loaded)
-// ����������������������������������������������������������������������������
+// ============================================================================
 
 typedef struct _FPGHEADER
 {
@@ -246,10 +246,10 @@ typedef struct _FNTBODY
         int file_offset;
 } FNTBODY;
 
-// ����������������������������������������������������������������������������
+// ============================================================================
 // DIV standard Entry-Points
 // You must define these functions on the DLL if you want DIV32RUN to call them up.
-// ����������������������������������������������������������������������������
+// ============================================================================
 
 void set_video_mode(void);                   // Set new video mode (wide x height)
 void process_palette(void);                  // Modify a new palette
@@ -270,9 +270,9 @@ void ss_init(void);  // Screen Saver initialisation function
 void ss_frame(void); // Screen Saver frame function
 void ss_end(void);   // Screen Saver ending function
 
-// ����������������������������������������������������������������������������
+// ============================================================================
 // DIV exported (shared) variables
-// ����������������������������������������������������������������������������
+// ============================================================================
 
 #define mem (_mem)                       // Memory of all programs (mem[], int array)
 #define stack (_stack)                   // mem[] index of stack
@@ -298,9 +298,9 @@ void ss_end(void);   // Screen Saver ending function
 #define background ((char *)*((unsigned long *)_background)) // Pointer to video background
 #define ghost ((char *)*((unsigned long *)_ghost))           // Pointer to ghost-layering table
 
-// ����������������������������������������������������������������������������
+// ============================================================================
 // DIV exported variables - Internal - You must use above definitions!
-// ����������������������������������������������������������������������������
+// ============================================================================
 
 int *_stack;
 int *_mem;
@@ -323,9 +323,9 @@ unsigned long _buffer;
 unsigned long _background;
 unsigned long _ghost;
 
-// ����������������������������������������������������������������������������
+// ============================================================================
 // DIV exported functions
-// ����������������������������������������������������������������������������
+// ============================================================================
 
 void *(*div_malloc)(size_t __size);              // Don't use malloc()!!!
 void (*div_free)(void *__ptr);                   // Don't use free()!!!
@@ -334,16 +334,16 @@ void (*div_fclose)(FILE *);                      // Don't use fclose()!!!
 int (*div_rand)(int rang_low, int rang_hi);      // Random between two numbers
 void (*div_text_out)(char *texto, int x, int y); // Screen print function
 
-// ����������������������������������������������������������������������������
+// ============================================================================
 // Macros to get parameters and return values in new functions
-// ����������������������������������������������������������������������������
+// ============================================================================
 
 #define getparm() stack[sp--]
 #define retval(_x_sp) (stack[++sp] = (_x_sp)) // Set return value (is a must)
 
-// ����������������������������������������������������������������������������
+// ============================================================================
 // Games exported variables (see documentation - Language - Global - Variables)
-// ����������������������������������������������������������������������������
+// ============================================================================
 
 #define timer(x) mem[end_struct + x]
 #define text_z mem[end_struct + 10]
@@ -367,9 +367,9 @@ void (*div_text_out)(char *texto, int x, int y); // Screen print function
 
 #define text_offset 0 // Start of text segment (mem[] index)
 
-// ����������������������������������������������������������������������������
+// ============================================================================
 // Games exported structures (see documentation - Language - Global - Structures)
-// ����������������������������������������������������������������������������
+// ============================================================================
 
 #define MOUSE ((_mouse *)&mem[long_header])
 #define SCROLL ((_scroll *)&mem[long_header + 14])
@@ -382,15 +382,18 @@ void (*div_text_out)(char *texto, int x, int y); // Screen print function
 #define FILEINFO ((_fileinfo *)&mem[long_header + 14 + 10 * 10 + 10 * 7 + 8 + 11 + 9 + 10 * 4 + 1026])
 #define VIDEO_MODES ((_video_modes *)&mem[long_header + 14 + 10 * 10 + 10 * 7 + 8 + 11 + 9 + 10 * 4 + 1026 + 146])
 
-// ����������������������������������������������������������������������������
-// Definition to get the TLSA98 Engine address in DIV's memory
-// ����������������������������������������������������������������������������
+// ============================================================================
+// Macro aliases for standard ANSI C methods implemented by DIV2 runtime
+// ============================================================================
 
-#define TLSA98_ENGINE_ADDRESS (void *)NET
+#define malloc(size) div_malloc(size)
+#define free(ptr) div_free(ptr)
+#define fopen(filename, mode) div_fopen(filename, mode)
+#define fclose(file) div_fclose(file)
 
-// ����������������������������������������������������������������������������
+// ============================================================================
 // Definition to get the offset of objects
-// ����������������������������������������������������������������������������
+// ============================================================================
 
 #define GLOBAL_IMPORT()                                                   \
         stack = (int *)DIV_import("stack");                               \

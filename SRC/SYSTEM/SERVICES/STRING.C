@@ -5,24 +5,45 @@
     String service.
 */
 
-#include <assert.h>
 #include <ctype.h>
-#include "../../H/SYSTEM/SERVICES/LOGGER.H"
-#include "../../H/SYSTEM/SERVICES/MEM.H"
-#include "../../H/SYSTEM/SERVICES/STRING.H"
+#include "../H/SERVICES/LOGGER.H"
+#include "../H/SERVICES/MEM.H"
+#include "../H/SERVICES/STRING.H"
 
-static string_service_t service;
-static mem_service_t *memoryService;
-static logger_service_t *logger;
-
-static string stringCreate(int chars)
+typedef struct
 {
-    return (string)memoryService->calloc(++chars); // Add extra char for null terminated char.
+    string_create_f create;
+    string_resize_f resize;
+    string_clear_f clear;
+    string_len_f length;
+    string_all_f all;
+    string_any_f any;
+    string_empty_f isEmpty;
+    string_equals_f equals;
+    string_copy_f copy;
+    string_to_lower_f toLower;
+    string_to_upper_f toUpper;
+    string_format_f format;
+    string_format_args_f formatArgs;
+    string_join_f join;
+    string_join_args_f joinArgs;
+} _string_service_t;
+
+static const mem_service_t *memoryService;
+static const logger_service_t *logger;
+
+static _string_service_t service;
+
+static string stringCreate(const int chars)
+{
+    // Add extra char for null terminated char:
+    return (string)memoryService->clearAllocate(chars + 1);
 }
 
-static string stringResize(string str, int chars)
+static string stringResize(string str, const int chars)
 {
-    return (string)memoryService->realloc(str, ++chars, true); // Add extra char for null terminated char.
+    // Add extra char for null terminated char:
+    return (string)memoryService->reAllocate(str, chars + 1, true);
 }
 
 static void stringClear(string str)
@@ -74,8 +95,9 @@ static string stringCopy(const string str)
 static string stringToCase(const string str, int (*case_f)(int))
 {
     string strCopy = service.copy(str);
+    char *chr;
 
-    for (char *chr = &strCopy[0]; *chr != '\0'; chr++)
+    for (chr = &strCopy[0]; *chr != '\0'; chr++)
         *chr = case_f(*chr);
 
     return strCopy;
@@ -93,12 +115,11 @@ static string stringToUpperCase(const string str)
 
 static bool stringFormat(string str, const string format, ...)
 {
+    bool ret;
     va_list args;
 
     va_start(args, format);
-
-    bool ret = service.formatArgs(str, format, args);
-
+    ret = service.formatArgs(str, format, args);
     va_end(args);
 
     return ret;
@@ -113,28 +134,28 @@ static bool stringFormatArgs(string str, const string format, va_list args)
     return vsprintf(str, format, copyArgs) > 0;
 }
 
-static string stringJoin(const string separator, int count, ...)
+static string stringJoin(const string separator, const int count, ...)
 {
+    string ret;
     va_list args;
 
     va_start(args, count);
-
-    string str = service.joinArgs(separator, count, args);
-
+    ret = service.joinArgs(separator, count, args);
     va_end(args);
 
-    return str;
+    return ret;
 }
 
-static int stringGetTotalCharsFromArgumentList(int count, va_list args)
+static int stringGetTotalCharsFromArgumentList(const int count, va_list args)
 {
     int chars = 0;
     va_list copyArgs;
     string arg;
+    int i;
 
     va_copy(copyArgs, args);
 
-    for (int i = 0; i < count; i++)
+    for (i = 0; i < count; i++)
     {
         arg = va_arg(copyArgs, string);
         chars += service.length(arg);
@@ -143,18 +164,20 @@ static int stringGetTotalCharsFromArgumentList(int count, va_list args)
     return chars;
 }
 
-static string stringJoinArgs(const string separator, int count, va_list args)
+static string stringJoinArgs(const string separator, const int count, va_list args)
 {
     va_list copyArgs;
+    string str, arg;
+    int strChars, i;
 
     va_copy(copyArgs, args);
 
-    int strChars = stringGetTotalCharsFromArgumentList(count, copyArgs);
-    string str = service.create(strChars);
+    strChars = stringGetTotalCharsFromArgumentList(count, copyArgs);
+    str = service.create(strChars);
 
-    for (int i = 0; i < count; i++)
+    for (i = 0; i < count; i++)
     {
-        string arg = va_arg(copyArgs, string);
+        arg = va_arg(copyArgs, string);
 
         if (i > 0)
             strcat(str, separator);
@@ -188,9 +211,7 @@ void registerStringService()
     service.join = stringJoin;
     service.joinArgs = stringJoinArgs;
 
-    int result = engine->services->registerService(STRING_SERVICE, &service);
-
-    assert(result == RESULT_OK);
+    assert(addService(STRING_SERVICE, &service));
 
     logger->debug("String service initialized.");
 }

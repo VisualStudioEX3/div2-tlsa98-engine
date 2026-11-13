@@ -1,0 +1,77 @@
+//! SYSTEM.DLL - System library for DIV Games Studio 2.
+//! @copyright TLSA98 Engine (C) VisualStudioEX3, José Miguel Sánchez Fernández - 2022, 2026
+//! @copyright DIV Games Studio 2 (C) Hammer Technologies, Daniel Navarro Medrano - 1998, 1999
+/*!
+    DateTime service.
+*/
+
+#ifndef __SYSTEM_DLL_DATETIME_SERVICE_H_
+#define __SYSTEM_DLL_DATETIME_SERVICE_H_
+
+#include "../ENGINE.H"
+
+/// @brief DateTime service id.
+#define DATETIME_SERVICE 1003
+
+/// @brief Inmutable date and time value.
+typedef struct
+{
+    /// @brief Seconds after the minute (from 0).
+    const int seconds;
+
+    /// @brief Minutes after the hour (from 0).
+    const int minutes;
+
+    /// @brief Hour of the day (from 0).
+    const int hour;
+
+    /// @brief Day of the month (from 1).
+    const int day;
+
+    /// @brief Month of the year (from 1).
+    const int month;
+
+    /// @brief Year (from 1900).
+    const int year;
+} datetime_t;
+
+typedef ulong (*datetime_get_tick_count_f)();
+typedef datetime_t *(*datetime_get_datetime_f)();
+typedef void (*datetime_get_datetime_not_alloc_f)(datetime_t *);
+typedef string (*datetime_datetime_to_string_f)(const datetime_t *);
+
+/// @brief DateTime service interface.
+typedef struct
+{
+    /**
+     * @brief Retrieves the number of milliseconds that have elapsed since the
+     * system was started.
+     * @return Returns the number of milliseconds that have elapsed since the
+     * system was started.
+     */
+    const datetime_get_tick_count_f getTickCount;
+
+    /**
+     * @brief Get current date and time.
+     * @return Returns the current system date and time.
+     */
+    const datetime_get_datetime_f getDateTime;
+
+    /**
+     * @brief Get current date and time.
+     * @param dateTime Pointer to variable to store the date and time values.
+     */
+    const datetime_get_datetime_not_alloc_f getDateTimeNotAlloc;
+
+    /**
+     * @brief Converts date time value to string representation.
+     * @param dateTime Pointer to date time value to converts.
+     * @return Returns the string rerpresentation of the date time value.
+     */
+    const datetime_datetime_to_string_f dateTimeToString;
+} datetime_service_t;
+
+/// @brief Register and initializes the service.
+void registerDateTimeService();
+
+#endif

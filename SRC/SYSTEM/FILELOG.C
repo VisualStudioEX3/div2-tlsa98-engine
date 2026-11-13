@@ -7,28 +7,26 @@
 
 #include <assert.h>
 #include <direct.h>
-#include <stdarg.h>
 #include <string.h>
 #include <sys/stat.h>
 #include <time.h>
-#include "../H/DIV2.H"
-#include "../H/SYSTEM/FILELOG.H"
+#include "H/DIV2.H"
+#include "H/FILELOG.H"
 
-static const int LOG_MESSAGE_MAX_LENGTH = 256;
-static const char LOG_MESSAGE_FORMAT[] = "%s | %s | %s\n"; // "2026-10-14 19:28:18 | INFO | Hello, world!"
-static const char LOGS_FOLDERNAME[] = "LOGS";
-static const size_t LOG_TIMESTAMP_LENGTH = 20; // "2026-10-14 19:28:18"
-static const char *LOG_LEVELS[] = {"DEBUG", "INFO", "WARN", "ERROR", "CRITICAL"};
+#define LOG_MESSAGE_MAX_LENGTH 256
+#define LOG_MESSAGE_FORMAT "%s | %s | %s\n" // "2026-10-14 19:28:18 | INFO | Hello, world!"
+#define LOGS_FOLDERNAME "LOGS"
+#define LOG_TIMESTAMP_LENGTH 20 // "2026-10-14 19:28:18"
+
+static const char *LOG_LEVELS[] =
+    {"DEBUG", "INFO", "WARN", "ERROR", "CRITICAL"};
 
 static FILE *file;
 static char logTimeStamp[LOG_TIMESTAMP_LENGTH];
 static char messageBuffer[LOG_MESSAGE_MAX_LENGTH];
 
-#define malloc(size) div_malloc(size)
-#define free(ptr) div_free(ptr)
-#define fopen(filename, mode) div_fopen(filename, mode)
-#define fclose(file) div_fclose(file)
-#define va_copy(dst, src) memcpy((void *)dst, (void *)src, sizeof(va_list))
+// Local macros pointed right to DIV2.H:
+#define va_copy(dst, src) memcpy((void *)dst, (void *)src, sizeof(va_list));
 
 static struct tm *getLocalDateTime()
 {
@@ -40,15 +38,11 @@ static struct tm *getLocalDateTime()
 
 static int checkIfLogFolderExists()
 {
-    struct stat *buf = (struct stat *)malloc(sizeof(struct stat));
+    struct stat buf;
 
-    stat(LOGS_FOLDERNAME, buf);
+    stat(LOGS_FOLDERNAME, &buf);
 
-    const int folderExists = S_ISDIR(buf->st_mode);
-
-    free(buf);
-
-    return folderExists;
+    return S_ISDIR(buf.st_mode);
 }
 
 static void createLogsFolder()
@@ -59,7 +53,8 @@ static void createLogsFolder()
 
 static char *getFilenameTimeStamp()
 {
-    const size_t size = sizeof(char) * strlen("20261014") + 1; // 2026-10-14 -> "20261014"
+    // 2026-10-14 -> "20261014":
+    const size_t size = sizeof(char) * strlen("20261014") + 1;
 
     char *timeStamp = (char *)malloc(size);
     struct tm *dateTime = getLocalDateTime();
@@ -71,7 +66,8 @@ static char *getFilenameTimeStamp()
 
 static char *getLogFilename()
 {
-    const size_t size = sizeof(char) * strlen("LOGS\\20261014.LOG") + 1;
+    const size_t size =
+        sizeof(char) * strlen("LOGS\\20261014.LOG") + 1;
 
     char *filename = (char *)malloc(size);
     char *timeStamp = getFilenameTimeStamp();
@@ -84,11 +80,10 @@ static char *getLogFilename()
 
 static char *getLogTimeStampNotAllocated()
 {
-    const size_t size = sizeof(char) * strlen("2026-10-14 19:28:18") + 1;
-
     struct tm *dateTime = getLocalDateTime();
 
-    strftime(logTimeStamp, LOG_TIMESTAMP_LENGTH, "%Y-%m-%d %H:%M:%S", dateTime); // "2026-10-14 19:28:18"
+    // "2026-10-14 19:28:18":
+    strftime(logTimeStamp, LOG_TIMESTAMP_LENGTH, "%Y-%m-%d %H:%M:%S", dateTime);
 
     return (char *)logTimeStamp;
 }
@@ -112,9 +107,10 @@ void closeLogFile(const char *closeMessage)
 char *logMessage(const E_LOG_LEVEL level, const char *message, ...)
 {
     va_list args;
+    char *result;
 
     va_start(args, message);
-    char *result = logMessageArgs(level, message, args);
+    result = logMessageArgs(level, message, args);
     va_end(args);
 
     return result;
@@ -124,14 +120,15 @@ char *logMessageArgs(const E_LOG_LEVEL level, const char *message, va_list args)
 {
     va_list copyArgs;
 
-#ifndef DEBUG
-    if (level == LOG_DEBUG)
-        return NULL;
-#endif
+    /* #ifndef DEBUG
+        if (level == LOG_DEBUG)
+            return NULL;
+    #endif */
 
     va_copy(copyArgs, args);
     vsprintf(messageBuffer, message, copyArgs);
-    fprintf(file, LOG_MESSAGE_FORMAT, getLogTimeStampNotAllocated(), LOG_LEVELS[level], messageBuffer);
+    fprintf(file, LOG_MESSAGE_FORMAT,
+            getLogTimeStampNotAllocated(), LOG_LEVELS[level], messageBuffer);
 
     return messageBuffer;
 }
