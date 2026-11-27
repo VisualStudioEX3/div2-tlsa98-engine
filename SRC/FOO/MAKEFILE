@@ -11,15 +11,14 @@ cpp_sources	= *.c
 	@cd $(SRC_PATH)
 
 .AFTER:
-	@cd ..\..
-
-all: compile clean
-
-compile: 	.SYMBOLIC
-	@$(COMPILER_CMD) $(cpp_sources)
-
-clean: 		.SYMBOLIC
-	@echo cleaning directory
 	@if exist *.obj @del /f /q *.obj
 	@if exist *.lnk @del /f /q *.lnk
 	@if exist *.err @del /f /q *.err
+	@cd ..\..
+	@echo Success!
+
+all: compile
+
+compile: .SYMBOLIC
+	@echo Compiling FOO library...
+	@$(COMPILER_CMD) $(cpp_sources)

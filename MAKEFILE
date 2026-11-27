@@ -14,19 +14,25 @@
 
 bin_folder 			= BIN
 src_folder			= SRC
-make_cmd			= wmake /f $(target_makefile) "SRC_PATH=$(src_path)" "COMPILER_CMD=$(compiler_cmd)"
+make_cmd			= wmake /h /f $(target_makefile) "SRC_PATH=$(src_path)" "COMPILER_CMD=$(compiler_cmd)"
 compiler_cmd		= wcl386 $(compiler_args)
-compiler_args		= /ox /l=div_dll /fe=..\..\$(bin_folder)\$@.DLL
+compiler_args		= /zq /ox /l=div_dll /fe=..\..\$(bin_folder)\$@.DLL
 src_path			= $(src_folder)\$@
 target_makefile		= $(src_path)\MAKEFILE
 
 all: FOO SYSTEM
 
 .BEFORE createBinFolder:
-	@safemd.bat $(bin_folder)
+	@echo.
+	@if exist $(bin_folder) @echo Check for $(bin_folder) folder on root...
+	@if not exist $(bin_folder) @echo Creating $(bin_folder) folder on root...
+	@if not exist $(bin_folder) @md $(bin_folder)
+	@echo Success!
 
-system: .SYMBOLIC
+SYSTEM: .SYMBOLIC
+	@echo.
 	@$(make_cmd)
 
-foo: 	.SYMBOLIC
+FOO: 	.SYMBOLIC
+	@echo.
 	@$(make_cmd)
