@@ -10,7 +10,7 @@
 #include <string.h>
 #include <sys/stat.h>
 #include <time.h>
-#include "H/DIV2.H"
+#include "H/DIV.H"
 #include "H/FILELOG.H"
 
 #define LOG_MESSAGE_MAX_LENGTH 256

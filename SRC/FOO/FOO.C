@@ -5,6 +5,8 @@
     Test library to perform tests over the engine libraries.
 */
 
+#define GLOBALS
+
 #include "H/FOO.H"
 
 #define TLSA_ENGINE_MAJOR_VERSION 0

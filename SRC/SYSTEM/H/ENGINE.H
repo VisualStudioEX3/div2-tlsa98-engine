@@ -12,7 +12,7 @@
 #include <stdarg.h>
 #include <string.h>
 #include "TYPES.H"
-#include "DIV2.H"
+#include "DIV.H"
 
 /**
  * @brief The engine signature to identify the runtime instance.
@@ -135,6 +135,37 @@ typedef struct
  */
 #define TLSA98_ENGINE_VERSION_MAJOR_OR_EQUALS(_major, _minor) \
     engine->version->major >= _major && engine->version->minor >= _minor
+
+/**
+ * @brief Allocates a defined amount of bytes of uninitialized storage.
+ * @param size Number of bytes to allocate.
+ * @returns Returns the pointer to the beginning of newly allocated memory, or [NULL] in case of error.
+ * @remarks This macro is a replace of the standard malloc() function using the exported version by DIV runtime.
+ */
+#define malloc(size) div_malloc(size)
+
+/**
+ * @brief Deallocates the space previously allocated.
+ * @param ptr Pointer to the memory to deallocate.
+ * @remarks This macro is a replace of the standard free() function using the exported version by DIV runtime.
+ */
+#define free(ptr) div_free(ptr)
+
+/**
+ * @brief Opens a file.
+ * @param filename File name to associate the file stream to.
+ * @param mode A null-terminated character string determining [file access mode](https://en.cppreference.com/c/io/fopen#File_access_flags).
+ * @returns Returns a pointer to the file stream associated with that file, or [NULL] in case of error.
+ * @remarks This macro is a replace of the standard fopen() function using the exported version by DIV runtime.
+ */
+#define fopen(filename, mode) div_fopen(filename, mode)
+
+/**
+ * @brief Closes a file.
+ * @param file The file stream to close.
+ * @remarks This macro is a replace of the standard fclose() function using the exported version by DIV runtime.
+ */
+#define fclose(file) div_fclose(file)
 
 /**
  * @brief Gets the size of an array.
