@@ -12,7 +12,7 @@
 #include <stdarg.h>
 #include <string.h>
 #include "TYPES.H"
-#include "DIV2.H"
+#include "DIV.H"
 
 /**
  * @brief The engine signature to identify the runtime instance.
