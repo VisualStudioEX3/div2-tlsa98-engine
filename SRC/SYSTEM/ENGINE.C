@@ -5,6 +5,8 @@
     Engine interface.
 */
 
+#define GLOBALS
+
 #include "H/ENGINE.H"
 #include "H/FILELOG.H"
 #include "H/SERVICES/MEM.H"
