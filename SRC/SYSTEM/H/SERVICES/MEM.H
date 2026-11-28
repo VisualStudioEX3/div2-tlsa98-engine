@@ -27,16 +27,14 @@ typedef struct
      * @brief Sets all bytes to null.
      * @param ptr Pointer to a memory region.
      * @param size Size of the memory region.
-     * @remarks This function not releases allocated memory regions. Use [free]
-     * instead.
+     * @remarks This function not releases allocated memory regions. Use [free] instead.
      */
     const mem_clear_f clear;
 
     /**
      * @brief Allocates a memory region and filled with null values.
      * @param size Size of the memory region to allocate.
-     * @return Returns the pointer to the allocated memory region, [NULL]
-     * otherwise.
+     * @return Returns the pointer to the allocated memory region, [NULL] otherwise.
      */
     const mem_calloc_f clearAllocate;
 
@@ -45,8 +43,7 @@ typedef struct
      * @param ptr Pointer to a memory region to reallocate.
      * @param size New size of the memory region.
      * @param clearMemory Clear memory after allocated it.
-     * @return Returns the pointer to the reallocated memory region, [NULL]
-     * otherwise.
+     * @return Returns the pointer to the reallocated memory region, [NULL] otherwise.
      */
     const mem_realloc_f reAllocate;
 
@@ -54,8 +51,7 @@ typedef struct
      * @brief Creates a copy of the region memory.
      * @param ptr Pointer to the memory region to copy.
      * @param size Size of the memory region to copy.
-     * @return Returns a new pointer to the copied memory region, [NULL]
-     * otherwise.
+     * @return Returns a new pointer to the copied memory region, [NULL] otherwise.
      */
     const mem_copy_f copy;
 
@@ -65,8 +61,7 @@ typedef struct
      * @param to Pointer to the memory region to copy the bytes.
      * @param size Size of the memory region to copy.
      * @remarks The source memory region keeps the values after the copy.
-     * Also ensure that both memory regions has the same size, otherwise, will
-     * overwrite data of other memory regions.
+     * Also ensure that both memory regions has the same size, otherwise, will overwrite data of other memory regions.
      */
     const mem_copy_to_f copyTo;
 
@@ -75,10 +70,8 @@ typedef struct
      * @param ptr1 First pointer.
      * @param ptr2 Second pointer.
      * @param size Size of the memory region. This value is for both pointers.
-     * @returns Returns [true] if all bytes of both memory regions are equals,
-     * [false] otherwise.
-     * @remarks Ensure that both memory regions has the same size, otherwise,
-     * the comparison may return wrong results.
+     * @returns Returns [true] if all bytes of both memory regions are equals, [false] otherwise.
+     * @remarks Ensure that both memory regions has the same size, otherwise, the comparison may return wrong results.
      */
     const mem_equals_f equals;
 } mem_service_t;

@@ -18,8 +18,7 @@
 #define LOGS_FOLDERNAME "LOGS"
 #define LOG_TIMESTAMP_LENGTH 20 // "2026-10-14 19:28:18"
 
-static const char *LOG_LEVELS[] =
-    {"DEBUG", "INFO", "WARN", "ERROR", "CRITICAL"};
+static const char *LOG_LEVELS[] = {"DEBUG", "INFO", "WARN", "ERROR", "CRITICAL"};
 
 static FILE *file;
 static char logTimeStamp[LOG_TIMESTAMP_LENGTH];
@@ -126,8 +125,7 @@ char *logMessageArgs(const E_LOG_LEVEL level, const char *message, va_list args)
 
     va_copy(copyArgs, args);
     vsprintf(messageBuffer, message, copyArgs);
-    fprintf(file, LOG_MESSAGE_FORMAT,
-            getLogTimeStampNotAllocated(), LOG_LEVELS[level], messageBuffer);
+    fprintf(file, LOG_MESSAGE_FORMAT, getLogTimeStampNotAllocated(), LOG_LEVELS[level], messageBuffer);
 
     return messageBuffer;
 }

@@ -44,10 +44,8 @@ typedef string (*datetime_datetime_to_string_f)(const datetime_t *);
 typedef struct
 {
     /**
-     * @brief Retrieves the number of milliseconds that have elapsed since the
-     * system was started.
-     * @return Returns the number of milliseconds that have elapsed since the
-     * system was started.
+     * @brief Retrieves the number of milliseconds that have elapsed since the system was started.
+     * @return Returns the number of milliseconds that have elapsed since the system was started.
      */
     const datetime_get_tick_count_f getTickCount;
 

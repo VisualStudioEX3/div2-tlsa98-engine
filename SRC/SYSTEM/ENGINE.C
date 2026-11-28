@@ -83,6 +83,7 @@ static bool registerService(const service_id_t id, const void *service)
     else
     {
         logMessage(LOG_CRITICAL, "Error registering service %d.", id);
+
         return false;
     }
 }
@@ -118,8 +119,7 @@ static void setEngineVersion()
         version->revision = TLSA98_ENGINE_VERSION_REVISION;
         version->reserved = 0;
 
-        logMessage(LOG_INFO, "Engine version: %i.%i.%i",
-                   version->major, version->minor, version->revision);
+        logMessage(LOG_INFO, "Engine version: %i.%i.%i", version->major, version->minor, version->revision);
     }
 }
 
@@ -127,10 +127,7 @@ static void initializeEngineInterface()
 {
     logMessage(LOG_DEBUG, "Initializing engine interface...");
 
-    /*
-     * Used DIV.H NET struct address to share the TLSA98 Engine address location
-     * between different DLLs loaded into DIV Games Studio runtime.
-     */
+    // Used DIV.H NET struct address to share the TLSA98 Engine address location between different DLLs loaded into DIV Games Studio runtime.
     _engine = ((_tlsa98_engine_t *)(void *)NET);
     {
         memset(_engine, NULL, sizeof(_tlsa98_engine_t));
@@ -180,9 +177,7 @@ void __export divlibrary(LIBRARY_PARAMS)
 
 void __export divend(COMMON_PARAMS)
 {
-    // FYI: Testing FOO.DLL we get the DIV2 runtime perform the divend calls in inverse order
-    // of the libraries are initialized. For the "terminating engine" logs and actions, maybe
-    // is a good idea to create an event of "engine termination" to do this.
+    // FYI: Testing FOO.DLL we get the DIV2 runtime perform the divend calls in inverse order of the libraries are initialized. For the "terminating engine" logs and actions, maybe is a good idea to create an event of "engine termination" to do this.
     logMessage(LOG_INFO, "Terminating engine...");
 
     // Terminate here services:

@@ -34,21 +34,17 @@ typedef struct
 {
     /**
      * @brief Creates a new string.
-     * @param chars Number of characters. Not counting the null terminated
-     * character.
-     * @return Returns a pointer to the new string created, filled with null
-     * characters, [NULL] otherwise.
+     * @param chars Number of characters. Not counting the null terminated character.
+     * @return Returns a pointer to the new string created, filled with null characters, [NULL] otherwise.
      */
     const string_create_f create;
 
     /**
      * @brief Resizes a string.
      * @param str Pointer to a string to resize.
-     * @param chars Number of characters. Not counting the null terminated
-     * character.
+     * @param chars Number of characters. Not counting the null terminated character.
      * @return Returns a pointer to the resized string, [NULL] otherwise.
-     * If the size is major than original string size, the new chars are filled
-     * with null characters.
+     * If the size is major than original string size, the new chars are filled with null characters.
      */
     const string_resize_f resize;
 
@@ -61,8 +57,7 @@ typedef struct
     /**
      * @brief Gets the length of the string.
      * @param str String to measure.
-     * @return Returns the number of characters until reach the first null
-     * character.
+     * @return Returns the number of characters until reach the first null character.
      */
     const string_len_f length;
 
@@ -71,26 +66,22 @@ typedef struct
      * character model.
      * @param str String to check.
      * @param chr Character to compare.
-     * @return Returns [true] if all characters are the character model,
-     * [false] otherwise.
+     * @return Returns [true] if all characters are the character model, [false] otherwise.
      */
     const string_all_f all;
 
     /**
-     * @brief Determines whether any character of a string are equal to any
-     * character of the string model.
+     * @brief Determines whether any character of a string are equal to any character of the string model.
      * @param str String to check.
      * @param chars String with characters to compare.
-     * @return Returns [true] if any character is present in the string,
-     * [false] otherwise.
+     * @return Returns [true] if any character is present in the string, [false] otherwise.
      */
     const string_any_f any;
 
     /**
      * @brief Determines if the string is null or empty.
      * @param str String to check.
-     * @return Returns [true] if the string is [NULL], 0 length string or a
-     * string full with null characters, [false] otherwise.
+     * @return Returns [true] if the string is [NULL], 0 length string or a string full with null characters, [false] otherwise.
      */
     const string_empty_f isEmpty;
 
@@ -98,8 +89,7 @@ typedef struct
      * @brief Determines if left string is equals to the right string.
      * @param lhs Left string to compare.
      * @param rhs Right string to compare.
-     * @return Returns [true] if the left string is equal to right string,
-     * [false] otherwise.
+     * @return Returns [true] if the left string is equal to right string, [false] otherwise.
      * @remarks The comparison method is case sensitive.
      */
     const string_equals_f equals;
@@ -128,46 +118,37 @@ typedef struct
     /**
      * @brief Formats a string using a list of values.
      * @param str Pointer to string where store the output formatted restult.
-     * @param format Format string model. To see how to format the output see:
-     * https://cplusplus.com/reference/cstdio/printf/.
+     * @param format Format string model. To see how to format the output see: https://cplusplus.com/reference/cstdio/printf/.
      * @param ... List of arguments to use in formatted string.
-     * @returns Returns [true] if string is sucessful formatted, [false]
-     * otherwise.
+     * @returns Returns [true] if string is sucessful formatted, [false] otherwise.
      */
     const string_format_f format;
 
     /**
      * @brief Formats a string using a list of values (Variadic version).
      * @param str Pointer to string where store the output formatted restult.
-     * @param format Format string model. To see how to format the output see:
-     * https://cplusplus.com/reference/cstdio/printf/.
+     * @param format Format string model. To see how to format the output see: https://cplusplus.com/reference/cstdio/printf/.
      * @param args List of arguments to use in formatted string.
-     * @returns Returns [true] if string is sucessful formatted, [false]
-     * otherwise.
+     * @returns Returns [true] if string is sucessful formatted, [false] otherwise.
      */
     const string_format_args_f formatArgs;
 
     /**
-     * @brief Concatenates the elements of the argument list using the
-     * specified separator.
-     * @param separator The string to use as a separator. Separator is included
-     * in the returned string only if values has more than one element.
+     * @brief Concatenates the elements of the argument list using the specified separator.
+     * @param separator The string to use as a separator. Separator is included in the returned string only if values has more than one element.
      * @param count Number of elements of the argument list.
      * @param ... Argument list that contains the strings to concatenate.
-     * @return Returns a new string that consists of the elements of the
-     * argument list delimited by the separator string.
+     * @return Returns a new string that consists of the elements of the argument list delimited by the separator string.
      */
     const string_join_f join;
 
     /**
      * @brief Concatenates the elements of the argument list using the
      * specified separator (Variadic version).
-     * @param separator The string to use as a separator. Separator is included
-     * in the returned string only if values has more than one element.
+     * @param separator The string to use as a separator. Separator is included in the returned string only if values has more than one element.
      * @param count Number of elements of the argument list.
      * @param args Argument list that contains the strings to concatenate.
-     * @return Returns a new string that consists of the elements of the
-     * argument list delimited by the separator string.
+     * @return Returns a new string that consists of the elements of the argument list delimited by the separator string.
      */
     const string_join_args_f joinArgs;
 } string_service_t;

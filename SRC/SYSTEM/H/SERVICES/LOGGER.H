@@ -15,8 +15,7 @@
 #define LOGGER_SERVICE 1000
 
 /**
- * @brief Callback predicate to define an event listener to get notifications
- * when a message was logged.
+ * @brief Callback predicate to define an event listener to get notifications when a message was logged.
  * @param level Log level.
  * @param message Log message.
  */
@@ -28,8 +27,7 @@ typedef void (*logger_add_listener_f)(const logger_message_callback_f);
 
 /**
  * @brief Logger service.
- * @remarks This service allow to log events in a file, created with the date
- * as name under game root "LOGS" folder("LOGS\20261014.LOG").
+ * @remarks This service allow to log events in a file, created with the date as name under game root "LOGS" folder("LOGS\20261014.LOG").
  *
  * The service allows to notified log events by function callback listeners.
  * This allow to extend the logger to other features, like a debug console.
@@ -40,8 +38,7 @@ typedef struct
      * @brief Logs a debug message.
      * @param message Message to log.
      * @param ... Optional values to formatted into mesaage.
-     * @remarks The logged message contains a date time stamp at the start of
-     * line followed by the log level tag like as follow:
+     * @remarks The logged message contains a date time stamp at the start of line followed by the log level tag like as follow:
      * "2026-10-14 19:28:18 | DEBUG | Hello, world!"
      */
     const logger_log_message_f debug;
@@ -50,8 +47,7 @@ typedef struct
      * @brief Logs a debug message (Variadic).
      * @param message Message to log.
      * @param args Values to formatted into mesaage.
-     * @remarks The logged message contains a date time stamp at the start of
-     * line followed by the log level tag like as follow:
+     * @remarks The logged message contains a date time stamp at the start of line followed by the log level tag like as follow:
      * "2026-10-14 19:28:18 | DEBUG | Hello, world!"
      */
     const logger_log_message_args_f debugArgs;
@@ -60,8 +56,7 @@ typedef struct
      * @brief Logs an information message.
      * @param message Message to log.
      * @param ... Optional values to formatted into mesaage.
-     * @remarks The logged message contains a date time stamp at the start of
-     * line followed by the log level tag like as follow:
+     * @remarks The logged message contains a date time stamp at the start of line followed by the log level tag like as follow:
      * "2026-10-14 19:28:18 | INFO | Hello, world!"
      */
     const logger_log_message_f info;
@@ -70,8 +65,7 @@ typedef struct
      * @brief Logs an information message (Variadic).
      * @param message Message to log.
      * @param args Values to formatted into mesaage.
-     * @remarks The logged message contains a date time stamp at the start of
-     * line followed by the log level tag like as follow:
+     * @remarks The logged message contains a date time stamp at the start of line followed by the log level tag like as follow:
      * "2026-10-14 19:28:18 | INFO | Hello, world!"
      */
     const logger_log_message_args_f infoArgs;
@@ -80,8 +74,7 @@ typedef struct
      * @brief Logs a warning message.
      * @param message Message to log.
      * @param ... Optional values to formatted into mesaage.
-     * @remarks The logged message contains a date time stamp at the start of
-     * line followed by the log level tag like as follow:
+     * @remarks The logged message contains a date time stamp at the start of line followed by the log level tag like as follow:
      * "2026-10-14 19:28:18 | WARN | Hello, world!"
      */
     const logger_log_message_f warning;
@@ -90,8 +83,7 @@ typedef struct
      * @brief Logs a warning message (Variadic).
      * @param message Message to log.
      * @param args Values to formatted into mesaage.
-     * @remarks The logged message contains a date time stamp at the start of
-     * line followed by the log level tag like as follow:
+     * @remarks The logged message contains a date time stamp at the start of line followed by the log level tag like as follow:
      * "2026-10-14 19:28:18 | WARN | Hello, world!"
      */
     const logger_log_message_args_f warningArgs;
@@ -100,8 +92,7 @@ typedef struct
      * @brief Logs an error message.
      * @param message Message to log.
      * @param ... Optional values to formatted into mesaage.
-     * @remarks The logged message contains a date time stamp at the start of
-     * line followed by the log level tag like as follow:
+     * @remarks The logged message contains a date time stamp at the start of line followed by the log level tag like as follow:
      * "2026-10-14 19:28:18 | ERROR | Hello, world!"
      */
     const logger_log_message_f error;
@@ -110,8 +101,7 @@ typedef struct
      * @brief Logs an error message (Variadic).
      * @param message Message to log.
      * @param args Values to formatted into mesaage.
-     * @remarks The logged message contains a date time stamp at the start of
-     * line followed by the log level tag like as follow:
+     * @remarks The logged message contains a date time stamp at the start of line followed by the log level tag like as follow:
      * "2026-10-14 19:28:18 | ERROR | Hello, world!"
      */
     const logger_log_message_args_f errorArgs;
@@ -120,8 +110,7 @@ typedef struct
      * @brief Logs a critical error message.
      * @param message Message to log.
      * @param ... Optional values to formatted into mesaage.
-     * @remarks The logged message contains a date time stamp at the start of
-     * line followed by the log level tag like as follow:
+     * @remarks The logged message contains a date time stamp at the start of line followed by the log level tag like as follow:
      * "2026-10-14 19:28:18 | CRITICAL | Hello, world!"
      */
     const logger_log_message_f critical;
@@ -130,8 +119,7 @@ typedef struct
      * @brief Logs a critical error message (Variadic).
      * @param message Message to log.
      * @param args Values to formatted into mesaage.
-     * @remarks The logged message contains a date time stamp at the start of
-     * line followed by the log level tag like as follow:
+     * @remarks The logged message contains a date time stamp at the start of line followed by the log level tag like as follow:
      * "2026-10-14 19:28:18 | CRITICAL | Hello, world!"
      */
     const logger_log_message_args_f criticalArgs;

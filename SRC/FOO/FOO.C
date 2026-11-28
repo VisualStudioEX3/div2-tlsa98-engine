@@ -63,9 +63,7 @@ void __export divmain(COMMON_PARAMS)
 
     logger->debug("Initializing FOO.DLL...");
 
-    // TODO: Implement own assert to allow custom assertion messages, outputs like the future
-    // built-in game console or error reporter, and termination action (end program or
-    // terminate current level and return to game console).
+    // TODO: Implement own assert to allow custom assertion messages, outputs like the future built-in game console or error reporter, and termination action (end program or terminate current level and return to game console).
     assert(TLSA98_ENGINE_SIGNATURE_EQUALS);
     assert(TLSA98_ENGINE_VERSION_MAJOR_OR_EQUALS(TLSA_ENGINE_MAJOR_VERSION, TLSA_ENGINE_MINOR_VERSION));
 
@@ -83,10 +81,7 @@ void __export divlibrary(LIBRARY_PARAMS)
     // Export here all services to DIV language:
     exportFooService(COM_export);
 
-    // BUG: FileLogger service crash program when you try to log any message from here or any child
-    // function call from here. Because SYSTEM.DLL should implements in a near future a service to
-    // register there the functions to DIV language, this bug seems to be avoided, because divlibrary()
-    // is not required in the child libraries, only in SYSTEM.DLL, where this bug not ocurr.
+    // BUG: FileLogger service crash program when you try to log any message from here or any child function call from here. Because SYSTEM.DLL should implements in a near future a service to register there the functions to DIV language, this bug seems to be avoided, because divlibrary() is not required in the child libraries, only in SYSTEM.DLL, where this bug not ocurr.
 }
 
 void __export divend(COMMON_PARAMS)
