@@ -24,6 +24,7 @@ static const char *LOG_LEVELS[] =
 static FILE *file;
 static char logTimeStamp[LOG_TIMESTAMP_LENGTH];
 static char messageBuffer[LOG_MESSAGE_MAX_LENGTH];
+static E_LOG_LEVEL minimalLogLevel = LOG_DEBUG;
 
 // Local macros pointed right to DIV2.H:
 #define va_copy(dst, src) memcpy((void *)dst, (void *)src, sizeof(va_list));
@@ -120,10 +121,8 @@ char *logMessageArgs(const E_LOG_LEVEL level, const char *message, va_list args)
 {
     va_list copyArgs;
 
-    /* #ifndef DEBUG
-        if (level == LOG_DEBUG)
-            return NULL;
-    #endif */
+    if (level < minimalLogLevel)
+        return NULL;
 
     va_copy(copyArgs, args);
     vsprintf(messageBuffer, message, copyArgs);
@@ -131,4 +130,9 @@ char *logMessageArgs(const E_LOG_LEVEL level, const char *message, va_list args)
             getLogTimeStampNotAllocated(), LOG_LEVELS[level], messageBuffer);
 
     return messageBuffer;
+}
+
+void setLogLevel(const E_LOG_LEVEL level)
+{
+    minimalLogLevel = level;
 }

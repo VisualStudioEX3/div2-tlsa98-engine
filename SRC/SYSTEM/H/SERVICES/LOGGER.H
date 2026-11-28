@@ -43,7 +43,6 @@ typedef struct
      * @remarks The logged message contains a date time stamp at the start of
      * line followed by the log level tag like as follow:
      * "2026-10-14 19:28:18 | DEBUG | Hello, world!"
-     * The message only log if the DEBUG preprocessor is defined.
      */
     const logger_log_message_f debug;
 
@@ -54,7 +53,6 @@ typedef struct
      * @remarks The logged message contains a date time stamp at the start of
      * line followed by the log level tag like as follow:
      * "2026-10-14 19:28:18 | DEBUG | Hello, world!"
-     * The message only log if the DEBUG preprocessor is defined.
      */
     const logger_log_message_args_f debugArgs;
 

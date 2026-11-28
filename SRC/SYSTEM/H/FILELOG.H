@@ -13,10 +13,7 @@
 /// @brief Log levels.
 typedef enum
 {
-    /**
-     * @brief Debug log level.
-     * @remarks This level only log if DEBUG preprocessor is defined.
-     */
+    /// @brief Debug log level.
     LOG_DEBUG,
     /// @brief Information log level.
     LOG_INFO,
@@ -48,7 +45,7 @@ void closeLogFile(const char *closeMessage);
  * @param level Debug level.
  * @param message Message to log.
  * @param ... Optional values to formatted into mesaage.
- * @returns Returns the formatted message, if was logged, NULL otherwise.
+ * @returns Returns the formatted message, if was logged, [NULL] otherwise.
  * @remarks The logged message contains a date time stamp at the start of line
  * followed by the log level tag like as follow:
  * "2026-10-14 19:28:18 | INFO | Hello, world!"
@@ -60,11 +57,20 @@ char *logMessage(const E_LOG_LEVEL level, const char *message, ...);
  * @param level Debug level.
  * @param message Message to log.
  * @param args Values to formatted into mesaage.
- * @returns Returns the formatted message, if was logged, NULL otherwise.
+ * @returns Returns the formatted message, if was logged, [NULL] otherwise.
  * @remarks The logged message contains a date time stamp at the start of line
  * followed by the log level tag like as follow:
  * "2026-10-14 19:28:18 | INFO | Hello, world!"
  */
 char *logMessageArgs(const E_LOG_LEVEL level, const char *message, va_list args);
+
+/**
+ * @brief Sets the minimal log level.
+ * @param level Minimal log level.
+ * @remarks This level setup the minimal level to log messages. For example, if the log level is [LOG_WARN] any log message with level [LOG_INFO] or [LOG_DEBUG] is ignored.
+ *
+ * By default, the minimal log level is [LOG_DEBUG].
+ */
+void setLogLevel(const E_LOG_LEVEL level);
 
 #endif

@@ -8,8 +8,6 @@
 #ifndef __SYSTEM_DLL_H_
 #define __SYSTEM_DLL_H_
 
-#define DEBUG // Uncomment this to enable DEBUG features.
-
 // Core engine interface:
 #include "ENGINE.H"
 
