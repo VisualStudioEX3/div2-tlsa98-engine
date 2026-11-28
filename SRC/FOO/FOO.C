@@ -27,8 +27,8 @@ static void div_getHelloWorldMessage()
 
     foo_service_t *fooService = (foo_service_t *)getService(FOO_SERVICE);
 
-    assert(fooService != NULL);
-    assert(fooService->getHelloWorldMessage != NULL);
+    assert(fooService != NULL, "");
+    assert(fooService->getHelloWorldMessage != NULL, "");
 
     arg = div_readStringParameter();
 
@@ -45,7 +45,7 @@ void registerFooService()
     logger->debug("Initializating FOO service...");
 
     service.getHelloWorldMessage = getHelloWorldMessage;
-    assert(addService(FOO_SERVICE, &service));
+    assert(addService(FOO_SERVICE, &service), "");
 
     logger->debug("FOO service initialized.");
 }
@@ -64,8 +64,8 @@ void __export divmain(COMMON_PARAMS)
     logger->debug("Initializing FOO.DLL...");
 
     // TODO: Implement own assert to allow custom assertion messages, outputs like the future built-in game console or error reporter, and termination action (end program or terminate current level and return to game console).
-    assert(TLSA98_ENGINE_SIGNATURE_EQUALS);
-    assert(TLSA98_ENGINE_VERSION_MAJOR_OR_EQUALS(TLSA_ENGINE_MAJOR_VERSION, TLSA_ENGINE_MINOR_VERSION));
+    assert(TLSA98_ENGINE_SIGNATURE_EQUALS, "");
+    assert(TLSA98_ENGINE_VERSION_MAJOR_OR_EQUALS(TLSA_ENGINE_MAJOR_VERSION, TLSA_ENGINE_MINOR_VERSION), "");
 
     // Register services:
     registerFooService();

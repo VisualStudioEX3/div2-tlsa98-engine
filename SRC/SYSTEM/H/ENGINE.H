@@ -8,7 +8,6 @@
 #ifndef __SYSTEM_DLL_ENGINE_H_
 #define __SYSTEM_DLL_ENGINE_H_
 
-#include <assert.h>
 #include <stdarg.h>
 #include <string.h>
 #include "TYPES.H"
@@ -67,6 +66,8 @@ typedef struct
     const get_registered_services_count count;
 } service_provider_t;
 
+typedef void (*log_message_f)(int, string, ...);
+
 /**
  * @brief TLSA98 Engine main interface.
  * @remarks This interface exposes the main access to engine services and other relevant data or implementations across the different engine libraries. The struct setup is designed to remplace the DIV Games Studio _net struct, occuping the same space.
@@ -87,6 +88,8 @@ typedef struct
 
     /// @brief Engine services provider.
     const service_provider_t *services;
+
+    const log_message_f log;
 } tlsa98_engine_t;
 
 /**
@@ -200,5 +203,37 @@ typedef struct
  * @remarks This functions always must be called at the end of an exported function to DIV program.
  */
 #define div_return(value) retval(value)
+
+#ifndef NDEBUG
+/**
+ * @brief Evaluates a condition and terminates the execution if it fails.
+ * @param expr Expression of scalar type.
+ * @param message Message to log in case of assertion failed.
+ * @remarks This macro defines a custom version of the standard assert macro, thats output a message (and the diagnostic data if [NDEBUG] is not defined) on our file logger.
+ *
+ * In TLSA98 Engine, by design, this macro always terminates the execution of the program, even if [NDEBUG] macro is defined. Use this assertion macro to define break points (in a meaning of terminate the execution) on critical conditions in case of error.
+ */
+#define assert(expr, message)                                                 \
+    if (!expr)                                                                \
+    {                                                                         \
+        engine->log(4, "%s | %s:%d: %s", message, __FILE__, __LINE__, #expr); \
+        abort();                                                              \
+    }
+#else
+/**
+ * @brief Evaluates a condition and terminates the execution if it fails.
+ * @param expr Expression of scalar type.
+ * @param message Message to log in case of assertion failed.
+ * @remarks This macro defines a custom version of the standard assert macro, thats output a message (and the diagnostic data if [NDEBUG] is not defined) on our file logger.
+ *
+ * In TLSA98 Engine, by design, this macro always terminates the execution of the program, even if [NDEBUG] macro is defined. Use this assertion macro to define break points (in a meaning of terminate the execution) on critical conditions in case of error.
+ */
+#define assert(expr, message)    \
+    if (!expr)                   \
+    {                            \
+        engine->log(4, message); \
+        abort();                 \
+    }
+#endif
 
 #endif

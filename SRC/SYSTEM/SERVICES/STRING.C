@@ -211,7 +211,7 @@ void registerStringService()
     service.join = stringJoin;
     service.joinArgs = stringJoinArgs;
 
-    assert(addService(STRING_SERVICE, &service));
+    assert(addService(STRING_SERVICE, &service), "");
 
     logger->debug("String service initialized.");
 }

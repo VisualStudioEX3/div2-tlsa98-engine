@@ -103,7 +103,7 @@ void registerDateTimeService()
     service.getDateTimeNotAlloc = getDateTimeNotAlloc;
     service.dateTimeToString = dateTimeToString;
 
-    assert(addService(DATETIME_SERVICE, &service));
+    assert(addService(DATETIME_SERVICE, &service), "");
 
     logger->debug("DateTime service initialized.");
 }

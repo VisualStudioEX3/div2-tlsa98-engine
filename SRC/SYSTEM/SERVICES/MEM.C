@@ -82,7 +82,7 @@ void registerMemService()
     service.copyTo = memoryCopyTo;
     service.equals = memoryEquals;
 
-    assert(addService(MEM_SERVICE, &service));
+    assert(addService(MEM_SERVICE, &service), "");
 
     logger->debug("Memory service initialized.");
 }

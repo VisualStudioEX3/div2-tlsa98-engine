@@ -134,7 +134,7 @@ void registerLoggerService()
     service.criticalArgs = logCriticalArgs;
     service.addListener = addListener;
 
-    assert(addService(LOGGER_SERVICE, &service));
+    assert(addService(LOGGER_SERVICE, &service), "");
 
     logMessage(LOG_DEBUG, "Logger service initialized.");
 }

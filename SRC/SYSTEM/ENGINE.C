@@ -32,11 +32,14 @@ typedef struct
     int signature;
     version_t *version;
     _service_provider_t *services;
+    log_message_f log;
 } _tlsa98_engine_t;
 
 static int servicesCount = 0;
 static service_t servicesContainer[32];
 static _tlsa98_engine_t *_engine;
+
+// Custom assertion //
 
 // Service provider //
 
@@ -123,6 +126,11 @@ static void setEngineVersion()
     }
 }
 
+static void setEngineLogMessage()
+{
+    _engine->log = logMessage;
+}
+
 static void initializeEngineInterface()
 {
     logMessage(LOG_DEBUG, "Initializing engine interface...");
@@ -135,6 +143,7 @@ static void initializeEngineInterface()
         setEngineSignature();
         setEngineVersion();
         initializeServiceProvider();
+        setEngineLogMessage();
     }
 
     logMessage(LOG_DEBUG, "Engine interface initialized.");
